@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <title>핫도그</title>
     
-	 <!-- CSS -->
+	<!-- CSS -->
 	<link href="/resources/plugins/flexslider/flexslider.css" rel="stylesheet" media="screen" />
 	<link href="/resources/css/cubeportfolio.min.css" rel="stylesheet" />
 	<link href="/resources/css/style.css" rel="stylesheet" />
@@ -47,6 +47,21 @@
       <tiles:insertAttribute name="footer" />
    </div>
 </div>
+
+	<script src="/resources/js/jquery.min.js"></script>
+	<script src="/resources/js/modernizr.custom.js"></script>
+	<script src="/resources/js/jquery.easing.1.3.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/plugins/flexslider/jquery.flexslider-min.js"></script>
+	<script src="/resources/plugins/flexslider/flexslider.config.js"></script>
+	<script src="/resources/js/jquery.appear.js"></script>
+	<script src="/resources/js/stellar.js"></script>
+	<script src="/resources/js/classie.js"></script>
+	<script src="/resources/js/uisearch.js"></script>
+	<script src="/resources/js/jquery.cubeportfolio.min.js"></script>
+	<script src="/resources/js/google-code-prettify/prettify.js"></script>
+	<script src="/resources/js/animate.js"></script>
+	<script src="/resources/js/custom.js"></script>
 </body>
 
 </html>

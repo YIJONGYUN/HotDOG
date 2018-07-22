@@ -34,21 +34,21 @@
 						<!-- Slider -->
 						<div id="main-slider" class="main-slider flexslider">
 							<ul class="slides">
-								<li><img src="img/slides/flexslider/1.jpg" alt="" />
+								<li><img src="/resources/img/slides/flexslider/1.jpg" alt="" />
 									<div class="flex-caption">
 										<h3>Modern Design</h3>
 										<p>Duis fermentum auctor ligula ac malesuada. Mauris et
 											metus odio, in pulvinar urna</p>
 										<a href="#" class="btn btn-theme">Learn More</a>
 									</div></li>
-								<li><img src="img/slides/flexslider/2.jpg" alt="" />
+								<li><img src="/resources/img/slides/flexslider/2.jpg" alt="" />
 									<div class="flex-caption">
 										<h3>Fully Responsive</h3>
 										<p>Sodales neque vitae justo sollicitudin aliquet sit amet
 											diam curabitur sed fermentum.</p>
 										<a href="#" class="btn btn-theme">Learn More</a>
 									</div></li>
-								<li><img src="img/slides/flexslider/3.jpg" alt="" />
+								<li><img src="/resources/img/slides/flexslider/3.jpg" alt="" />
 									<div class="flex-caption">
 										<h3>Clean & Fast</h3>
 										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit
@@ -315,7 +315,7 @@
 								<div class="tab-content">
 									<div class="tab-pane active" id="one">
 										<p>
-											<img src="img/dummy1.jpg" class="pull-left" alt="" /> <strong>Augue
+											<img src="/resources/img/dummy1.jpg" class="pull-left" alt="" /> <strong>Augue
 												iriure</strong> dolorum per ex, ne iisque ornatus veritus duo. Ex
 											nobis integre lucilius sit, pri ea falli ludus appareat. Eum
 											quodsi fuisset id, nostro patrioque qui id. Nominati
@@ -327,7 +327,7 @@
 									</div>
 									<div class="tab-pane" id="two">
 										<p>
-											<img src="img/dummy1.jpg" class="pull-right" alt="" /> Tale
+											<img src="/resources/img/dummy1.jpg" class="pull-right" alt="" /> Tale
 											dolor mea ex, te enim assum suscipit cum, vix aliquid
 											omittantur in. Duo eu cibo dolorum menandri, nam sumo dicit
 											admodum ei. Ne mazim commune honestatis cum, mentitum
@@ -504,7 +504,7 @@
 											<div class="cbp-l-caption-alignCenter">
 												<div class="cbp-l-caption-body">
 
-													<a href="img/works/6big.jpg"
+													<a href="/resources/img/works/6big.jpg"
 														class="cbp-lightbox cbp-l-caption-buttonRight"
 														data-title="Ski * Buddy<br>by Tiberiu Neamu">view
 														larger</a>
@@ -519,13 +519,13 @@
 								<li class="cbp-item graphic logo">
 									<div class="cbp-caption">
 										<div class="cbp-caption-defaultWrap">
-											<img src="img/works/7.jpg" alt="" />
+											<img src="/resources/img/works/7.jpg" alt="" />
 										</div>
 										<div class="cbp-caption-activeWrap">
 											<div class="cbp-l-caption-alignCenter">
 												<div class="cbp-l-caption-body">
 
-													<a href="img/works/7big.jpg"
+													<a href="/resources/img/works/7big.jpg"
 														class="cbp-lightbox cbp-l-caption-buttonRight"
 														data-title="Seemple* Music for iPad<br>by Tiberiu Neamu">view
 														larger</a>
@@ -540,13 +540,13 @@
 								<li class="cbp-item graphic logo">
 									<div class="cbp-caption">
 										<div class="cbp-caption-defaultWrap">
-											<img src="img/works/8.jpg" alt="" />
+											<img src="/resources/img/works/8.jpg" alt="" />
 										</div>
 										<div class="cbp-caption-activeWrap">
 											<div class="cbp-l-caption-alignCenter">
 												<div class="cbp-l-caption-body">
 
-													<a href="img/works/8big.jpg"
+													<a href="/resources/img/works/8big.jpg"
 														class="cbp-lightbox cbp-l-caption-buttonRight"
 														data-title="Seemple* Music for iPad<br>by Tiberiu Neamu">view
 														larger</a>
@@ -585,26 +585,26 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-xs-6 col-md-2 aligncenter client">
-						<img alt="logo" src="img/clients/logo1.png" class="img-responsive" />
+						<img alt="logo" src="/resources/img/clients/logo1.png" class="img-responsive" />
 					</div>
 
 					<div class="col-xs-6 col-md-2 aligncenter client">
-						<img alt="logo" src="img/clients/logo2.png" class="img-responsive" />
+						<img alt="logo" src="/resources/img/clients/logo2.png" class="img-responsive" />
 					</div>
 
 					<div class="col-xs-6 col-md-2 aligncenter client">
-						<img alt="logo" src="img/clients/logo3.png" class="img-responsive" />
+						<img alt="logo" src="/resources/img/clients/logo3.png" class="img-responsive" />
 					</div>
 
 					<div class="col-xs-6 col-md-2 aligncenter client">
-						<img alt="logo" src="img/clients/logo4.png" class="img-responsive" />
+						<img alt="logo" src="/resources/img/clients/logo4.png" class="img-responsive" />
 					</div>
 
 					<div class="col-xs-6 col-md-2 aligncenter client">
-						<img alt="logo" src="img/clients/logo5.png" class="img-responsive" />
+						<img alt="logo" src="/resources/img/clients/logo5.png" class="img-responsive" />
 					</div>
 					<div class="col-xs-6 col-md-2 aligncenter client">
-						<img alt="logo" src="img/clients/logo6.png" class="img-responsive" />
+						<img alt="logo" src="/resources/img/clients/logo6.png" class="img-responsive" />
 					</div>
 
 				</div>
@@ -616,20 +616,20 @@
 	<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
 
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="js/jquery.min.js"></script>
-	<script src="js/modernizr.custom.js"></script>
-	<script src="js/jquery.easing.1.3.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="plugins/flexslider/jquery.flexslider-min.js"></script>
-	<script src="plugins/flexslider/flexslider.config.js"></script>
-	<script src="js/jquery.appear.js"></script>
-	<script src="js/stellar.js"></script>
-	<script src="js/classie.js"></script>
-	<script src="js/uisearch.js"></script>
-	<script src="js/jquery.cubeportfolio.min.js"></script>
-	<script src="js/google-code-prettify/prettify.js"></script>
-	<script src="js/animate.js"></script>
-	<script src="js/custom.js"></script>
+	<script src="/resources/js/jquery.min.js"></script>
+	<script src="/resources/js/modernizr.custom.js"></script>
+	<script src="/resources/js/jquery.easing.1.3.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/plugins/flexslider/jquery.flexslider-min.js"></script>
+	<script src="/resources/plugins/flexslider/flexslider.config.js"></script>
+	<script src="/resources/js/jquery.appear.js"></script>
+	<script src="/resources/js/stellar.js"></script>
+	<script src="/resources/js/classie.js"></script>
+	<script src="/resources/js/uisearch.js"></script>
+	<script src="/resources/js/jquery.cubeportfolio.min.js"></script>
+	<script src="/resources/js/google-code-prettify/prettify.js"></script>
+	<script src="/resources/js/animate.js"></script>
+	<script src="/resources/js/custom.js"></script>
 
 
 </body>
