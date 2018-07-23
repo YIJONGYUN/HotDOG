@@ -16,7 +16,7 @@
 			<div class="navbar-collapse collapse ">
 				<ul class="nav navbar-nav">
 
-					<li><a href="portfolio.html">수정3</a></li>
+					<li><a href="portfolio.html">수정4</a></li>
 					<li><a href="portfolio.html">수정</a></li>
 					
 					<li class="dropdown"><a href="#" class="dropdown-toggle "
