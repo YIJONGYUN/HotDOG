@@ -15,21 +15,10 @@
 			</div>
 			<div class="navbar-collapse collapse ">
 				<ul class="nav navbar-nav">
-
-					<li><a href="portfolio.html">수정4</a></li>
-					<li><a href="portfolio.html">수정</a></li>
-					
-					<li class="dropdown"><a href="#" class="dropdown-toggle "
-						data-toggle="dropdown" data-hover="dropdown" data-delay="0"
-						data-close-others="false">Blog <i class="fa fa-angle-down"></i></a>
-						<ul class="dropdown-menu">
-							<li><a href="blog-rightsidebar.html">Blog right
-									sidebar</a></li>
-							<li><a href="blog-leftsidebar.html">Blog left sidebar</a></li>
-							<li><a href="post-rightsidebar.html">Post right
-									sidebar</a></li>
-							<li><a href="post-leftsidebar.html">Post left sidebar</a></li>
-						</ul></li>
+					<li><a href="portfolio.html">핫도그란?</a></li>
+					<li><a href="fullwidth.html">독스타그램</a></li>
+					<li><a href="fullwidth.html">이리오시개</a></li>
+					<li><a href="fullwidth.html">도그시그널</a></li>
 					<li><a href="/user/loginPage">로그인</a></li>
 				</ul>
 			</div>
