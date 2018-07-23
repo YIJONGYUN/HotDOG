@@ -22,15 +22,4 @@ public class BoardController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 
-	
-	@RequestMapping(value = "/loginPage", method = RequestMethod.GET)
-	public String loginPage() {
-		return "user/login";
-	}
-	
-	@RequestMapping(value = "/registerPage", method = RequestMethod.GET)
-	public String registerPage() {
-		return "user/register";
-	}
-
 }
