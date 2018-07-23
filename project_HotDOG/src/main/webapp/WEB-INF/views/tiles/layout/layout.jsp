@@ -1,14 +1,22 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
-
-<!DOCTYPE html>
+<!DOCTYPE>
 <html>
 <head>
 <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Bootstrap 3 template for corporate business" />
     <title>핫도그</title>
+    
+    <!-- bootstrap css -->
+	<link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
+	
+	<!-- Theme skin -->
+	<link id="t-colors" href="/resources/skins/default.css" rel="stylesheet" />
+	
+	<!-- boxed bg -->
+	<link id="bodybg" href="/resources/bodybg/bg1.css" rel="stylesheet" type="text/css" />
     
 	<!-- CSS -->
 	<link href="/resources/plugins/flexslider/flexslider.css" rel="stylesheet" media="screen" />

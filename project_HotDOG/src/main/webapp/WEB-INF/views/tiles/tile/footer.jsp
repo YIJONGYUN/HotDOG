@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <footer>
+<div id="footer">
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-3 col-lg-3">
@@ -91,4 +92,21 @@
 					</div>
 				</div>
 			</div>
+			</div>
+			
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="/resources/js/jquery.min.js"></script>
+	<script src="/resources/js/modernizr.custom.js"></script>
+	<script src="/resources/js/jquery.easing.1.3.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/plugins/flexslider/jquery.flexslider-min.js"></script>
+	<script src="/resources/plugins/flexslider/flexslider.config.js"></script>
+	<script src="/resources/js/jquery.appear.js"></script>
+	<script src="/resources/js/stellar.js"></script>
+	<script src="/resources/js/classie.js"></script>
+	<script src="/resources/js/uisearch.js"></script>
+	<script src="/resources/js/jquery.cubeportfolio.min.js"></script>
+	<script src="/resources/js/google-code-prettify/prettify.js"></script>
+	<script src="/resources/js/animate.js"></script>
+	<script src="/resources/js/custom.js"></script>
 		</footer>
