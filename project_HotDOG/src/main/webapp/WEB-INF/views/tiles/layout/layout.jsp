@@ -9,6 +9,9 @@
 	<meta name="description" content="Bootstrap 3 template for corporate business" />
     <title>핫도그</title>
     
+    <!-- 파비콘 설정 -->
+    <link rel="shortcut icon" href="/resources/img/dog.ico">
+    
     <!-- bootstrap css -->
 	<link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
 	
