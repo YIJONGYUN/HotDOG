@@ -16,8 +16,8 @@
 			<div class="navbar-collapse collapse ">
 				<ul class="nav navbar-nav">
 					<li><a href="/about">핫도그란?</a></li>
-					<li><a href="fullwidth.html">독스타그램</a></li>
-					<li><a href="fullwidth.html">이리오시개</a></li>
+					<li><a href="/board/info">독스타그램</a></li>
+					<li><a href="/board/parcel">이리오시개</a></li>
 					<li><a href="/board/mating">도그시그널</a></li>
 					<li><a href="/user/loginPage">로그인</a></li>
 				</ul>

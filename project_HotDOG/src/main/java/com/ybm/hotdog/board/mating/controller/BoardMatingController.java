@@ -28,21 +28,21 @@ public class BoardMatingController {
 	public String boardForm(Locale locale) {
 		logger.info("도그시그널 글 작성 페이지", locale);
 		
-		return "board/mating/boardForm";
+		return "board/mating/matingForm";
 	}
 	
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public String boardDetail(Locale locale) {
 		logger.info("도그시그널 글 상세 페이지", locale);
 		
-		return "board/mating/boardDetail";
+		return "board/mating/matingDetail";
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String boardEdit(Locale locale) {
 		logger.info("도그시그널 글 수정 페이지", locale);
 		
-		return "board/mating/boardEdit";
+		return "board/mating/matingEdit";
 	}
 	
 }
