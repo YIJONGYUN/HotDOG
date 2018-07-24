@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <body>
@@ -19,20 +20,22 @@
 
 				<div class="row">
 					<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-						<form action="/" role="form" class="register-form">
+						<form action="/" method="get" role="form" class="register-form">
 							<h2>Sign in <small>manage your account</small></h2>
 							<hr class="colorgraph">
 
 							<div class="form-group">
-								<input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address" tabindex="4">
+								<input type="text" name="id" id="id" class="form-control input-lg" placeholder="ID" tabindex="4" data-rule="required" data-msg="ID를 입력해 주세요!" />
 							</div>
 							<div class="form-group">
-								<input type="password" class="form-control input-lg" id="exampleInputPassword1" placeholder="Password">
+								<input type="password" class="form-control input-lg" id="password" placeholder="Password" data-rule="required" data-msg="비밀번호를 입력해 주세요!" />
 							</div>
 
 							<hr class="colorgraph">
 							<div class="row">
-								<div class="col-xs-12 col-md-6"><input type="submit" value="Sign in" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
+								<div class="col-xs-12 col-md-6">
+									<input type="submit" value="Sign in" class="btn btn-primary btn-block btn-lg" tabindex="7">
+								</div>
 								<div class="col-xs-12 col-md-6">Don't have an account? <a href="/user/registerPage">Register</a></div>
 							</div>
 						</form>
@@ -43,7 +46,7 @@
 		</section>
 	</div>
 	<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
-
+	<script src="/resources/contactform/contactform.js"></script>
 
 </body>
 
