@@ -38,10 +38,10 @@
 									</div>
 						             
 						  			<input type="text" name="name" class="form-control" id="name" placeholder="제목을 입력해 주세요" data-rule="required" data-msg="제목을 입력해 주세요!" />
-											<div class="validation"></div>
+									<div class="validation"></div>
 						             
 								</div>
-								</div>
+							</div>
 							<div class="form-group">
 								<textarea class="form-control" name="content" rows="5" data-rule="required" data-msg="내용을 입력해 주세요!" placeholder="내용을 입력해 주세요"></textarea>
 								<div class="validation"></div>

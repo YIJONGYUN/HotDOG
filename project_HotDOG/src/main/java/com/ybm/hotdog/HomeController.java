@@ -30,4 +30,11 @@ public class HomeController {
 		return "about/about";
 	}
 	
+	@RequestMapping(value = "/board/mating", method = RequestMethod.GET)
+	public String boardMating(Locale locale) {
+		logger.info("도그시그널 페이지 들어옴~", locale);
+		
+		return "board/mating/boardMating";
+	}
+	
 }
