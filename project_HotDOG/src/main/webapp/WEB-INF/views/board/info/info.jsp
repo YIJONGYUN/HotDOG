@@ -21,7 +21,7 @@
 			    <div class="row">
 			      <div class="col-sm-12 col-lg-12">
 			        <div class="text-center">
-			        	<img src="/resources/img/dogstagram.png" width="25%"/>
+			        	<img src="/resources/img/dogstagram.png" width="30%"/>
 			        </div>
 			        <hr class="colorgraph">
 			        <div class="row">
@@ -41,7 +41,7 @@
 			                <tr>
 			                  <td>5</td>
 			                  <td>[아들]</td>
-			                  <td colspan="4"><a href="/board/mating/detail" style="color: black;">화이트 포메라니언 4살입니다~</a></td>
+			                  <td colspan="4"><a href="/board/info/detail" style="color: black;">화이트 포메라니언 4살입니다~</a></td>
 			                  <td>이종윤</td>
 			                  <td>2018-07-24</td>
 			                  <td>23</td>

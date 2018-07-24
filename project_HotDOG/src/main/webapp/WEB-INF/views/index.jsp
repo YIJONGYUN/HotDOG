@@ -12,19 +12,19 @@
 							<!-- Slider -->
 							<div id="main-slider" class="main-slider flexslider">
 								<ul class="slides">
-									<li> <img src="/resources/img/slides/flexslider/dogsta.png" alt="" />
+									<li> <img src="/resources/img/slides/flexslider/dogsta.png" />
 										<div class="flex-caption">
-											<a href="#" class="btn btn-theme">바로가기</a>
+											<a href="/board/info" class="btn btn-theme">바로가기</a>
 										</div>
 									</li>
-									<li><img src="/resources/img/slides/flexslider/dogcome.png" alt="" />
+									<li><img src="/resources/img/slides/flexslider/dogcome.png" />
 										<div class="flex-caption">
-											<a href="#" class="btn btn-theme">바로가기</a>
+											<a href="/board/parcel" class="btn btn-theme">바로가기</a>
 										</div>
 									</li>
-									<li><img src="/resources/img/slides/flexslider/dogsignal.png" alt="" />
+									<li><img src="/resources/img/slides/flexslider/dogsignal.png" />
 										<div class="flex-caption">
-											<a href="#" class="btn btn-theme">바로가기</a>
+											<a href="/board/mating" class="btn btn-theme">바로가기</a>
 										</div>
 									</li>
 								</ul>

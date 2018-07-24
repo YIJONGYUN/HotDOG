@@ -19,9 +19,9 @@
 		<section id="content">
 			<div class="container">
 			    <div class="row">
-			      <div class="col-sm-12 col-lg-12">
+			      <div class="col-md-8 col-md-offset-2">
 			        <div class="text-center">
-			        	<img src="/resources/img/dogstagram.png" width="25%"/>
+			        	<img src="/resources/img/dogstagram.png" width="40%"/>
 			        </div>
 						<hr class="colorgraph">
 						<table class="table table-bordered text-center" data-effect="fade">
