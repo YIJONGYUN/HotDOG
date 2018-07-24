@@ -22,8 +22,8 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
-						<h3>About us</h3>
-						<img src="/resources/img/dummies/dog.jpg" alt="" class="img-responsive" />
+						<h3>핫도그란?</h3>
+						<img src="/resources/img/dummies/aboutus.png" alt="" class="img-responsive" />
 
 
 
