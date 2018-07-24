@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -10,7 +11,7 @@
 					<div class="col-lg-12">
 						<ul class="breadcrumb">
 							<li><a href="/"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i></li>
-							<li class="active">Register</li>
+							<li class="active">회원가입</li>
 						</ul>
 					</div>
 				</div>
@@ -58,9 +59,9 @@
 							<hr class="colorgraph">
 							<div class="row">
 								<div class="col-xs-12 col-md-6">
-									<input type="submit" value="Register" class="btn btn-theme btn-block btn-lg" tabindex="7">
+									<input type="submit" value="가입하기" class="btn btn-theme btn-block btn-lg" tabindex="7">
 								</div>
-								<div class="col-xs-12 col-md-6">Already have an account? <a href="/user/loginPage">Sign In</a></div>
+								<div class="col-xs-12 col-md-6">이미 계정이 있으신가요? <a href="/user/loginPage">로그인</a></div>
 							</div>
 						</form>
 					</div>

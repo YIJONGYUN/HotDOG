@@ -13,7 +13,7 @@
 						<ul class="breadcrumb">
 							<li><a href="/"><i class="fa fa-home"></i></a>
 							<i class="icon-angle-right"></i></li>
-							<li class="active"><a href="/about">핫도그란</a></li>
+							<li class="active"><a href="/about">핫도그란?</a></li>
 						</ul>
 					</div>
 				</div>

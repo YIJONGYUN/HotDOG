@@ -9,7 +9,7 @@
 					<div class="col-lg-12">
 						<ul class="breadcrumb">
 							<li><a href="/"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i></li>
-							<li class="active">Login</li>
+							<li class="active">로그인</li>
 						</ul>
 					</div>
 				</div>
@@ -34,9 +34,9 @@
 							<hr class="colorgraph">
 							<div class="row">
 								<div class="col-xs-12 col-md-6">
-									<input type="submit" value="Sign in" class="btn btn-primary btn-block btn-lg" tabindex="7">
+									<input type="submit" value="로그인" class="btn btn-primary btn-block btn-lg" tabindex="7">
 								</div>
-								<div class="col-xs-12 col-md-6">Don't have an account? <a href="/user/registerPage">Register</a></div>
+								<div class="col-xs-12 col-md-6">아직 계정이 없으세요? <a href="/user/registerPage">회원가입</a></div>
 							</div>
 						</form>
 					</div>
