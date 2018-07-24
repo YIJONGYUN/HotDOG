@@ -45,6 +45,18 @@
     <!-- SweetAlert JavaScript -->
     <script src="/resources/js/sweetalert2.min.js"></script>
     
+<style type="text/css">
+
+@font-face { 
+     font-family:"setFont";
+     src:url("/resources/fonts/A뉴굴림2.TTF") format("truetype");
+}    
+
+body, div, h2 { 
+     font-family:setFont;
+} 
+</style>
+    
 </head>
 <body>
 <div id="wrapper">
