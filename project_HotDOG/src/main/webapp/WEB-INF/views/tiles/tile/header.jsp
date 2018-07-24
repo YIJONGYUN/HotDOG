@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib  prefix="m" uri="urlDecode"%> 
 
-<!-- start header -->
 <header>
 <div id = "header">
 	<div class="navbar navbar-default navbar-static-top">
@@ -24,6 +23,5 @@
 			</div>
 		</div>
 	</div>
-	</div>
+</div>
 </header>
-<!-- end header -->
