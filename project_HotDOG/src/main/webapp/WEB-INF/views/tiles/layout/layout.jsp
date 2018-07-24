@@ -52,7 +52,7 @@
      src:url("/resources/fonts/A뉴굴림2.TTF") format("truetype");
 }    
 
-body, div, h2 { 
+body, div, h1, h2, h3, h4, h5, h6 { 
      font-family:setFont;
 } 
 </style>

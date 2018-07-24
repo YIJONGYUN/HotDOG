@@ -21,14 +21,14 @@
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2">
 						<div class="text-center">
-			        		<img src="/resources/img/dog_signal.png" alt="" width="30%"/>
+			        		<img src="/resources/img/comeon.png" width="35%"/>
 			        	</div>
 						<hr class="colorgraph">
 						<table class="table table-bordered text-center" data-effect="fade">
 			              <thead>
 			                <tr>
-			                  <td>[아들]</td>
-			                  <th colspan="5">화이트 포메라니언 4살입니다~</th>
+			                  <td>[오시개]</td>
+			                  <th colspan="5">토이 푸들 분양 받고 싶어요!</th>
 			                </tr>
 			              </thead>
 			              <tbody>
@@ -36,13 +36,13 @@
 			                  <td>작성자</td>
 			                  <td>이종윤</td>
 			                  <td>작성일</td>
-			                  <td>2018-07-24</td>
+			                  <td>2018-07-25</td>
 			                  <td>조회수</td>
 			                  <td>23</td>
 			                </tr>
 			                <tr>
 			                  <td colspan="6">
-			                  	<textarea class="form-control text-center" rows="5" cols="50" readonly="readonly" style="background-color: white;">졸귀탱 포메랑 교배하실 분 73583-70861로 연락주세요~</textarea>
+			                  	<textarea class="form-control text-center" rows="5" cols="50" readonly="readonly" style="background-color: white;">요즘 토이푸들이 너무 좋아요</textarea>
 			                  </td>
 			                </tr>
 			              </tbody>

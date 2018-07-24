@@ -40,40 +40,40 @@
 			              <tbody>
 			                <tr>
 			                  <td>5</td>
-			                  <td>[아들]</td>
-			                  <td colspan="4"><a href="/board/info/detail" style="color: black;">화이트 포메라니언 4살입니다~</a></td>
+			                  <td>[의료/위생]</td>
+			                  <td colspan="4"><a href="/board/info/detail" style="color: black;">강아지 예방 접종은 동물병원에서 하나요?</a></td>
 			                  <td>이종윤</td>
 			                  <td>2018-07-24</td>
 			                  <td>23</td>
 			                </tr>
 							<tr>
 			                  <td>4</td>
-			                  <td>[딸]</td>
-			                  <td colspan="4"><a style="color: black;">크림 푸들 시집 보내요</a></td>
+			                  <td>[의류/미용]</td>
+			                  <td colspan="4"><a style="color: black;">셀프 미용 하는 방법!</a></td>
 			                  <td>심민정</td>
 			                  <td>2018-07-24</td>
 			                  <td>27</td>
 			                </tr>
 			                <tr>
 			                  <td>3</td>
-			                  <td>[아들]</td>
-			                  <td colspan="4"><a style="color: black;">강아지 교배 시키려는데 조언 부탁드려요</a></td>
+			                  <td>[사료/간식]</td>
+			                  <td colspan="4"><a style="color: black;">이번에 우리 애기 사료 바꿨어요.</a></td>
 			                  <td>이종윤</td>
 			                  <td>2018-07-22</td>
 			                  <td>52</td>
 			                </tr>
 			                <tr>
 			                  <td>2</td>
-			                  <td>[아들]</td>
-			                  <td colspan="4"><a style="color: black;">저희 강아지 교배를 어떻게 해야할까요</a></td>
+			                  <td>[훈련/놀이]</td>
+			                  <td colspan="4"><a style="color: black;">2개월 된 강아지 배변훈련 시작해야겠죠?</a></td>
 			                  <td>권한별</td>
 			                  <td>2018-07-21</td>
 			                  <td>39</td>
 			                </tr>
 			                <tr>
 			                  <td>1</td>
-			                  <td>[딸]</td>
-			                  <td colspan="4"><a style="color: black;">저희 강아지랑 교배할 강아지 있나요?</a></td>
+			                  <td>[의료/위생]</td>
+			                  <td colspan="4"><a style="color: black;">목욕은 매일 시켜줘야 하나요?</a></td>
 			                  <td>심민정</td>
 			                  <td>2018-07-21</td>
 			                  <td>24</td>

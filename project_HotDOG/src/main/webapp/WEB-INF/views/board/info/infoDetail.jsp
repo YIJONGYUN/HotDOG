@@ -27,8 +27,8 @@
 						<table class="table table-bordered text-center" data-effect="fade">
 			              <thead>
 			                <tr>
-			                  <td>[아들]</td>
-			                  <th colspan="5">화이트 포메라니언 4살입니다~</th>
+			                  <td>[의료/위생]</td>
+			                  <th colspan="5">강아지 예방 접종은 동물병원에서 하나요?</th>
 			                </tr>
 			              </thead>
 			              <tbody>
@@ -42,7 +42,7 @@
 			                </tr>
 			                <tr>
 			                  <td colspan="6">
-			                  	<textarea class="form-control text-center" rows="5" cols="50" readonly="readonly" style="background-color: white;">졸귀탱 포메랑 교배하실 분 73583-70861로 연락주세요~</textarea>
+			                  	<textarea class="form-control text-center" rows="5" cols="50" readonly="readonly" style="background-color: white;">강아지 처음 키워봐요</textarea>
 			                  </td>
 			                </tr>
 			              </tbody>

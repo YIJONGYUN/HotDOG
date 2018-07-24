@@ -21,7 +21,7 @@
 			    <div class="row">
 			      <div class="col-sm-12 col-lg-12">
 			        <div class="text-center">
-			        	<img src="/resources/img/dog_signal.png" width="20%"/>
+			        	<img src="/resources/img/comeon.png" width="25%"/>
 			        </div>
 			        <hr class="colorgraph">
 			        <div class="row">
@@ -40,40 +40,40 @@
 			              <tbody>
 			                <tr>
 			                  <td>5</td>
-			                  <td>[아들]</td>
-			                  <td colspan="4"><a href="/board/parcel/detail" style="color: black;">화이트 포메라니언 4살입니다~</a></td>
+			                  <td>[오시개]</td>
+			                  <td colspan="4"><a href="/board/parcel/detail" style="color: black;">토이 푸들 분양 받고 싶어요!</a></td>
 			                  <td>이종윤</td>
 			                  <td>2018-07-24</td>
 			                  <td>23</td>
 			                </tr>
 							<tr>
 			                  <td>4</td>
-			                  <td>[딸]</td>
-			                  <td colspan="4"><a style="color: black;">크림 푸들 시집 보내요</a></td>
+			                  <td>[오시개]</td>
+			                  <td colspan="4"><a style="color: black;">말티즈 분양 원해요.</a></td>
 			                  <td>심민정</td>
 			                  <td>2018-07-24</td>
 			                  <td>27</td>
 			                </tr>
 			                <tr>
 			                  <td>3</td>
-			                  <td>[아들]</td>
-			                  <td colspan="4"><a style="color: black;">강아지 교배 시키려는데 조언 부탁드려요</a></td>
+			                  <td>[가시개]</td>
+			                  <td colspan="4"><a style="color: black;">비글 새끼강아지 분양합니다</a></td>
 			                  <td>이종윤</td>
 			                  <td>2018-07-22</td>
 			                  <td>52</td>
 			                </tr>
 			                <tr>
 			                  <td>2</td>
-			                  <td>[아들]</td>
-			                  <td colspan="4"><a style="color: black;">저희 강아지 교배를 어떻게 해야할까요</a></td>
+			                  <td>[오시개]</td>
+			                  <td colspan="4"><a style="color: black;">닥스훈트가 요즘 너무 좋아요</a></td>
 			                  <td>권한별</td>
 			                  <td>2018-07-21</td>
 			                  <td>39</td>
 			                </tr>
 			                <tr>
 			                  <td>1</td>
-			                  <td>[딸]</td>
-			                  <td colspan="4"><a style="color: black;">저희 강아지랑 교배할 강아지 있나요?</a></td>
+			                  <td>[가시개]</td>
+			                  <td colspan="4"><a style="color: black;">진돗개 6남매 분양 보냅니다~</a></td>
 			                  <td>심민정</td>
 			                  <td>2018-07-21</td>
 			                  <td>24</td>

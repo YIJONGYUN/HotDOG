@@ -21,7 +21,7 @@
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2">
 						<div class="text-center">
-			        		<img src="/resources/img/dog_signal.png" alt="" width="30%"/>
+			        		<img src="/resources/img/comeon.png" width="35%"/>
 			        	</div>
 						<hr class="colorgraph">
 						<div id="sendmessage">Your message has been sent. Thank you!</div>
@@ -32,8 +32,8 @@
 						        	<div class="input-group-btn">
 						            	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"> 말머리 <span class="caret"></span></button>
 										<ul class="dropdown-menu">
-											<li style="text-align: center;">[아들]</li>
-											<li style="text-align: center;">[딸]</li>
+											<li style="text-align: center;">[오시개]</li>
+											<li style="text-align: center;">[가시개]</li>
 										</ul>
 									</div>
 						             
