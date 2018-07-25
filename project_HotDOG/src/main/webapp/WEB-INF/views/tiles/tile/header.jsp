@@ -3,24 +3,21 @@
 <%@ taglib  prefix="m" uri="urlDecode"%> 
 
 <header>
-<div id = "header">
-	<div class="navbar navbar-default navbar-static-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="/"><img src="/resources/img/logo1.png" alt="" width="50%"/></a>
-			</div>
-			<div class="navbar-collapse collapse ">
-				<ul class="nav navbar-nav">
-					<li><a href="/about">핫도그란?</a></li>
-					<li><a href="/board/info">독스타그램</a></li>
-					<li><a href="/board/parcel">이리오시개</a></li>
-					<li><a href="/board/mating">도그시그널</a></li>
-					<li><a href="/user/loginPage">로그인</a></li>
-				</ul>
-			</div>
+<div class="navbar navbar-default navbar-static-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+			</button>
+			<a class="navbar-brand" href="/"><img src="/resources/img/logo1.png" width="50%"/></a>
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="/about">핫도그란?</a></li>
+				<li><a href="/board/info">독스타그램</a></li>
+				<li><a href="/board/parcel">이리오시개</a></li>
+				<li><a href="/board/mating">도그시그널</a></li>
+				<li><a href="/user/loginPage">로그인</a></li>
+			</ul>
 		</div>
 	</div>
 </div>

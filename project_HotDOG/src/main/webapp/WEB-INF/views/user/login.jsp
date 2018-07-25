@@ -36,7 +36,7 @@
 								<div class="col-xs-12 col-md-6">
 									<input type="submit" value="로그인" class="btn btn-primary btn-block btn-lg" tabindex="7">
 								</div>
-								<div class="col-xs-12 col-md-6">아직 계정이 없으세요? <a href="/user/registerPage">회원가입</a></div>
+								<div class="col-xs-12 col-md-6" style="margin-top: 2%">아직 계정이 없으세요? <a href="/user/registerPage">회원가입</a></div>
 							</div>
 						</form>
 					</div>

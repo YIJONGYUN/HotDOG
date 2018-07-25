@@ -62,7 +62,7 @@
 								<div class="col-xs-12 col-md-6">
 									<input type="submit" value="가입하기" class="btn btn-theme btn-block btn-lg" tabindex="6">
 								</div>
-								<div class="col-xs-12 col-md-6">이미 계정이 있으신가요? <a href="/user/loginPage">로그인</a></div>
+								<div class="col-xs-12 col-md-6"  style="margin-top: 2%">이미 계정이 있으신가요? <a href="/user/loginPage">로그인</a></div>
 							</div>
 						</form>
 					</div>
