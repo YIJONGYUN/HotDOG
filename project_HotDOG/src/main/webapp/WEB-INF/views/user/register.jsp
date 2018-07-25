@@ -25,8 +25,18 @@
 						<form role="form" class="register-form" action="/user/loginPage">
 							<h2>Please Sign Up <small>It's free and always will be.</small></h2>
 							<hr class="colorgraph">
-							<div class="form-group">
-								<input type="text" name="u_id" id="u_id" class="form-control input-lg" placeholder="ID" tabindex="1">
+							<div class="row">
+								<div class="col-xs-9 col-sm-9">
+									<div class="form-group">
+										<input type="text" name="u_id" id="u_id" class="form-control input-lg" placeholder="ID" tabindex="1">
+									</div>
+								</div>
+								<div class="col-xs-3 col-sm-3">
+									<div class="form-group">
+										<input type="button" value="CHECK" class="btn btn-primary input-lg" style="padding-right: 25%; padding-left: 25%; margin-left: 7%">
+									</div>
+								</div>
+										
 							</div>
 							<div class="row">
 								<div class="col-xs-12 col-sm-6 col-md-6">
