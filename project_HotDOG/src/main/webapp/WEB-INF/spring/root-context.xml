@@ -12,6 +12,10 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	<context:component-scan base-package="com.ybm.hotdog.user.dao"/>
+	<context:component-scan base-package="com.ybm.hotdog.board.info.dao"/>
+	<context:component-scan base-package="com.ybm.hotdog.board.mating.dao"/>
+	<context:component-scan base-package="com.ybm.hotdog.board.parcel.dao"/>
 		
 	<!-- Database 연동을 위한 DataSource 설정 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -26,9 +30,11 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
 		<property name="configLocation" value="classpath:/mybatis-config.xml"/>
-<!-- 		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"/> -->
+		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"/>
 	</bean>	
+	
+	<!-- Database Transaction Manager 설정 -->
+   	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 </beans>
-
-
-

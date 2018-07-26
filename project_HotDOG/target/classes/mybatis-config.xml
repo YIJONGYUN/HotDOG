@@ -4,5 +4,14 @@
 
 <!-- MyBatis XML 설정 파일(MyBatis설정의 중앙 허브 역할) -->
 <configuration>
-
+	<typeAliases>
+		<!-- 회원 -->
+		<typeAlias type="com.ybm.hotdog.user.domain.UserDTO" alias="User"/>
+			
+		<!-- 게시판 -->
+		<typeAlias type="com.ybm.hotdog.board.domain.ArticleDTO" alias="Article"/>
+		<typeAlias type="com.ybm.hotdog.board.domain.BoardDTO" alias="Board"/>
+		<typeAlias type="com.ybm.hotdog.board.domain.CategoryDTO" alias="Category"/>
+		<typeAlias type="com.ybm.hotdog.board.domain.ReplyDTO" alias="Reply"/>
+	</typeAliases>
 </configuration> 

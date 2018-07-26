@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 게시판 네임스페이스(사용영역) 설정 -->
+
+<mapper namespace="com.classs.skhuter.mappers.BoardMapper">
+
+	<!-- 글쓰기 -->
+	<insert id="create">
+		INSERT INTO Board (board_no, user_no, title, regdate,
+		hit_count, password, content, like_count, hate_count)
+		VALUES
+		(seq_board.nextVal, #{userNo}, #{title}, sysdate, 0, #{password},
+		#{content},
+		0, 0)
+	</insert>
+
+	<!-- 게시글 읽기 -->
+	<select id="read" resultType="board">
+		SELECT board_no as boardNo, user_no
+		as userNo, title, regdate, hit_count as hitCount, password, content,
+		like_count as likeCount, hate_count as hateCount
+		FROM
+		Board
+		where board_no = #{boardNo}
+	</select>
+
+	<!-- 게시물 삭제 -->
+	<delete id="delete">
+		DELETE FROM board WHERE board_no = #{boardNo}
+	</delete>
+
+	<!-- 게시물 전체 목록 불러오기 -->
+	<select id="listAll" resultType="board">
+		SELECT board_no as boardNo, user_no as userNo, title, regdate, hit_count as
+		hitCount, password, content, like_count as likeCount, hate_count as
+		hateCount
+		FROM
+		Board
+		order by board_no desc, regdate desc
+	</select>
+
+	<!-- 게시물리스트 페이징처리 -->
+	<select id="listPage" resultType="board">
+ 	<![CDATA[
+		SELECT boardNo1 as boardNo, userNo1 as userNo, title, regdate, hitCount1 as hitCount, password, content, likeCount1 as likeCount, hateCount1 as hateCount 
+    from 
+    (select
+      rownum rn, board_no as boardNo1, user_no as userNo1, title, regdate, hit_count as hitCount1, password, content, like_count as likeCount1, hate_count as hateCount1
+		FROM 
+			Board
+      where board_no > 0
+      and rownum <= #{page}
+      order by rn desc)
+      where rn >= (#{page}-9)
+	]]>
+	</select>
+
+	<!-- 게시물리스트 페이징처리 -->
+	<select id="listCriteria" resultType="board">
+ 		<![CDATA[
+	select rn,boardNo,userNo,title,regdate,hitCount, password, content, likeCount, hateCount from(
+SELECT rownum rn, boardNo1 as boardNo, userNo1 as userNo, title, regdate, hitCount1 as hitCount, password, content, likeCount1 as likeCount, hateCount1 as hateCount 
+    from 
+    (select
+    board_no as boardNo1, user_no as userNo1, title, regdate, hit_count as hitCount1, password, content, like_count as likeCount1, hate_count as hateCount1
+		FROM 
+			Board
+      where board_no > 0
+      order by boardNo1 desc
+      )
+      order by rownum asc
+      )
+      where rn>=#{pageStart}+1 and rn<=#{pageStart}+10
+	]]>
+	</select>
+
+	<!-- 댓글 개수 세기 -->
+	<select id="countReply" parameterType="board" resultType="int">
+		select
+		count(reply_no) from reply where board_no= #{boardNo}
+	</select>
+
+	<!-- 조회수 세기 -->
+	<update id="updateHitCount">
+		update board set hit_count=hit_count+1 where
+		board_no= #{boardNo}
+	</update>
+
+	<select id="countPaging" resultType="int">
+	 <![CDATA[
+ 		select 
+   			count(board_no) 
+		from 
+			board 
+		where 
+			board_no > 0 
+	 ]]>
+	</select>
+	
+	<select id="listSearch_t" resultType="board">
+	<![CDATA[
+	  select rn, boardNo,userNo,title,regdate,hitCount, password, content, likeCount, hateCount from(
+select rownum rn, boardNo,userNo,title,regdate,hitCount, password, content, likeCount, hateCount from(
+SELECT rownum rn, boardNo1 as boardNo, userNo1 as userNo, title, regdate, hitCount1 as hitCount, password, content, likeCount1 as likeCount, hateCount1 as hateCount 
+    from 
+    (select
+    board_no as boardNo1, user_no as userNo1, title, regdate, hit_count as hitCount1, password, content, like_count as likeCount1, hate_count as hateCount1
+		FROM 
+			Board
+      where board_no > 0
+      order by boardNo1 desc
+      )
+      order by rownum asc
+      )
+      where title like concat(concat('%',#{keyword}),'%')
+      )
+      where rn>=#{pageStart}+1 and rn<=#{pageStart}+10
+        ]]>
+</select>
+
+<select id="listSearchCount_t" resultType="int">
+<![CDATA[  
+    
+      select  count(boardNo) from(
+SELECT rownum rn, boardNo1 as boardNo, userNo1 as userNo, title, regdate, hitCount1 as hitCount, password, content, likeCount1 as likeCount, hateCount1 as hateCount 
+    from 
+    (select
+    board_no as boardNo1, user_no as userNo1, title, regdate, hit_count as hitCount1, password, content, like_count as likeCount1, hate_count as hateCount1
+		FROM 
+			Board
+      where board_no > 0
+      order by boardNo1 desc
+      )
+      order by rownum asc
+      )
+      where title like concat(concat('%',#{keyword}),'%')
+]]>
+</select>
+	
+	<select id="listSearch_c" resultType="board">
+	<![CDATA[
+	  select rn, boardNo,userNo,title,regdate,hitCount, password, content, likeCount, hateCount from(
+select rownum rn, boardNo,userNo,title,regdate,hitCount, password, content, likeCount, hateCount from(
+SELECT rownum rn, boardNo1 as boardNo, userNo1 as userNo, title, regdate, hitCount1 as hitCount, password, content, likeCount1 as likeCount, hateCount1 as hateCount 
+    from 
+    (select
+    board_no as boardNo1, user_no as userNo1, title, regdate, hit_count as hitCount1, password, content, like_count as likeCount1, hate_count as hateCount1
+		FROM 
+			Board
+      where board_no > 0
+      order by boardNo1 desc
+      )
+      order by rownum asc
+      )
+      where content like concat(concat('%',#{keyword}),'%')
+      )
+      where rn>=#{pageStart}+1 and rn<=#{pageStart}+10
+        ]]>
+</select>
+
+<select id="listSearchCount_c" resultType="int">
+<![CDATA[  
+select  count(boardNo) from(
+SELECT rownum rn, boardNo1 as boardNo, userNo1 as userNo, title, regdate, hitCount1 as hitCount, password, content, likeCount1 as likeCount, hateCount1 as hateCount 
+    from 
+    (select
+    board_no as boardNo1, user_no as userNo1, title, regdate, hit_count as hitCount1, password, content, like_count as likeCount1, hate_count as hateCount1
+		FROM 
+			Board
+      where board_no > 0
+      order by boardNo1 desc
+      )
+      order by rownum asc
+      )
+      where content like concat(concat('%',#{keyword}),'%')
+]]>
+</select>
+	
+	
+	
+	<select id="listSearch_tc" resultType="board">
+	<![CDATA[
+	  select rn, boardNo,userNo,title,regdate,hitCount, password, content, likeCount, hateCount from(
+select rownum rn, boardNo,userNo,title,regdate,hitCount, password, content, likeCount, hateCount from(
+SELECT rownum rn, boardNo1 as boardNo, userNo1 as userNo, title, regdate, hitCount1 as hitCount, password, content, likeCount1 as likeCount, hateCount1 as hateCount 
+    from 
+    (select
+    board_no as boardNo1, user_no as userNo1, title, regdate, hit_count as hitCount1, password, content, like_count as likeCount1, hate_count as hateCount1
+		FROM 
+			Board
+      where board_no > 0
+      order by boardNo1 desc
+      )
+      order by rownum asc
+      )
+      where title like concat(concat('%',#{keyword}),'%') 
+      or content like concat(concat('%',#{keyword}),'%')
+      )
+      where rn>=#{pageStart}+1 and rn<=#{pageStart}+10
+        ]]>
+</select>
+
+<select id="listSearchCount_tc" resultType="int">
+<![CDATA[  
+select  count(boardNo) from(
+SELECT rownum rn, boardNo1 as boardNo, userNo1 as userNo, title, regdate, hitCount1 as hitCount, password, content, likeCount1 as likeCount, hateCount1 as hateCount 
+    from 
+    (select
+    board_no as boardNo1, user_no as userNo1, title, regdate, hit_count as hitCount1, password, content, like_count as likeCount1, hate_count as hateCount1
+		FROM 
+			Board
+      where board_no > 0
+      order by boardNo1 desc
+      )
+      order by rownum asc
+      )
+      where title like concat(concat('%',#{keyword}),'%') 
+      or content like concat(concat('%',#{keyword}),'%')
+]]>
+</select>
+	
+	<!-- likeboard게시물 전체 목록 불러오기 -->
+	<select id="LikeCountlistAll" resultType="likeBoard">
+		SELECT board_no as boardNo, user_no as userNo
+		FROM
+		BOARD_LIKE
+	</select>
+	
+	<!-- 해당 게시물의 좋아요 개수 세기 -->
+	<select id="countLike" parameterType="board" resultType="int">
+		SELECT count(user_no)
+		from 
+			BOARD_LIKE
+		where 
+			board_no =#{boardNo}
+	</select>
+	
+	
+	<select id="isLike" resultType="int">
+	<![CDATA[  
+		SELECT count(rn)
+		from 
+			(SELECT rownum rn, user_no as userNo
+		FROM
+		BOARD_LIKE where
+			board_no =#{boardNo})
+    where 
+      userNo=#{userNo}
+			]]>
+	</select>
+	
+	<!-- 좋아요 등록 -->
+	<insert id="createlike">
+		INSERT INTO BOARD_LIKE (board_no, user_no)
+		VALUES
+		(#{boardNo}, #{userNo})
+	</insert>
+	
+	<!-- 좋아요  + 1 -->
+	<update id="uplikeCount">
+		update board set like_count=like_count+1 where
+		board_no= #{boardNo}
+	</update>
+	
+	
+	<!-- 싫어요 등록 -->
+	<insert id="createhate">
+		INSERT INTO BOARD_HATE (board_no, user_no)
+		VALUES
+		(#{boardNo}, #{userNo})
+	</insert>
+	
+	<!-- 싫어요  + 1 -->
+	<update id="uphateCount">
+		update board set hate_count=hate_count+1 where
+		board_no= #{boardNo}
+	</update>
+	
+	<!-- 해당 게시물의 싫어요 개수 세기 -->
+	<select id="counthate" parameterType="board" resultType="int">
+		SELECT count(user_no)
+		from 
+			BOARD_HATE
+		where 
+			board_no =#{boardNo}
+	</select>
+	
+	
+	<select id="ishate" resultType="int">
+	<![CDATA[  
+		SELECT count(rn)
+		from 
+			(SELECT rownum rn, user_no as userNo
+		FROM
+		BOARD_HATE where
+			board_no =#{boardNo})
+    where 
+      userNo=#{userNo}
+			]]>
+	</select>
+	
+</mapper>
