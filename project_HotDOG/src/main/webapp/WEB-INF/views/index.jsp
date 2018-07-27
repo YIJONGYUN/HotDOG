@@ -17,7 +17,7 @@
 											<a href="/board/info" class="btn btn-theme">바로가기</a>
 										</div>
 									</li>
-									<li><img src="/resources/img/slides/flexslider/dogcome.png" />
+									<li><img src="/resources/img/slides/flexslider/dogcome2.png" />
 										<div class="flex-caption">
 											<a href="/board/parcel" class="btn btn-theme">바로가기</a>
 										</div>
