@@ -5,5 +5,11 @@
 
 <mapper namespace="com.ybm.hotdog.mappers.InfoBoardMapper">
 
+<!-- 게시물 전체 목록 불러오기 -->
+<select id="boardInfoListAll" resultType="Article">
+	SELECT article_no, board_no, user_no, category_no, title, content, reg_date, hit_count, "group", step, "order" 
+	FROM Article
+	ORDER BY article_no desc, reg_date desc
+</select>
 	
 </mapper>

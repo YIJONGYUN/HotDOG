@@ -1,7 +1,5 @@
 package com.ybm.hotdog;
 
-import java.sql.Connection;
-
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -26,7 +24,7 @@ public class MyBatisTest {
 	@Test
 	public void testSession() throws Exception {
 		try (SqlSession session = sqlFactory.openSession()) {
-			System.out.println(session);
+			System.out.println("session "+session);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
