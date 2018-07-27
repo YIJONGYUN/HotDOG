@@ -22,7 +22,7 @@
 											<a href="/board/parcel" class="btn btn-theme">바로가기</a>
 										</div>
 									</li>
-									<li><img src="/resources/img/slides/flexslider/dogsignal.png" />
+									<li><img src="/resources/img/slides/flexslider/dogsignal.jpg" />
 										<div class="flex-caption">
 											<a href="/board/mating" class="btn btn-theme">바로가기</a>
 										</div>
