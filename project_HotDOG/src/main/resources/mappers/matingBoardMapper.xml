@@ -5,5 +5,14 @@
 
 <mapper namespace="com.ybm.hotdog.mappers.MatingBoardMapper">
 
-	
+<!-- 게시물 전체 목록 불러오기 -->
+<select id="boardMatingListAll" resultType="Article">
+	SELECT 	article_no as articleNo, board_no as boardNo, user_no as userNo, 
+			category_no as categoryNo, title, content, reg_date as regDate, hit_count as hitCount,
+			"group", step, "order" 
+	FROM Article
+	WHERE board_no = 3
+	ORDER BY article_no desc, reg_date desc
+</select>
+
 </mapper>

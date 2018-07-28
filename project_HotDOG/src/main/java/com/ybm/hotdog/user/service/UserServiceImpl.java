@@ -25,9 +25,16 @@ public class UserServiceImpl implements UserService {
 	@Inject
 	private UserDAO dao;
 
+	/** 회원 목록 조회 */
 	@Override
 	public List<UserDTO> UserListAll() {
 		return dao.UserListAll();
+	}
+
+	/** 회원 번호로 회원 정보 조회 */
+	@Override
+	public UserDTO getUser(int userNo) {
+		return dao.getUser(userNo);
 	}
 
 }

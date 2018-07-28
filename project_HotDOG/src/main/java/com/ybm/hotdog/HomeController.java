@@ -1,12 +1,21 @@
 package com.ybm.hotdog;
 
+import java.util.List;
 import java.util.Locale;
+
+import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.ybm.hotdog.board.domain.ArticleDTO;
+import com.ybm.hotdog.board.mating.service.BoardMatingService;
+import com.ybm.hotdog.user.domain.UserDTO;
+import com.ybm.hotdog.user.service.UserService;
 
 /**
  * 메뉴 관련 컨트롤러
@@ -21,6 +30,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	@Inject
+	private BoardMatingService matingService;
+	
+	@Inject
+	private UserService userService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale) {
@@ -37,8 +52,12 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/board/mating", method = RequestMethod.GET)
-	public String boardMating(Locale locale) {
-		logger.info("도그시그널 페이지 들어옴~", locale);
+	public String boardMating(Model model) {
+		logger.info("도그시그널 페이지 들어옴~");
+		
+		List<ArticleDTO> list = matingService.listAll();
+		
+		model.addAttribute("boardMatingList", list);
 		
 		return "board/mating/mating";
 	}

@@ -2,11 +2,15 @@ package com.ybm.hotdog.board.mating.controller;
 
 import java.util.Locale;
 
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.ybm.hotdog.board.mating.service.BoardMatingService;
 
 /**
  * 교배 게시판 관련 프로젝트 Controller @RequestMapping("/board/mating") URI 매칭
@@ -23,6 +27,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class BoardMatingController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BoardMatingController.class);
+	
+	@Inject
+	private BoardMatingService service;
 	
 	@RequestMapping(value = "/form", method = RequestMethod.GET)
 	public String boardForm(Locale locale) {

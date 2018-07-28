@@ -1,4 +1,4 @@
-package com.ybm.hotdog.board.info;
+package com.ybm.hotdog.board.mating;
 
 import java.util.List;
 
@@ -12,15 +12,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ybm.hotdog.board.domain.ArticleDTO;
 import com.ybm.hotdog.board.info.dao.BoardInfoDAO;
+import com.ybm.hotdog.board.mating.dao.BoardMatingDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"})
-public class BoardInfoDaoTest {
+public class BoardMatingDaoTest {
 	
 	@Inject
-	private BoardInfoDAO dao;
+	private BoardMatingDAO dao;
 	
-	Logger logger = Logger.getLogger(BoardInfoDaoTest.class);
+	Logger logger = Logger.getLogger(BoardMatingDaoTest.class);
 	
 	/** 게시글 전체 조회 테스트 */
 	@Test

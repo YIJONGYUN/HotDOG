@@ -29,9 +29,16 @@ public class UserDAOImpl implements UserDAO {
 	
 	Logger logger = Logger.getLogger(UserDAOImpl.class);
 	
+	/** 회원 목록 조회 */
 	@Override
 	public List<UserDTO> UserListAll() {
 		return sqlSession.selectList(namespace + ".userListAll");
+	}
+
+	/** 회원 번호로 회원 정보 조회 */
+	@Override
+	public UserDTO getUser(int userNo) {
+		return sqlSession.selectOne(namespace + ".getUser", userNo);
 	}
 
 }

@@ -9,6 +9,7 @@
 <select id="boardInfoListAll" resultType="Article">
 	SELECT article_no, board_no, user_no, category_no, title, content, reg_date, hit_count, "group", step, "order" 
 	FROM Article
+	WHERE board_no = 1
 	ORDER BY article_no desc, reg_date desc
 </select>
 	

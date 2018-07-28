@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <body>
@@ -38,46 +41,23 @@
 			                </tr>
 			              </thead>
 			              <tbody>
-			                <tr>
-			                  <td>5</td>
-			                  <td>[아들]</td>
-			                  <td colspan="4"><a href="/board/mating/detail" style="color: black;">화이트 포메라니언 4살입니다~</a></td>
-			                  <td>이종윤</td>
-			                  <td>2018-07-24</td>
-			                  <td>23</td>
-			                </tr>
-							<tr>
-			                  <td>4</td>
-			                  <td>[딸]</td>
-			                  <td colspan="4"><a style="color: black;">크림 푸들 시집 보내요</a></td>
-			                  <td>심민정</td>
-			                  <td>2018-07-24</td>
-			                  <td>27</td>
-			                </tr>
-			                <tr>
-			                  <td>3</td>
-			                  <td>[아들]</td>
-			                  <td colspan="4"><a style="color: black;">강아지 교배 시키려는데 조언 부탁드려요</a></td>
-			                  <td>이종윤</td>
-			                  <td>2018-07-22</td>
-			                  <td>52</td>
-			                </tr>
-			                <tr>
-			                  <td>2</td>
-			                  <td>[아들]</td>
-			                  <td colspan="4"><a style="color: black;">저희 강아지 교배를 어떻게 해야할까요</a></td>
-			                  <td>권한별</td>
-			                  <td>2018-07-21</td>
-			                  <td>39</td>
-			                </tr>
-			                <tr>
-			                  <td>1</td>
-			                  <td>[딸]</td>
-			                  <td colspan="4"><a style="color: black;">저희 강아지랑 교배할 강아지 있나요?</a></td>
-			                  <td>심민정</td>
-			                  <td>2018-07-21</td>
-			                  <td>24</td>
-			                </tr>
+			              	<c:choose>
+			              		<c:when test="${empty boardMatingList}">
+			              			<td> 게시물이 존재하지 않습니다. </td>
+			              		</c:when>
+			              		<c:otherwise>
+			              			<c:forEach items="${boardMatingList}" var="articleDTO" varStatus="status">
+			              				<tr>
+						                  <td>${articleDTO.articleNo}</td>
+						                  <td>[아들]</td>
+						                  <td colspan="4"><a href="/board/mating/detail" style="color: black;">${articleDTO.title}</a></td>
+						                  <td>이종윤</td>
+						                  <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${articleDTO.regDate}" /></td>
+						                  <td>${articleDTO.hitCount}</td>
+						                </tr>
+			              			</c:forEach>
+			              		</c:otherwise>
+			              	</c:choose>
 			              </tbody>
 			            </table>
 			          </div>

@@ -7,7 +7,15 @@
 
 <!-- 회원 목록 조회 -->
 <select id="userListAll" resultType="User">
-SELECT user_no, ID, password, name, phone, grade FROM Users
+	SELECT user_no as uerNo, ID, password, name, phone, grade 
+	FROM Users
+</select>
+
+<!-- 회원번호로 회원정보 조회-->
+<select id="getUser" resultType="User">
+	SELECT user_no as uerNo, ID, password, name, phone, grade 
+	FROM Users
+	WHERE user_no=#{userNo}
 </select>
 	
 </mapper>

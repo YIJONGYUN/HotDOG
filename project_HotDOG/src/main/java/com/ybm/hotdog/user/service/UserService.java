@@ -18,4 +18,6 @@ public interface UserService {
 	/** 회원 목록 조회 */
 	public List<UserDTO> UserListAll ();
 
+	/** 회원 번호로 회원 정보 조회 */
+	public UserDTO getUser (int userNo);
 }
