@@ -101,7 +101,7 @@
 							<form role="form">
 								<div class="col-md-10">
 									<div class="form-group">
-										<textarea class="form-control" rows="2" placeholder="댓글을 작성해 주세요!"></textarea>
+										<textarea class="form-control" rows="2" placeholder="댓글을 작성해 주세요!" style="resize: none;"></textarea>
 									</div>
 								</div>
 								<div class="col-md-2">
