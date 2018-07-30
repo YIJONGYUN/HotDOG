@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <body>
@@ -27,22 +29,22 @@
 						<table class="table table-bordered text-center" data-effect="fade">
 			              <thead>
 			                <tr>
-			                  <td>[아들]</td>
-			                  <th colspan="5">화이트 포메라니언 4살입니다~</th>
+			                  <td>${category.content}</td>
+			                  <th colspan="5">${article.title}</th>
 			                </tr>
 			              </thead>
 			              <tbody>
 			               <tr>
 			                  <td>작성자</td>
-			                  <td>이종윤</td>
+			                  <td>${user.name}</td>
 			                  <td>작성일</td>
-			                  <td>2018-07-24</td>
+			                  <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${article.regDate}" /></td>
 			                  <td>조회수</td>
-			                  <td>23</td>
+			                  <td>${article.hitCount}</td>
 			                </tr>
 			                <tr>
 			                  <td colspan="6">
-			                  	<textarea class="form-control text-center" rows="5" cols="50" readonly="readonly" style="background-color: white;">졸귀탱 포메랑 교배하실 분 73583-70861로 연락주세요~</textarea>
+			                  	<textarea class="form-control text-center" rows="5" cols="50" readonly="readonly" style="background-color: white;">${article.content}</textarea>
 			                  </td>
 			                </tr>
 			              </tbody>

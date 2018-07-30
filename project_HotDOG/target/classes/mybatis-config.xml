@@ -10,7 +10,9 @@
 		<!-- 게시판 -->
 		<typeAlias type="com.ybm.hotdog.board.domain.ArticleDTO" alias="Article"/>
 		<typeAlias type="com.ybm.hotdog.board.domain.BoardDTO" alias="Board"/>
-		<typeAlias type="com.ybm.hotdog.board.domain.CategoryDTO" alias="Category"/>
 		<typeAlias type="com.ybm.hotdog.board.domain.ReplyDTO" alias="Reply"/>
+		
+		<!-- 카테고리 -->
+		<typeAlias type="com.ybm.hotdog.category.domain.CategoryDTO" alias="Category"/>
 	</typeAliases>
 </configuration> 

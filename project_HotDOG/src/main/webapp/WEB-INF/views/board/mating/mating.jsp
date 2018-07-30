@@ -43,15 +43,16 @@
 			              <tbody>
 			              	<c:choose>
 			              		<c:when test="${empty boardMatingList}">
-			              			<td> 게시물이 존재하지 않습니다. </td>
+			              			<td colspan="9"> 게시물이 존재하지 않습니다. </td>
 			              		</c:when>
 			              		<c:otherwise>
 			              			<c:forEach items="${boardMatingList}" var="articleDTO" varStatus="status">
 			              				<tr>
-						                  <td>${articleDTO.articleNo}</td>
-						                  <td>[아들]</td>
-						                  <td colspan="4"><a href="/board/mating/detail" style="color: black;">${articleDTO.title}</a></td>
-						                  <td>이종윤</td>
+			              				  <td><input type="hidden" id="articleNo" value="${articleDTO.articleNo}"></td>
+						                  <td>${status.count}</td>
+						                  <td>${category[status.index].content}</td>
+						                  <td colspan="4"><a href="/board/mating/detail/${articleDTO.articleNo}" style="color: black;">${articleDTO.title}</a></td>
+						                  <td>${name[status.index].name}</td>
 						                  <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${articleDTO.regDate}" /></td>
 						                  <td>${articleDTO.hitCount}</td>
 						                </tr>

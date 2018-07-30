@@ -17,5 +17,8 @@ public interface BoardMatingDAO {
 	
 	/** 게시글 목록 전체 조회 */
 	public List<ArticleDTO> listAll();
+	
+	/** 게시글 상세 조회 */
+	public ArticleDTO getArticle(int articleNo);
 
 }

@@ -1,12 +1,12 @@
-package com.ybm.hotdog.board.domain;
+package com.ybm.hotdog.category.domain;
 
 /**
  * 카테고리 관련 객체 선언 및 getter(), setter() 메소드 정의
  * 
- * @Package : com.ybm.hotdog.board.domain
+ * @Package : com.ybm.hotdog.category.domain
  * @FileName : CategoryDTO.java
  * @Author : YI JONGYUN
- * @date : 2018. 7. 25.
+ * @date : 2018. 7. 30. 
  *
  */
 public class CategoryDTO {

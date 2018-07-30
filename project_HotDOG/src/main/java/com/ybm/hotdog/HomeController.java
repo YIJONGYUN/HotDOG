@@ -1,5 +1,6 @@
 package com.ybm.hotdog;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ybm.hotdog.board.domain.ArticleDTO;
 import com.ybm.hotdog.board.mating.service.BoardMatingService;
+import com.ybm.hotdog.category.domain.CategoryDTO;
+import com.ybm.hotdog.category.service.CategoryService;
 import com.ybm.hotdog.user.domain.UserDTO;
 import com.ybm.hotdog.user.service.UserService;
 
@@ -37,6 +40,9 @@ public class HomeController {
 	@Inject
 	private UserService userService;
 	
+	@Inject
+	private CategoryService categoryService;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale) {
 		logger.info("인덱스 페이지", locale);
@@ -56,8 +62,17 @@ public class HomeController {
 		logger.info("도그시그널 페이지 들어옴~");
 		
 		List<ArticleDTO> list = matingService.listAll();
+		List<UserDTO> name = new ArrayList<UserDTO>();
+		List<CategoryDTO> category = new ArrayList<CategoryDTO>();
+		
+		for (ArticleDTO articleList : list) {
+			name.add(userService.getUser(articleList.getUserNo()));
+			category.add(categoryService.getCategory(articleList.getCategoryNo()));
+		}
 		
 		model.addAttribute("boardMatingList", list);
+		model.addAttribute("name", name);
+		model.addAttribute("category", category);
 		
 		return "board/mating/mating";
 	}
