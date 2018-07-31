@@ -67,7 +67,7 @@ public class BoardMatingDaoTest {
 	
 	/** 글 작성 테스트 */
 	@Test
-	public void testCreate() throws Exception {
+	public void testInsert() throws Exception {
 		ArticleDTO article = new ArticleDTO();
 		article.setCategoryNo(7);
 		article.setTitle("테스트에서 작성");
@@ -76,6 +76,28 @@ public class BoardMatingDaoTest {
 		dao.regist(article);
 		
 		logger.info("글 작성 완료!");
+	}
+	
+	/** 글 삭제 테스트 */
+	@Test
+	public void testDelete() throws Exception {
+		dao.delete(23);
+		
+		logger.info("글 삭제 완료!");
+	}
+	
+	/** 글 수정 테스트 */
+	@Test
+	public void testUpdate() throws Exception {
+		ArticleDTO article = new ArticleDTO();
+		article.setArticleNo(21);
+		article.setCategoryNo(7);
+		article.setTitle("테스트에서 수정");
+		article.setContent("테스트 테스트");
+		
+		dao.edit(article);
+		
+		logger.info("글 수정 완료!");
 	}
 
 }

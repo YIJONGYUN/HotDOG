@@ -1,6 +1,8 @@
 package com.ybm.hotdog.board.mating.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -8,6 +10,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.ybm.hotdog.board.domain.ArticleDTO;
+
+import oracle.net.aso.a;
 /**
  * BoardMatingDAO 인터페이스를 구현하는 클래스
  * 
@@ -40,7 +44,19 @@ public class BoardMatingDAOImpl implements BoardMatingDAO {
 	/** 게시글 등록 */
 	@Override
 	public void regist (ArticleDTO article) {
-		sqlSession.insert(namespace + ".regist", article);
+		sqlSession.insert(namespace + ".registMating", article);
+	}
+
+	/** 게시글 삭제 */
+	@Override
+	public void delete(int articleNo) {
+		sqlSession.delete(namespace + ".deleteMating", articleNo);
+	}
+
+	/** 게시글 수정 */
+	@Override
+	public void edit (ArticleDTO article) {
+		sqlSession.update(namespace + ".updateMating", article);
 	}
 
 }

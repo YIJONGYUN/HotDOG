@@ -24,4 +24,9 @@ public interface BoardMatingDAO {
 	/** 게시글 등록 */
 	public void regist (ArticleDTO article);
 
+	/** 게시글 삭제 */
+	public void delete (int articleNo);
+	
+	/** 게시글 수정 */
+	public void edit (ArticleDTO article);
 }

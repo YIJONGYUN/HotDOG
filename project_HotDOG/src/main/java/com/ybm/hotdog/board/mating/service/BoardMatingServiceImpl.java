@@ -43,4 +43,16 @@ public class BoardMatingServiceImpl implements BoardMatingService {
 		dao.regist(article);
 	}
 
+	/** 게시글 삭제 */
+	@Override
+	public void delete(int articleNo) {
+		dao.delete(articleNo);
+	}
+
+	/** 게시글 수정 */
+	@Override
+	public void edit(ArticleDTO article) {
+		dao.edit(article);
+	}
+
 }

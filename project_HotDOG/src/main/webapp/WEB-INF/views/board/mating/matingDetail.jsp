@@ -53,8 +53,8 @@
 						<a href="/board/mating" class="btn btn-default"> 목록 </a>
 						<div class="bs-docs-example pull-right">
 							<div class="btn-group">
-								<a href="/board/mating/edit" class="btn btn-primary">수정</a>
-								<a class="btn btn-theme">삭제 </a>
+								<a href="/board/mating/editForm/${article.articleNo}" class="btn btn-primary">수정</a>
+								<a href="/board/mating/delete/${article.articleNo}" class="btn btn-theme">삭제 </a>
 								<a href="/board/mating/form" class="btn btn-warning">답글</a>
 							</div>
 						</div>

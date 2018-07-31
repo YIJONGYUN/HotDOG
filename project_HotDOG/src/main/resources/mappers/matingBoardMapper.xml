@@ -25,9 +25,20 @@
 </select>
 
 <!-- 게시글 작성 -->
-<insert id="regist">
+<insert id="registMating">
 	INSERT INTO Article(article_no, board_no, user_no, category_no, title, content, reg_date, hit_count, "group", step, "order") 
 	VALUES (seq_Article.nextVal, 3, 1, #{categoryNo}, #{title}, #{content}, sysdate, 0, 1, 1, 1)
 </insert>
+
+<!-- 게시글 삭제 -->
+<delete id="deleteMating">
+	DELETE FROM Article 
+	WHERE article_no = #{articleNo}
+</delete>
+
+<update id="updateMating">
+	UPDATE Article SET category_no = #{categoryNo}, title = #{title}, content = #{content}, reg_date = sysdate
+	WHERE article_no = #{articleNo}
+</update>
 
 </mapper>

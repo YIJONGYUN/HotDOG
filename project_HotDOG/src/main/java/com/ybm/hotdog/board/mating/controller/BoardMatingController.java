@@ -72,9 +72,17 @@ public class BoardMatingController {
 		return "board/mating/matingDetail";
 	}
 	
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public String boardEdit(Locale locale) {
-		logger.info("도그시그널 글 수정 페이지", locale);
+	@RequestMapping(value = "/editForm/{articleNo}", method = RequestMethod.GET)
+	public String boardEdit(Model model, @PathVariable int articleNo) {
+		logger.info("도그시그널 글 수정 페이지");
+		
+		ArticleDTO article = matingService.getArticle(articleNo);
+		CategoryDTO category = categoryService.getCategory(article.getCategoryNo());
+		List<CategoryDTO> categoryList = categoryService.getCategoryList(3);
+		
+		model.addAttribute("article", article);
+		model.addAttribute("category", category);
+		model.addAttribute("categoryList", categoryList);
 		
 		return "board/mating/matingEdit";
 	}
@@ -84,19 +92,39 @@ public class BoardMatingController {
 	 *
 	 * @Method Name : regist
 	 * @param article	등록할 게시글 객체
-	 * @param rttr
 	 * @return
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
-	public String regist(ArticleDTO article, RedirectAttributes rttr) throws Exception {
+	public String regist(ArticleDTO article) throws Exception {
 		
-		logger.info(article.toString());
 		matingService.regist(article);
-		
-		rttr.addFlashAttribute("message", "success");
 		
 		return "redirect:/board/mating";
 	}
 	
+	/**
+	 * 게시글 삭제
+	 *
+	 * @Method Name : delete
+	 * @param model
+	 * @param articleNo	삭제할 게시글 번호
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/delete/{articleNo}", method = RequestMethod.GET)
+	public String delete(@PathVariable int articleNo) throws Exception {
+		
+		matingService.delete(articleNo);
+		
+		return "redirect:/board/mating";
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	public String edit(ArticleDTO article) {
+		
+		matingService.edit(article);
+		
+		return "redirect:/board/mating";
+	}
 }
