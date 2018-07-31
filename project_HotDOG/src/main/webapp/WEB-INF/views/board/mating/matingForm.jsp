@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <body>
@@ -32,8 +33,9 @@
 						        	<div class="input-group-btn">
 						            	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"> 말머리 <span class="caret"></span></button>
 										<ul class="dropdown-menu">
-											<li style="text-align: center;">[아들]</li>
-											<li style="text-align: center;">[딸]</li>
+											<c:forEach items="${categoryList}" var="category">
+												<li style="text-align: center;">${category.content}</li>
+											</c:forEach>
 										</ul>
 									</div>
 						             

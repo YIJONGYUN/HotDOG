@@ -38,7 +38,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 	/** 게시판 번호로 카테고리 리스트 조회 */
 	@Override
 	public List<CategoryDTO> getCategoryList(int boardNo) {
-		return sqlSession.selectList(namespace + "getCategoryList", boardNo);
+		return sqlSession.selectList(namespace + ".getCategoryList", boardNo);
 	}
 
 }
