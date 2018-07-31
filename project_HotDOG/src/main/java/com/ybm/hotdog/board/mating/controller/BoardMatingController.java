@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ybm.hotdog.board.domain.ArticleDTO;
 import com.ybm.hotdog.board.mating.service.BoardMatingService;
@@ -76,6 +77,26 @@ public class BoardMatingController {
 		logger.info("도그시그널 글 수정 페이지", locale);
 		
 		return "board/mating/matingEdit";
+	}
+	
+	/**
+	 * 게시글 등록
+	 *
+	 * @Method Name : regist
+	 * @param article	등록할 게시글 객체
+	 * @param rttr
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/regist", method = RequestMethod.POST)
+	public String regist(ArticleDTO article, RedirectAttributes rttr) throws Exception {
+		
+		logger.info(article.toString());
+		matingService.regist(article);
+		
+		rttr.addFlashAttribute("message", "success");
+		
+		return "redirect:/board/mating";
 	}
 	
 }

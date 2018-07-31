@@ -20,5 +20,8 @@ public interface BoardMatingDAO {
 	
 	/** 게시글 상세 조회 */
 	public ArticleDTO getArticle(int articleNo);
+	
+	/** 게시글 등록 */
+	public void regist (ArticleDTO article);
 
 }

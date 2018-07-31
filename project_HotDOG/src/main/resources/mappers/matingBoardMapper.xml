@@ -15,6 +15,7 @@
 	ORDER BY article_no desc, reg_date desc
 </select>
 
+<!-- 게시글 상세 조회 -->
 <select id="articleDetail" resultType="Article">
 	SELECT 	article_no as articleNo, board_no as boardNo, user_no as userNo, 
 			category_no as categoryNo, title, content, reg_date as regDate, hit_count as hitCount,
@@ -22,5 +23,11 @@
 	FROM Article
 	WHERE article_no = #{articleNo}
 </select>
+
+<!-- 게시글 작성 -->
+<insert id="regist">
+	INSERT INTO Article(article_no, board_no, user_no, category_no, title, content, reg_date, hit_count, "group", step, "order") 
+	VALUES (seq_Article.nextVal, 3, 1, #{categoryNo}, #{title}, #{content}, sysdate, 0, 1, 1, 1)
+</insert>
 
 </mapper>

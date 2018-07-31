@@ -48,19 +48,14 @@
 												<td colspan="9">게시물이 존재하지 않습니다.</td>
 											</c:when>
 											<c:otherwise>
-												<c:forEach items="${boardMatingList}" var="articleDTO"
-													varStatus="status">
-													<input type="hidden" id="articleNo"
-														value="${articleDTO.articleNo}">
+												<c:forEach items="${boardMatingList}" var="articleDTO" varStatus="status">
+													<input type="hidden" id="articleNo" value="${articleDTO.articleNo}">
 													<tr>
 														<td>${status.count}</td>
 														<td>${category[status.index].content}</td>
-														<td colspan="4"><a
-															href="/board/mating/detail/${articleDTO.articleNo}"
-															style="color: black;">${articleDTO.title}</a></td>
+														<td colspan="4"><a href="/board/mating/detail/${articleDTO.articleNo}" style="color: black;">${articleDTO.title}</a></td>
 														<td>${name[status.index].name}</td>
-														<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-																value="${articleDTO.regDate}" /></td>
+														<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${articleDTO.regDate}" /></td>
 														<td>${articleDTO.hitCount}</td>
 													</tr>
 												</c:forEach>
@@ -88,8 +83,7 @@
 						<div class="col-md-4 col-md-offset-4">
 							<div class="input-group">
 								<div class="input-group-btn">
-									<button type="button" class="btn btn-default dropdown-toggle"
-										data-toggle="dropdown">
+									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 										검색 <span class="caret"></span>
 									</button>
 									<ul class="dropdown-menu">

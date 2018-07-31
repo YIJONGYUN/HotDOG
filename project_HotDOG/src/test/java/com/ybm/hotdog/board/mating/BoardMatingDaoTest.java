@@ -1,5 +1,7 @@
 package com.ybm.hotdog.board.mating;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -55,12 +57,25 @@ public class BoardMatingDaoTest {
 	
 	/** 카테고리 리스트 조회 테스트 */
 	@Test
-	public void testCategoryList()  throws Exception {
+	public void testCategoryList() throws Exception {
 		List<CategoryDTO> list = categoryDao.getCategoryList(3);
 		
 		for (CategoryDTO categoryDTO : list) {
 			logger.info(categoryDTO.toString());
 		}
+	}
+	
+	/** 글 작성 테스트 */
+	@Test
+	public void testCreate() throws Exception {
+		ArticleDTO article = new ArticleDTO();
+		article.setCategoryNo(7);
+		article.setTitle("테스트에서 작성");
+		article.setContent("테스트 테스트");
+		
+		dao.regist(article);
+		
+		logger.info("글 작성 완료!");
 	}
 
 }

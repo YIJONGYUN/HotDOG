@@ -37,4 +37,10 @@ public class BoardMatingServiceImpl implements BoardMatingService {
 		return dao.getArticle(articleNo);
 	}
 
+	/** 게시글 등록 */
+	@Override
+	public void regist(ArticleDTO article) {
+		dao.regist(article);
+	}
+
 }

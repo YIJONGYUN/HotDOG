@@ -37,4 +37,10 @@ public class BoardMatingDAOImpl implements BoardMatingDAO {
 		return sqlSession.selectOne(namespace + ".articleDetail", articleNo);
 	}
 
+	/** 게시글 등록 */
+	@Override
+	public void regist (ArticleDTO article) {
+		sqlSession.insert(namespace + ".regist", article);
+	}
+
 }

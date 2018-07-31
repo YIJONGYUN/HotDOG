@@ -27,19 +27,21 @@
 						<hr class="colorgraph">
 						<div id="sendmessage">Your message has been sent. Thank you!</div>
 						<div id="errormessage"></div>
-						<form action="" method="post" role="form" class="contactForm">
+						<form action="/board/mating/regist" method="post" role="form" class="contactForm">
 							<div class="form-group">
 								<div class="input-group">
 						        	<div class="input-group-btn">
-						            	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"> 말머리 <span class="caret"></span></button>
-										<ul class="dropdown-menu">
+						            	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="categoryList"> 말머리 <span class="caret"></span></button>
+										<ul class="dropdown-menu" id="myCategory" role="menu">
 											<c:forEach items="${categoryList}" var="category">
-												<li style="text-align: center;">${category.content}</li>
+												<li style="text-align: center;" id="${category.categoryNo}">${category.content}</li>
 											</c:forEach>
 										</ul>
 									</div>
 						             
-						  			<input type="text" name="name" class="form-control" id="name" placeholder="제목을 입력해 주세요" data-rule="required" data-msg="제목을 입력해 주세요!" />
+						            <input type="hidden" id="categoryNo" name="categoryNo">
+						            
+						  			<input type="text" name="title" class="form-control" id="title" placeholder="제목을 입력해 주세요" data-rule="required" data-msg="제목을 입력해 주세요!" />
 									<div class="validation"></div>
 						             
 								</div>
@@ -61,7 +63,18 @@
 		</section>
 	</div>
 	<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
-	<script src="/resources/contactform/contactform.js"></script>
+<!-- 	<script src="/resources/contactform/contactform.js"></script> -->
+	
+	<script>
+		$(function() {
+			$('#myCategory li').on('click', function() {
+			    // 버튼에 선택된 항목 텍스트 넣기 
+			    $('#categoryList').html($(this).text()+' <span class="caret"></span>');
+			    // 카테고리 번호 속성으로 넣기
+			    $('#categoryNo').val($(this).attr('id'));
+			});
+		})
+	</script>
 
 </body>
 
