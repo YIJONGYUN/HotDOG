@@ -1,5 +1,6 @@
 package com.ybm.hotdog.board.mating.controller;
 
+import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -36,7 +37,7 @@ public class BoardMatingController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardMatingController.class);
 	
 	@Inject
-	private BoardMatingService service;
+	private BoardMatingService matingService;
 	
 	@Inject
 	private UserService userService;
@@ -45,17 +46,21 @@ public class BoardMatingController {
 	private CategoryService categoryService;
 	
 	@RequestMapping(value = "/form", method = RequestMethod.GET)
-	public String boardForm(Locale locale) {
-		logger.info("도그시그널 글 작성 페이지", locale);
+	public String boardForm(Model model) {
+		logger.info("도그시그널 글 작성 페이지");
+		
+		List<CategoryDTO> categoryList = categoryService.getCategoryList(3);
+		
+		model.addAttribute("categoryList", categoryList);
 		
 		return "board/mating/matingForm";
 	}
 	
 	@RequestMapping(value = "/detail/{articleNo}", method = RequestMethod.GET)
-	public String boardDetail(Locale locale, Model model, @PathVariable int articleNo) {
-		logger.info("도그시그널 글 상세 페이지", locale);
+	public String boardDetail(Model model, @PathVariable int articleNo) {
+		logger.info("도그시그널 글 상세 페이지");
 		
-		ArticleDTO article = service.getArticle(articleNo);
+		ArticleDTO article = matingService.getArticle(articleNo);
 		CategoryDTO category = categoryService.getCategory(article.getCategoryNo());
 		UserDTO user = userService.getUser(article.getUserNo());
 		
