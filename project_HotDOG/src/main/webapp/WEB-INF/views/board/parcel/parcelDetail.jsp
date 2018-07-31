@@ -1,4 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <body>
@@ -8,8 +12,8 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<ul class="breadcrumb">
-							<li><a href="/"><i class="fa fa-home"></i></a>
-							<i class="icon-angle-right"></i></li>
+							<li><a href="/"><i class="fa fa-home"></i></a> <i
+								class="icon-angle-right"></i></li>
 							<li class="active"><a href="/board/parcel">이리오시개</a></li>
 						</ul>
 					</div>
@@ -21,39 +25,40 @@
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2">
 						<div class="text-center">
-			        		<img src="/resources/img/comeon.png" width="35%"/>
-			        	</div>
+							<img src="/resources/img/comeon.png" width="35%" />
+						</div>
 						<hr class="colorgraph">
 						<table class="table table-bordered text-center" data-effect="fade">
-			              <thead>
-			                <tr>
-			                  <td>[오시개]</td>
-			                  <th colspan="5">토이 푸들 분양 받고 싶어요!</th>
-			                </tr>
-			              </thead>
-			              <tbody>
-			               <tr>
-			                  <td>작성자</td>
-			                  <td>이종윤</td>
-			                  <td>작성일</td>
-			                  <td>2018-07-25</td>
-			                  <td>조회수</td>
-			                  <td>23</td>
-			                </tr>
-			                <tr>
-			                  <td colspan="6">
-			                  	<textarea class="form-control text-center" rows="5" cols="50" readonly="readonly" style="background-color: white;">요즘 토이푸들이 너무 좋아요</textarea>
-			                  </td>
-			                </tr>
-			              </tbody>
-			            </table>
+							<thead>
+								<tr>
+									<td>${category.content}</td>
+									<th colspan="5">${article.title}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>작성자</td>
+									<td>${user.name}</td>
+									<td>작성일</td>
+									<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+											value="${article.regDate}" /></td>
+									<td>조회수</td>
+									<td>${article.hitCount}</td>
+								</tr>
+								<tr>
+									<td colspan="6"><textarea class="form-control text-center"
+											rows="5" cols="50" readonly="readonly"
+											style="background-color: white;">${article.content}</textarea></td>
+								</tr>
+							</tbody>
+						</table>
 						<hr class="colorgraph">
 						<a href="/board/parcel" class="btn btn-default"> 목록 </a>
 						<div class="bs-docs-example pull-right">
 							<div class="btn-group">
-								<a href="/board/parcel/edit" class="btn btn-primary">수정</a>
-								<a class="btn btn-theme">삭제 </a>
-								<a href="/board/parcel/form" class="btn btn-warning">답글</a>
+								<a href="/board/parcel/edit" class="btn btn-primary">수정</a> <a
+									class="btn btn-theme">삭제 </a> <a href="/board/parcel/form"
+									class="btn btn-warning">답글</a>
 							</div>
 						</div>
 					</div>
@@ -63,35 +68,35 @@
 						<div class="comment-area">
 							<h4>댓글 3</h4>
 							<div class="media">
-								<a class="pull-left"><img src="/resources/img/dog2.png"/></a>
+								<a class="pull-left"><img src="/resources/img/dog2.png" /></a>
 								<div class="media-body">
 									<div class="media-content">
-										<h6><span>2018-07-24</span> 이종윤 </h6>
-										<p>
-											졸귀탱 ㅠㅠ
-										</p>
+										<h6>
+											<span>2018-07-24</span> 이종윤
+										</h6>
+										<p>졸귀탱 ㅠㅠ</p>
 									</div>
 								</div>
 							</div>
 							<div class="media">
-								<a class="pull-left"><img src="/resources/img/dog2.png"/></a>
+								<a class="pull-left"><img src="/resources/img/dog2.png" /></a>
 								<div class="media-body">
 									<div class="media-content">
-										<h6><span>2018-07-24</span> 심민정 </h6>
-										<p>
-											저요 저요!
-										</p>
+										<h6>
+											<span>2018-07-24</span> 심민정
+										</h6>
+										<p>저요 저요!</p>
 									</div>
 								</div>
 							</div>
 							<div class="media">
-								<a class="pull-left"><img src="/resources/img/dog2.png"/></a>
+								<a class="pull-left"><img src="/resources/img/dog2.png" /></a>
 								<div class="media-body">
 									<div class="media-content">
-										<h6><span>2018-07-24</span> 권한별 </h6>
-										<p>
-											이리오시개
-										</p>
+										<h6>
+											<span>2018-07-24</span> 권한별
+										</h6>
+										<p>이리오시개</p>
 									</div>
 								</div>
 							</div>
@@ -99,11 +104,13 @@
 							<form role="form">
 								<div class="col-md-10">
 									<div class="form-group">
-										<textarea class="form-control" rows="2" placeholder="댓글을 작성해 주세요!"></textarea>
+										<textarea class="form-control" rows="2"
+											placeholder="댓글을 작성해 주세요!"></textarea>
 									</div>
 								</div>
 								<div class="col-md-2">
-									<button type="submit" class="btn btn-lg btn-theme" style="margin-left: 20%">등록</button>
+									<button type="submit" class="btn btn-lg btn-theme"
+										style="margin-left: 20%">등록</button>
 								</div>
 							</form>
 						</div>

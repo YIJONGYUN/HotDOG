@@ -12,21 +12,24 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+		
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<context:component-scan base-package="com.ybm.hotdog.user.dao"/>
-	<context:component-scan base-package="com.ybm.hotdog.board.mating.dao"/>
+	<context:component-scan base-package="com.ybm.hotdog.board.info.dao"/>
 	<context:component-scan base-package="com.ybm.hotdog.board.mating.dao"/>
 	<context:component-scan base-package="com.ybm.hotdog.board.parcel.dao"/>
 	<context:component-scan base-package="com.ybm.hotdog.category.dao"/>
+	
 		
 	<!-- Database 연동을 위한 DataSource 설정 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:shimDB" />
 		<property name="username" value="hr" />
 		<property name="password" value="hr" />
 	</bean>
+	
 	
 	<!-- Connection을 생성하고, 처리하는 SqlSessionFactory 등록 -->	
 	<!-- 데이터베이스와의 연결과 SQL의 실행에 대한 모든 것을 가진 객체 -->
