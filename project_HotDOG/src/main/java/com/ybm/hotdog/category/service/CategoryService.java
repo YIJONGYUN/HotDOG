@@ -1,5 +1,7 @@
 package com.ybm.hotdog.category.service;
 
+import java.util.List;
+
 import com.ybm.hotdog.category.domain.CategoryDTO;
 
 /**
@@ -15,4 +17,7 @@ public interface CategoryService {
 	
 	/** 카테고리 번호로 카테고리 조회 */
 	public CategoryDTO getCategory (int categoryNo);
+	
+	/** 게시판 번호로 카테고리 리스트 조회 */
+	public List<CategoryDTO> getCategoryList (int boardNo);
 }
