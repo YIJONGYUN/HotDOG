@@ -7,10 +7,21 @@
 
 <!-- 게시물 전체 목록 불러오기 -->
 <select id="boardInfoListAll" resultType="Article">
-	SELECT article_no, board_no, user_no, category_no, title, content, reg_date, hit_count, "group", step, "order" 
+	SELECT 	article_no as articleNo, board_no as boardNo, user_no as userNo, 
+			category_no as categoryNo, title, content, reg_date as regDate, hit_count as hitCount,
+			"group", step, "order" 
 	FROM Article
 	WHERE board_no = 1
 	ORDER BY article_no desc, reg_date desc
 </select>
 	
+<!-- 게시물 상세 조회  -->	
+<select id="articleDetail" resultType="Article">
+	SELECT 	article_no as articleNo, board_no as boardNo, user_no as userNo, 
+			category_no as categoryNo, title, content, reg_date as regDate, hit_count as hitCount,
+			"group", step, "order" 
+	FROM Article
+	WHERE article_no = #{articleNo}
+</select>
+
 </mapper>

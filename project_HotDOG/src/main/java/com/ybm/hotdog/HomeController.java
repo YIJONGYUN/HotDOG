@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ybm.hotdog.board.domain.ArticleDTO;
+import com.ybm.hotdog.board.info.service.BoardInfoService;
 import com.ybm.hotdog.board.mating.service.BoardMatingService;
 import com.ybm.hotdog.board.parcel.service.BoardParcelService;
 import com.ybm.hotdog.category.domain.CategoryDTO;
@@ -38,6 +39,9 @@ public class HomeController {
 	@Inject
 	private BoardMatingService matingService;
 
+	@Inject
+	private BoardInfoService InfoService;
+	
 	@Inject
 	private BoardParcelService parcelService;
 
@@ -82,9 +86,22 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/board/info", method = RequestMethod.GET)
-	public String boardInfo(Locale locale) {
+	public String boardInfo(Locale locale , Model model) {
 		logger.info("독스타그램 페이지 들어옴~", locale);
 
+		List<ArticleDTO> list = InfoService.listAll();
+		List<UserDTO> name = new ArrayList<UserDTO>();
+		List<CategoryDTO> category = new ArrayList<CategoryDTO>();
+
+		for (ArticleDTO articleList : list) {
+			name.add(userService.getUser(articleList.getUserNo()));
+			category.add(categoryService.getCategory(articleList.getCategoryNo()));
+		}
+
+		model.addAttribute("boardInfoList", list);
+		model.addAttribute("name", name);
+		model.addAttribute("category", category);
+		
 		return "board/info/info";
 	}
 

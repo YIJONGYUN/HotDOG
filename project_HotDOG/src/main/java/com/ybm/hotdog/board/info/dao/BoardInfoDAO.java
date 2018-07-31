@@ -18,4 +18,5 @@ public interface BoardInfoDAO {
 	/** 게시글 목록 전체 조회 */
 	public List<ArticleDTO> listAll();
 
+	public ArticleDTO getArticle(int articleNo);
 }

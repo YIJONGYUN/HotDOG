@@ -34,4 +34,13 @@ public class BoardInfoDAOImpl implements BoardInfoDAO {
 		return sqlSession.selectList(namespace + ".boardInfoListAll");
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.dao.BoardInfoDAO#getArticle(int)
+	 */
+	@Override
+	public ArticleDTO getArticle(int articleNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace + ".articleDetail", articleNo);
+	}
+
 }

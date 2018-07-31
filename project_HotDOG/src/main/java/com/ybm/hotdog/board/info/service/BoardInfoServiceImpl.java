@@ -30,4 +30,13 @@ public class BoardInfoServiceImpl implements BoardInfoService {
 		return dao.listAll();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.service.BoardInfoService#getArticle(int)
+	 */
+	@Override
+	public ArticleDTO getArticle(int articleNo) {
+		// TODO Auto-generated method stub
+		return dao.getArticle(articleNo);
+	}
+
 }
