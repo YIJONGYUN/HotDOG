@@ -25,7 +25,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 	@Inject
 	private SqlSession sqlSession;
 
-	private static String namespace = "com.ybm.hotdog.mappers.CategotyMapper";
+	private static String namespace = "com.ybm.hotdog.mappers.CategoryMapper";
 	
 	Logger logger = Logger.getLogger(CategoryDAOImpl.class);
 
