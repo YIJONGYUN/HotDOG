@@ -33,7 +33,7 @@ public class BoardMatingDaoTest {
 		List<ArticleDTO> list = dao.listAll();
 
 		for (ArticleDTO article : list) {
-			logger.info(list);
+			logger.info(article.toString());
 		}
 	}
 
@@ -51,6 +51,16 @@ public class BoardMatingDaoTest {
 		ArticleDTO article = dao.getArticle(1);
 
 		logger.info(article);
+	}
+	
+	/** 카테고리 리스트 조회 테스트 */
+	@Test
+	public void testCategoryList()  throws Exception {
+		List<CategoryDTO> list = categoryDao.getCategoryList(3);
+		
+		for (CategoryDTO categoryDTO : list) {
+			logger.info(categoryDTO.toString());
+		}
 	}
 
 }

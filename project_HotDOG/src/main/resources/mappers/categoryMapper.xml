@@ -3,13 +3,20 @@
 
 <!-- 게시판 네임스페이스(사용영역) 설정 -->
 
-<mapper namespace="com.ybm.hotdog.mappers.CategotyMapper">
+<mapper namespace="com.ybm.hotdog.mappers.CategoryMapper">
 
 <!-- 카테고리 조회 -->
 <select id="getCategory" resultType="Category">
-	SELECT category_no, board_no, content
+	SELECT category_no as categoryNo, board_no as boardNo, content
 	FROM Category
 	WHERE category_no=#{categoryNo}
+</select>
+
+<!-- 게시판에 따른 카테고리 조회 -->
+<select id="getCategoryList" resultType="Category">
+	SELECT category_no as categoryNo, board_no as boardNo, content
+	FROM Category
+	WHERE board_no=#{boardNo}
 </select>
 
 </mapper>

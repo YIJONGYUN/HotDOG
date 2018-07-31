@@ -1,5 +1,7 @@
 package com.ybm.hotdog.category.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -27,6 +29,12 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public CategoryDTO getCategory(int categoryNo) {
 		return dao.getCategory(categoryNo);
+	}
+
+	/** 게시판 번호로 카테고리 리스트 조회 */
+	@Override
+	public List<CategoryDTO> getCategoryList(int boardNo) {
+		return dao.getCategoryList(boardNo);
 	}
 
 }
