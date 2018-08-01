@@ -61,9 +61,12 @@ public class BoardMatingController {
 	public String boardDetail(Model model, @PathVariable int articleNo) {
 		logger.info("도그시그널 글 상세 페이지");
 		
+		matingService.hitcountUpdate(articleNo);
+		
 		ArticleDTO article = matingService.getArticle(articleNo);
 		CategoryDTO category = categoryService.getCategory(article.getCategoryNo());
 		UserDTO user = userService.getUser(article.getUserNo());
+		
 		
 		model.addAttribute("article", article);
 		model.addAttribute("category", category);

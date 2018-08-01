@@ -59,4 +59,10 @@ public class BoardMatingDAOImpl implements BoardMatingDAO {
 		sqlSession.update(namespace + ".updateMating", article);
 	}
 
+	/** 조회수 증가 */
+	@Override
+	public void hitcountUpdate(int articleNo) {
+		sqlSession.update(namespace + ".updateHitcount", articleNo);
+	}
+
 }

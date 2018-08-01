@@ -29,4 +29,7 @@ public interface BoardMatingService {
 	
 	/** 게시글 수정 */
 	public void edit (ArticleDTO article);
+	
+	/** 조회수 증가 */
+	public void hitcountUpdate(int articleNo);
 }

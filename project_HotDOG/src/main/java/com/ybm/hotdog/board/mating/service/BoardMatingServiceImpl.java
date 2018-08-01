@@ -55,4 +55,10 @@ public class BoardMatingServiceImpl implements BoardMatingService {
 		dao.edit(article);
 	}
 
+	/** 조회수 증가 */
+	@Override
+	public void hitcountUpdate(int articleNo) {
+		dao.hitcountUpdate(articleNo);
+	}
+
 }

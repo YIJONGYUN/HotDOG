@@ -36,8 +36,15 @@
 	WHERE article_no = #{articleNo}
 </delete>
 
+<!-- 게시글 수정 -->
 <update id="updateMating">
 	UPDATE Article SET category_no = #{categoryNo}, title = #{title}, content = #{content}, reg_date = sysdate
+	WHERE article_no = #{articleNo}
+</update>
+
+<!-- 조회수 증가 -->
+<update id="updateHitcount">
+	UPDATE Article SET hit_count = (hit_count + 1)
 	WHERE article_no = #{articleNo}
 </update>
 
