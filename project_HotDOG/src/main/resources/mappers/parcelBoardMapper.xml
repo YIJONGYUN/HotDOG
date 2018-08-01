@@ -44,7 +44,8 @@
 	<update id="articleUpdate">
 		UPDATE Article SET category_no = #{categoryNo}, title
 		= #{title},
-		content = #{content} WHERE article_no = #{articleNo}
+		content = #{content},reg_date = sysdate WHERE article_no =
+		#{articleNo}
 	</update>
 
 	<delete id="articleDelete">

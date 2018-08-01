@@ -27,7 +27,7 @@
 						<hr class="colorgraph">
 						<div id="sendmessage">Your message has been sent. Thank you!</div>
 						<div id="errormessage"></div>
-						<form action="/board/parcel/update" method="get" role="form"
+						<form action="/board/parcel/update" method="post" role="form"
 							class="contactForm">
 							<div class="form-group">
 								<div class="input-group">
@@ -76,13 +76,11 @@
 	<script>
 		$('#mytype li').on('click', function() {
 			// 버튼에 선택된 항목 텍스트 넣기 
-			$('#mystatus').text($(this).text());
+			$('#mystatus').html($(this).text()+ ' <span class="caret"></span>');
 
 			$('#categoryNo').val($(this).attr('value'));
 		});
 
-		$('#categoryList')
-				.html($(this).text() + ' <span class="caret"></span>');
 	</script>
 
 </body>

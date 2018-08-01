@@ -51,7 +51,7 @@ public class BoardParcelController {
 		return "board/parcel/parcelForm";
 	}
 
-	@RequestMapping(value = "/write", method = RequestMethod.GET)
+	@RequestMapping(value = "/write", method = RequestMethod.POST)
 	public String boardWrite(ArticleDTO articleDTO) {
 		logger.info("이리오시개 글 작성 처리 페이지");
 
@@ -90,7 +90,7 @@ public class BoardParcelController {
 		return "board/parcel/parcelEdit";
 	}
 
-	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String boardUpdate(ArticleDTO articleDTO) {
 		logger.info("이리오시개 글 업데이트 페이지");
 
