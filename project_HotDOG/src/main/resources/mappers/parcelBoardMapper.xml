@@ -22,11 +22,34 @@
 	<select id="articleDetail" resultType="Article">
 		SELECT article_no as
 		articleNo, board_no as boardNo, user_no as userNo,
-		category_no as categoryNo, title, content, reg_date as regDate, hit_count as
+		category_no as
+		categoryNo, title, content, reg_date as regDate, hit_count as
 		hitCount,
 		"group", step, "order"
 		FROM Article
-		WHERE article_no = #{articleNo}
+		WHERE article_no =
+		#{articleNo}
 	</select>
+
+	<insert id="articleInsert">
+		INSERT INTO Article(article_no, board_no, user_no,
+		category_no, title,
+		content, reg_date, hit_count, "group", step,
+		"order")
+		VALUES (seq_Article.nextVal, 2, 123, #{categoryNo}, #{title},
+		#{content},
+		sysdate, 0, 1, 1, 1)
+	</insert>
+
+	<update id="articleUpdate">
+		UPDATE Article SET category_no = #{categoryNo}, title
+		= #{title},
+		content = #{content} WHERE article_no = #{articleNo}
+	</update>
+
+	<delete id="articleDelete">
+		DELETE FROM Article WHERE article_no
+		= #{articleNo}
+	</delete>
 
 </mapper>

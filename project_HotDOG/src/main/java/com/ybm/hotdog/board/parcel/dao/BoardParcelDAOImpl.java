@@ -29,4 +29,25 @@ public class BoardParcelDAOImpl implements BoardParcelDAO {
 		return sqlSession.selectOne(namespace + ".articleDetail", articleNo);// selectOne : 쿼리 결과로 레코드 하나만 반환
 	}
 
+	/** 게시글 삭제 */
+	@Override
+	public void articleDelete(int articleNo) {
+		sqlSession.delete(namespace + ".articleDelete", articleNo);
+	}
+
+	/** 게시글 작성 */
+	@Override
+	public void articleInsert(ArticleDTO articleDTO) {
+		sqlSession.insert(namespace + ".articleInsert", articleDTO);
+
+	}
+
+	/** 게시글 수정 */
+	@Override
+	public void articleUpdate(ArticleDTO articleDTO) {
+		System.out.println(articleDTO.getArticleNo());
+		sqlSession.update(namespace + ".articleUpdate", articleDTO);
+
+	}
+
 }
