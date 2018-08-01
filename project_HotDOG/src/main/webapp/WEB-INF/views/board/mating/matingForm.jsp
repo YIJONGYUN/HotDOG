@@ -63,7 +63,7 @@
 		</section>
 	</div>
 	<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
-	<script src="/resources/contactform/contactform.js"></script>
+	<!-- <script src="/resources/contactform/contactform.js"></script> -->
 	
 	<script>
 		$(function() {
