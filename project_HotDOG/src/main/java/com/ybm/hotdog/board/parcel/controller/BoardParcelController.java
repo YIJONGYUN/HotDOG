@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -50,6 +51,15 @@ public class BoardParcelController {
 		return "board/parcel/parcelForm";
 	}
 
+	@RequestMapping(value = "/write", method = RequestMethod.GET)
+	public String boardWrite(ArticleDTO articleDTO) {
+		logger.info("이리오시개 글 작성 처리 페이지");
+
+		service.articleInsert(articleDTO);
+		
+		return "redirect:/board/parcel";
+	}
+
 	@RequestMapping(value = "/detail/{articleNo}", method = RequestMethod.GET)
 	public String boardDetail(Locale locale, Model model, @PathVariable int articleNo) {
 		logger.info("이리오시개 글 상세 페이지", locale);
@@ -65,10 +75,36 @@ public class BoardParcelController {
 		return "board/parcel/parcelDetail";
 	}
 
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public String boardEdit(Locale locale) {
+	@RequestMapping(value = "/edit/{articleNo}", method = RequestMethod.GET)
+	public String boardEdit(Locale locale, Model model, @PathVariable int articleNo) {
 		logger.info("이리오시개 글 수정 페이지", locale);
 
+		ArticleDTO article = service.getArticle(articleNo);
+		UserDTO user = userService.getUser(article.getUserNo());
+		CategoryDTO category = categoryService.getCategory(article.getCategoryNo());
+
+		model.addAttribute("article", article);
+		model.addAttribute("category", category);
+		model.addAttribute("user", user);
+
 		return "board/parcel/parcelEdit";
+	}
+
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	public String boardUpdate(ArticleDTO articleDTO) {
+		logger.info("이리오시개 글 업데이트 페이지");
+
+		service.articleUpdate(articleDTO);
+
+		return "redirect:/board/parcel";
+	}
+
+	@RequestMapping(value = "/delete/{articleNo}", method = RequestMethod.GET)
+	public String boardDelete(Locale locale, @PathVariable int articleNo) {
+		logger.info("이리오시개 글 삭제 페이지", locale);
+
+		service.articleDelete(articleNo);
+
+		return "redirect:/board/parcel";
 	}
 }

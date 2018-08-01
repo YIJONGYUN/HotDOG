@@ -56,7 +56,9 @@
 						<a href="/board/parcel" class="btn btn-default"> 목록 </a>
 						<div class="bs-docs-example pull-right">
 							<div class="btn-group">
-								<a href="/board/parcel/edit" class="btn btn-primary">수정</a> <a
+								<a href="/board/parcel/edit/${article.articleNo}"
+									class="btn btn-primary">수정</a> <a
+									href="/board/parcel/delete/${article.articleNo}"
 									class="btn btn-theme">삭제 </a> <a href="/board/parcel/form"
 									class="btn btn-warning">답글</a>
 							</div>

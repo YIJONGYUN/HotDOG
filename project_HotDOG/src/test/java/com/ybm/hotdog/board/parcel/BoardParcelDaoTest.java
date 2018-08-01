@@ -55,5 +55,18 @@ public class BoardParcelDaoTest {
 
 		logger.info(article.toString());
 	}
+	
+	
+	@Test
+	public void testArticleWrite() throws Exception {
+		ArticleDTO article = new ArticleDTO();
+		article.setTitle("테스트에서 작성");
+		article.setContent("테스트에서 작성");
+		article.setCategoryNo(5);
+		
+		dao.articleInsert(article);
+
+		logger.info("작성 완료");
+	}
 
 }

@@ -27,4 +27,22 @@ public class BoardParcelServiceImpl implements BoardParcelService {
 		return dao.getArticle(articleNo);
 	}
 
+	/** 게시글 삭제 */
+	@Override
+	public void articleDelete(int articleNo) {
+		dao.articleDelete(articleNo);
+	}
+
+	/** 게시글 작성 */
+	@Override
+	public void articleInsert(ArticleDTO articleDTO) {
+		dao.articleInsert(articleDTO);
+	}
+
+	/** 게시글 수정 */
+	@Override
+	public void articleUpdate(ArticleDTO articleDTO) {
+		dao.articleUpdate(articleDTO);
+	}
+
 }
