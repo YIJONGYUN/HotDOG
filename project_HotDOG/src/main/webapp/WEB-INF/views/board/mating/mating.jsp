@@ -80,25 +80,27 @@
 							</div>
 						</div>
 						<div class="col-md-4 col-md-offset-4">
-							<div class="input-group">
-								<div class="input-group-btn">
-									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="searchList">
-										검색 <span class="caret"></span>
-									</button>
-									<ul class="dropdown-menu" id="mySearch" role="menu">
-										<li style="text-align: center;" id="titleS">제목</li>
-										<li style="text-align: center;" id="authorS">작성자</li>
-										<li style="text-align: center;" id="contentS">내용</li>
-									</ul>
-									<input type="hidden" name="searchType" id="searchType">
+							<form action="" method="get">
+								<div class="input-group">
+									<div class="input-group-btn">
+										<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="searchList">
+											검색 <span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu" id="mySearch" role="menu">
+											<li style="text-align: center;" value="title">제목</li>
+											<li style="text-align: center;" value="author">작성자</li>
+											<li style="text-align: center;" value="content">내용</li>
+										</ul>
+										<input type="hidden" name="searchType" id="searchType">
+									</div>
+	
+									<input type="text" class="form-control" id="keyword"> 
+									
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button" onclick="check()">Go!</button>
+									</span>
 								</div>
-
-								<input type="text" class="form-control" id="search"> 
-								
-								<span class="input-group-btn">
-									<button class="btn btn-default" type="button">Go!</button>
-								</span>
-							</div>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -107,15 +109,26 @@
 	</div>
 	<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
 	
-		<script>
+	<script>
 		$(function() {
 			$('#mySearch li').on('click', function() {
 			    // 버튼에 선택된 항목 텍스트 넣기 
 			    $('#searchList').html($(this).text()+' <span class="caret"></span>');
-			 // 카테고리 번호 속성으로 넣기
+			 	// 카테고리 번호 속성으로 넣기
 			    $('#searchType').val($(this).attr('id'));
 			});
 		})
+		
+		function check() {
+			var keyword = $('#keyword').val();	// 검색할 내용
+			var searchType = $('#mySearch li').attr('value');	// 검색 타입
+			
+			/* 검색어를 입력하지 않고 버튼 눌렀을 경우 */
+			if (keyword.trim().length < 1) {
+				alert("검색어를 입력하세요!");
+				$('#keyword').focus();
+			}
+		}
 	</script>
 
 </body>

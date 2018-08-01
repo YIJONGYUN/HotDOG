@@ -29,13 +29,10 @@
 	<!-- Theme skin -->
 	<link id="t-colors" href="/resources/skins/default.css" rel="stylesheet" />
 	
-	<!-- boxed bg -->
-	<link id="bodybg" href="/resources/bodybg/bg1.css" rel="stylesheet" type="text/css" />
-
     <!-- Custom Fonts -->
     <link href="/resources/css/font-awesome.css" rel="stylesheet" type="text/css">
     <!-- SweetAlert CSS -->
-    <link href="/resources/css/sweetalert2.min.css" rel="stylesheet">
+    <link href="/resources/css/sweetalert2.css" rel="stylesheet">
     
     <!-- jQuery -->
     <script src="/resources/js/jquery.min.js"></script>
@@ -44,6 +41,9 @@
     <script src="/resources/js/bootstrap.min.js"></script>
     <!-- SweetAlert JavaScript -->
     <script src="/resources/js/sweetalert2.min.js"></script>
+    <script src="/resources/js/sweetalert2.all.js"></script>
+    <script src="/resources/js/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
     
 <style type="text/css">
 

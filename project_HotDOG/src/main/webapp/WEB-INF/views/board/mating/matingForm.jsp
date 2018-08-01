@@ -25,9 +25,7 @@
 			        		<img src="/resources/img/dog_signal.png" alt="" width="30%"/>
 			        	</div>
 						<hr class="colorgraph">
-						<div id="sendmessage">Your message has been sent. Thank you!</div>
-						<div id="errormessage"></div>
-						<form action="/board/mating/regist" method="post" role="form" class="contactForm">
+						<form action="/board/mating/regist" method="post" role="form" class="boardForm">
 							<div class="form-group">
 								<div class="input-group">
 						        	<div class="input-group-btn">
@@ -39,16 +37,14 @@
 										</ul>
 									</div>
 						             
-						            <input type="hidden" id="categoryNo" name="categoryNo">
+						            <input type="hidden" id="categoryNo" name="categoryNo" value="0">
 						            
-						  			<input type="text" name="title" class="form-control" id="title" placeholder="제목을 입력해 주세요" data-rule="required" data-msg="제목을 입력해 주세요!" />
-									<div class="validation"></div>
+						  			<input type="text" name="title" class="form-control" id="title" placeholder="제목을 입력해 주세요"/>
 						             
 								</div>
 							</div>
 							<div class="form-group">
-								<textarea class="form-control" name="content" rows="5" data-rule="required" data-msg="내용을 입력해 주세요!" placeholder="내용을 입력해 주세요" style="resize: none;"></textarea>
-								<div class="validation"></div>
+								<textarea class="form-control form-content" name="content" rows="5" placeholder="내용을 입력해 주세요" style="resize: none;"></textarea>
 							</div>
 
 							<div class="text-center">
@@ -63,7 +59,6 @@
 		</section>
 	</div>
 	<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
-	<!-- <script src="/resources/contactform/contactform.js"></script> -->
 	
 	<script>
 		$(function() {
@@ -75,12 +70,35 @@
 			});
 		})
 		
- 		$('.contactForm').submit(function() {
+ 		$('.boardForm').submit(function() {
+ 			
+ 			if ($('#categoryNo').val() == 0) {
+ 				swal({
+					  type: 'error',
+					  title: '말머리를 선택하세요!'
+				});
+ 				return false;
+ 			}
+ 			
 			if ($('#title').val().trim().length < 1) {
-				alert("제목을 입력해 주세요!");
-				$('.validation').html($(this).attr("제목을 입력해 주세요!"));
+				swal({
+					  type: 'error',
+					  title: '제목을 입력해 주세요!'
+				});
+				$('#title').focus();
 				return false;
 			}
+			
+			if ($('.form-content').val().trim().length < 1) {
+			swal({
+				  type: 'error',
+				  title: '내용을 입력해 주세요!'
+			});
+			$('#content').focus();
+			return false;
+			}
+			
+			return true;
 		}) 
 	</script>
 
