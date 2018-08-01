@@ -1,7 +1,5 @@
 package com.ybm.hotdog.board.mating;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-
 import java.util.List;
 
 import javax.inject.Inject;

@@ -41,6 +41,7 @@
 									</div>
 									
 									<input type="hidden" id="articleNo" name="articleNo" value="${article.articleNo}">
+									<input type="hidden" id="articleContent" name="articleContent" value="${category.content}">
 									<input type="hidden" id="categoryNo" name="categoryNo" value="${category.categoryNo}">
 						             
 						  			<input type="text" name="title" class="form-control" id="title" value="${article.title}" placeholder="제목을 입력해 주세요" data-rule="required" data-msg="제목을 입력해 주세요!" />
@@ -68,6 +69,11 @@
 	<!-- <script src="/resources/contactform/contactform.js"></script> -->
 	
 	<script>
+		/* 수정 글쓰기 페이지 들어왔을 때 말머리 DB 연동 */
+		$(function() {
+			$('#categoryList').html($('#articleContent').val()+' <span class="caret"></span>');
+		})
+		
 		$(function() {
 			$('#myCategory li').on('click', function() {
 			    // 버튼에 선택된 항목 텍스트 넣기 
@@ -76,6 +82,7 @@
 			    $('#categoryNo').val($(this).attr('id'));
 			});
 		})
+		
 	</script>
 
 </body>

@@ -63,7 +63,7 @@
 		</section>
 	</div>
 	<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
-<!-- 	<script src="/resources/contactform/contactform.js"></script> -->
+	<script src="/resources/contactform/contactform.js"></script>
 	
 	<script>
 		$(function() {
@@ -74,6 +74,14 @@
 			    $('#categoryNo').val($(this).attr('id'));
 			});
 		})
+		
+ 		$('.contactForm').submit(function() {
+			if ($('#title').val().trim().length < 1) {
+				alert("제목을 입력해 주세요!");
+				$('.validation').html($(this).attr("제목을 입력해 주세요!"));
+				return false;
+			}
+		}) 
 	</script>
 
 </body>
