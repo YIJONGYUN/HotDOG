@@ -61,4 +61,10 @@ public class BoardMatingServiceImpl implements BoardMatingService {
 		dao.hitcountUpdate(articleNo);
 	}
 
+	/** 전체 게시글 수 조회 */
+	@Override
+	public int getArticleNumber() {
+		return dao.getArticleNumber();
+	}
+
 }

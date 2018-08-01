@@ -97,5 +97,12 @@ public class BoardMatingDaoTest {
 		
 		logger.info("글 수정 완료!");
 	}
+	
+	/** 게시글 수 조회 테스트 */
+	@Test
+	public void testGetArticlenumber() throws Exception {
+		
+		logger.info(dao.getArticleNumber());
+	}
 
 }

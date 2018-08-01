@@ -50,7 +50,7 @@
 												<c:forEach items="${boardMatingList}" var="articleDTO" varStatus="status">
 													<input type="hidden" id="articleNo" value="${articleDTO.articleNo}">
 													<tr>
-														<td>${status.count}</td>
+														<td>${articleNumber - status.index}</td>
 														<td>${category[status.index].content}</td>
 														<td colspan="4"><a href="/board/mating/detail/${articleDTO.articleNo}" style="color: black;">${articleDTO.title}</a></td>
 														<td>${name[status.index].name}</td>

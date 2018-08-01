@@ -72,6 +72,7 @@ public class HomeController {
 		List<ArticleDTO> list = matingService.listAll();
 		List<UserDTO> name = new ArrayList<UserDTO>();
 		List<CategoryDTO> category = new ArrayList<CategoryDTO>();
+		int articleNumber = matingService.getArticleNumber();
 
 		for (ArticleDTO articleList : list) {
 			name.add(userService.getUser(articleList.getUserNo()));
@@ -81,6 +82,7 @@ public class HomeController {
 		model.addAttribute("boardMatingList", list);
 		model.addAttribute("name", name);
 		model.addAttribute("category", category);
+		model.addAttribute("articleNumber", articleNumber);
 
 		return "board/mating/mating";
 	}

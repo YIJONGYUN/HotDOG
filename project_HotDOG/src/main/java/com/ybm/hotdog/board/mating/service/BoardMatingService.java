@@ -32,4 +32,7 @@ public interface BoardMatingService {
 	
 	/** 조회수 증가 */
 	public void hitcountUpdate(int articleNo);
+	
+	/** 전체 게시글 수 조회 */
+	public int getArticleNumber();
 }

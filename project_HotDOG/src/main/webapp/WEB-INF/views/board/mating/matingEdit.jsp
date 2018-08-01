@@ -50,7 +50,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<textarea class="form-control" name="content" rows="5" data-rule="required" data-msg="내용을 입력해 주세요!" placeholder="내용을 입력해 주세요"> ${article.content} </textarea>
+								<textarea class="form-control" name="content" rows="5" data-rule="required" data-msg="내용을 입력해 주세요!" placeholder="내용을 입력해 주세요" style="resize: none;"> ${article.content} </textarea>
 								<div class="validation"></div>
 							</div>
 

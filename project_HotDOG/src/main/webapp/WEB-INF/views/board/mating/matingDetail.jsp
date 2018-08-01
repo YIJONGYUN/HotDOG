@@ -44,7 +44,7 @@
 			                </tr>
 			                <tr>
 			                  <td colspan="6">
-			                  	<textarea class="form-control text-center" rows="5" cols="50" readonly="readonly" style="background-color: white;">${article.content}</textarea>
+			                  	<textarea class="form-control text-center" rows="5" cols="50" readonly="readonly" style="background-color: white; resize: none;">${article.content}</textarea>
 			                  </td>
 			                </tr>
 			              </tbody>
