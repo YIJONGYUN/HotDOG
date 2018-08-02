@@ -55,4 +55,37 @@
 	WHERE board_no = 3
 </select>
 
+<!-- 게시글 검색 -->
+<select id="searchMating" resultType="Article">
+	SELECT article_no as articleNo, board_no as boardNo, Article.user_no as userNo, 
+		   category_no as categoryNo, title, content, reg_date as regDate, hit_count as hitCount,
+		   "group", step, "order" 
+	FROM Article, Users
+	<include refid="search"></include>
+</select>
+
+<sql id="search">
+	<choose>
+		<when test="searchType=='author'">
+			WHERE board_no = 3 
+				  AND (Article.user_no = Users.user_no)
+				  AND Users.name LIKE '%'||#{keyword}||'%'
+			ORDER BY article_no desc, reg_date desc
+		</when>
+		<otherwise>
+			WHERE board_no = 3 
+				  AND (Article.user_no = Users.user_no)
+				  AND ${searchType} LIKE '%'||#{keyword}||'%'
+			ORDER BY article_no desc, reg_date desc
+		</otherwise>
+	</choose>
+</sql>
+
+<!-- 게시글 검색 글 수 조회 -->
+<select id="getSearchNumber" resultType="Integer">
+	SELECT COUNT(article_no) 
+	FROM Article, Users
+	<include refid="search" />
+</select>
+
 </mapper>
