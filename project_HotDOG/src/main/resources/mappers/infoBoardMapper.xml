@@ -44,4 +44,28 @@
 	UPDATE Article SET category_no = #{categoryNo}, title = #{title}, content = #{content}, reg_date = sysdate
 	WHERE article_no = #{articleNo}
 	</update>
+	
+	<!-- 키워드로 게시글 조회 -->
+	<select id="articleSearch" resultType="Article">
+		SELECT  article.article_no as articleNo,  article.board_no as boardNo,  article.user_no as userNo,
+		 article.category_no as categoryNo, title, content,  article.reg_date as regDate,
+		hit_count as hitCount,
+		"group", step, "order", Users.name
+		FROM  article inner join Users on article.user_no = Users.user_no
+		<include refid="search"></include>
+	</select>
+	
+	<sql id="search">
+	<choose>
+	<when test="searchOption == '제목'">
+	where title like '%'||#{keyword}||'%' and article.board_no = 1
+	</when>
+	<when test="searchOption == '작성자'">
+	where name like '%'||#{keyword}||'%' and article.board_no = 1
+	</when>
+	<when test="searchOption == '내용'">
+	where content like '%'||#{keyword}||'%' and article.board_no = 1
+	</when>
+	</choose>
+	</sql>
 </mapper>

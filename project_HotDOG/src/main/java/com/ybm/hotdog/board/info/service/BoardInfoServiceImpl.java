@@ -66,4 +66,14 @@ public class BoardInfoServiceImpl implements BoardInfoService {
 		dao.articleEdit(article);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.service.BoardInfoService#searchArticle(java.lang.String, java.lang.String)
+	 */
+	/** 키워드로 게시글 검색 */
+	@Override
+	public List<ArticleDTO> searchArticle(String searchOption, String keyword) {
+		// TODO Auto-generated method stub
+		return dao.articleSearch(searchOption, keyword);
+	}
+
 }

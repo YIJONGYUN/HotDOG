@@ -1,9 +1,12 @@
 package com.ybm.hotdog.board.info.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -68,6 +71,20 @@ public class BoardInfoDAOImpl implements BoardInfoDAO {
 	public void articleEdit(ArticleDTO article) {
 		// TODO Auto-generated method stub
 		sqlSession.update(namespace + ".articleEdit",article);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.dao.BoardInfoDAO#articleSearch(java.lang.String, java.lang.String)
+	 */
+	/** 키워드로 게시글 검색 */
+	@Override
+	public List<ArticleDTO> articleSearch(String searchOption, String keyword) {
+		// TODO Auto-generated method stub
+		Map<String, String> map = new HashMap<String,String>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		
+		return sqlSession.selectList(namespace + ".articleSearch",map);
 	}
 
 }

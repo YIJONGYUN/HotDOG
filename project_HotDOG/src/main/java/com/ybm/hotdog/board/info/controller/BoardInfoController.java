@@ -1,5 +1,6 @@
 package com.ybm.hotdog.board.info.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ybm.hotdog.board.domain.ArticleDTO;
 import com.ybm.hotdog.board.info.service.BoardInfoService;
@@ -52,6 +54,26 @@ public class BoardInfoController {
 		model.addAttribute("category", category);
 
 		return "board/info/infoForm";
+	}
+	
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public String boardFormSearch(@RequestParam("searchOption") String searchOption,@RequestParam("keyword") String keyword, Model model) {
+		logger.info("독스타그램 게시글 검색");
+		
+		List<ArticleDTO> list = service.searchArticle(searchOption, keyword);
+		List<UserDTO> name = new ArrayList<UserDTO>();
+		List<CategoryDTO> category = new ArrayList<CategoryDTO>();
+
+		for (ArticleDTO articleList : list) {
+			name.add(userService.getUser(articleList.getUserNo()));
+			category.add(categoryService.getCategory(articleList.getCategoryNo()));
+		}
+
+		model.addAttribute("boardInfoList", list);
+		model.addAttribute("name", name);
+		model.addAttribute("category", category);
+		
+		return "board/info/info";
 	}
 
 	@RequestMapping(value = "/detail/{articleNo}", method = RequestMethod.GET)

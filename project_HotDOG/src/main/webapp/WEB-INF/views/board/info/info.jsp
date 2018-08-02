@@ -87,26 +87,30 @@
 								</ul>
 							</div>
 						</div>
-						<div class="col-md-4 col-md-offset-4">
-							<div class="input-group">
-								<div class="input-group-btn">
-									<button type="button" class="btn btn-default dropdown-toggle"
-										data-toggle="dropdown" id="selectType">
-										검색 <span class="caret"></span>
-									</button>
-									<ul class="dropdown-menu" id="myType">
-										<li style="text-align: center;">제목</li>
-										<li style="text-align: center;">작성자</li>
-										<li style="text-align: center;">내용</li>
-									</ul>
-								</div>
+						<form action="/board/info/search" method="post">
+							<div class="col-md-4 col-md-offset-4">
+								<div class="input-group">
+									<div class="input-group-btn">
+										<button type="button" class="btn btn-default dropdown-toggle"
+											data-toggle="dropdown" id="type">
+											검색 <span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu" id="myType">
+											<li style="text-align: center;" id="제목">제목</li>
+											<li style="text-align: center;" id="작성자">작성자</li>
+											<li style="text-align: center;" id="내용">내용</li>
+										</ul>
+									</div>
 
-								<input type="text" class="form-control"> <span
-									class="input-group-btn">
-									<a href="/board/info/search"><button class="btn btn-default" type="button">Go!</button></a>
-								</span>
+									<input type="hidden" id="searchOption" name="searchOption"
+										value="기본"> <input type="text" class="form-control"
+										id="keyword" name="keyword"> <span
+										class="input-group-btn">
+										<button class="btn btn-default" type="submit">Go!</button>
+									</span>
+								</div>
 							</div>
-						</div>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -114,13 +118,15 @@
 	</div>
 	<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
 
-<script>
-	$(function() {
-		$('#myType li').on('click', function() {
+	<script>
+		$(function() {
+			$('#myType li').on('click',function() {
 			//드롭다운 선택항목 넣기
-			$('#selectType').html($(this).text()+'<span class="caret"></span>');
+			$('#type').html($(this).text()+ '<span class="caret"></span>');
+			//키워드옵션넣기
+			$('#searchOption').val($(this).attr('id'));
+			})
 		})
-	})
 	</script>
 </body>
 

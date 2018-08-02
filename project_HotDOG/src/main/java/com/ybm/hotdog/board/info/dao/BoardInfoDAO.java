@@ -25,4 +25,6 @@ public interface BoardInfoDAO {
 	public void articleDelete(int articleNo);
 	/** 게시글 수정 */
 	public void articleEdit(ArticleDTO article);
+	/** 게시글 검색 */
+	public List<ArticleDTO> articleSearch(String searchOption, String keyword);
 }
