@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <body>
@@ -26,26 +27,29 @@
 						<hr class="colorgraph">
 						<div id="sendmessage">Your message has been sent. Thank you!</div>
 						<div id="errormessage"></div>
-						<form action="" method="post" role="form" class="contactForm">
+						<form action="/board/info/edit" method="post" role="form" class="contactForm">
 							<div class="form-group">
 								<div class="input-group">
 						        	<div class="input-group-btn">
-						            	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"> 말머리 <span class="caret"></span></button>
-										<ul class="dropdown-menu">
-											<li style="text-align: center;">[의료/위생]</li>
-											<li style="text-align: center;">[의류/미용]</li>
-											<li style="text-align: center;">[사료/간식]</li>
-											<li style="text-align: center;">[훈련/놀이]</li>
+						            	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="myCategory"> 말머리 <span class="caret"></span></button>
+										<ul class="dropdown-menu" id="type">
+											<c:forEach items="${categoryList}" var="category">
+												<li style="text-align: center;" id="${category.categoryNo}">${category.content}</li>
+											</c:forEach>
 										</ul>
 									</div>
 						             
-						  			<input type="text" name="name" class="form-control" id="name" placeholder="제목을 입력해 주세요" data-rule="required" data-msg="제목을 입력해 주세요!" />
+						             <input type="hidden" id="categoryNo" name="categoryNo" value="${category.categoryNo}">
+						             <input type="hidden" id="articleNo" name="articleNo" value="${article.articleNo}">
+						             <input type="hidden" id="categoryType" name="categoryType" value="${category.content}">
+						             
+						  			<input type="text" name="title" class="form-control" id="title" data-rule="required" data-msg="제목을 입력해 주세요!" value="${article.title}"/>
 									<div class="validation"></div>
 						             
 								</div>
 							</div>
 							<div class="form-group">
-								<textarea class="form-control" name="content" rows="5" data-rule="required" data-msg="내용을 입력해 주세요!" placeholder="내용을 입력해 주세요"></textarea>
+								<textarea class="form-control" name="content" rows="5" data-rule="required" data-msg="내용을 입력해 주세요!" style="resize: none;">${article.content}</textarea>
 								<div class="validation"></div>
 							</div>
 
@@ -61,7 +65,29 @@
 		</section>
 	</div>
 	<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
-	<script src="/resources/contactform/contactform.js"></script>
+	<script>
+	$(function() {
+		$('#type li').on('click', function() {
+			//드롭다운 선택항목 넣기
+			$('#myCategory').html($(this).text()+'<span class="caret"></span>');
+			//카테고리 번호 히든인풋에 넣기
+			$('#categoryNo').val($(this).attr('id'));
+		})
+	})
+	
+	$('.contactForm').submit(function() {
+			if ($('#title').val().trim().length < 1) {
+				alert("제목을 입력해 주세요!");
+				$('.validation').html($(this).attr("제목을 입력해 주세요!"));
+				return false;
+			}
+		})
+		
+		/* 수정 페이지 말머리 바꾸기 */
+		$(function() {
+			$('#myCategory').html($('#categoryType').val()+' <span class="caret"></span>');
+		})
+	</script>
 
 </body>
 

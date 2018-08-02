@@ -1,5 +1,6 @@
 package com.ybm.hotdog.board.info.controller;
 
+import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -25,7 +26,7 @@ import com.ybm.hotdog.user.service.UserService;
  * @Package : com.ybm.hotdog.board.info.controller
  * @FileName : BoardInfoController.java
  * @Author : YI JONGYUN
- * @date : 2018. 7. 25. 
+ * @date : 2018. 7. 25.
  *
  */
 
@@ -33,43 +34,78 @@ import com.ybm.hotdog.user.service.UserService;
 @RequestMapping("/board/info")
 public class BoardInfoController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardInfoController.class);
-	
+
 	@Inject
 	private BoardInfoService service;
-	
+
 	@Inject
 	private UserService userService;
-	
+
 	@Inject
 	private CategoryService categoryService;
 
 	@RequestMapping(value = "/form", method = RequestMethod.GET)
-	public String boardForm(Locale locale) {
+	public String boardForm(Locale locale, Model model) {
 		logger.info("독스타그램 글 작성 페이지", locale);
-		
+
+		List<CategoryDTO> category = categoryService.getCategoryList(1);
+		model.addAttribute("category", category);
+
 		return "board/info/infoForm";
 	}
-	
+
 	@RequestMapping(value = "/detail/{articleNo}", method = RequestMethod.GET)
 	public String boardDetail(Locale locale, Model model, @PathVariable int articleNo) {
 		logger.info("독스타그램 글 상세 페이지", locale);
-		
+
 		ArticleDTO article = service.getArticle(articleNo);
 		CategoryDTO category = categoryService.getCategory(article.getCategoryNo());
 		UserDTO user = userService.getUser(article.getUserNo());
-		
-		model.addAttribute("article", article);
-		model.addAttribute("category",category);
-		model.addAttribute("user",user);
 
-		
+		model.addAttribute("article", article);
+		model.addAttribute("category", category);
+		model.addAttribute("user", user);
+
 		return "board/info/infoDetail";
 	}
-	
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public String boardEdit(Locale locale) {
-		logger.info("독스타그램 글 수정 페이지", locale);
+
+	@RequestMapping(value = "/viewedit/{articleNo}", method = RequestMethod.GET)
+	public String boardViewEdit(@PathVariable int articleNo,Model model) {
+	logger.info("독스타그램 글 수정 페이지");
 		
+	ArticleDTO article = service.getArticle(articleNo);
+	CategoryDTO category = categoryService.getCategory(article.getCategoryNo());
+	List<CategoryDTO> categoryList = categoryService.getCategoryList(1);
+	
+	model.addAttribute("article",article);
+	model.addAttribute("category",category);
+	model.addAttribute("categoryList",categoryList);
+
 		return "board/info/infoEdit";
+	}
+
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public String boardRegister(ArticleDTO article) {
+
+		service.articleRegister(article);
+
+		return "redirect:/board/info";
+	}
+
+	@RequestMapping(value = "/delete/{articleNo}", method = RequestMethod.GET)
+	public String boardDelete(@PathVariable int articleNo) throws Exception{
+
+		service.articleDelete(articleNo);
+
+		return "redirect:/board/info";
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	public String boardEdit(ArticleDTO article) throws Exception{
+
+		CategoryDTO category = categoryService.getCategory(article.getCategoryNo()); 
+		service.articleEdit(article);
+
+		return "redirect:/board/info";
 	}
 }

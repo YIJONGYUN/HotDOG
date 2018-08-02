@@ -5,23 +5,43 @@
 
 <mapper namespace="com.ybm.hotdog.mappers.InfoBoardMapper">
 
-<!-- 게시물 전체 목록 불러오기 -->
-<select id="boardInfoListAll" resultType="Article">
-	SELECT 	article_no as articleNo, board_no as boardNo, user_no as userNo, 
-			category_no as categoryNo, title, content, reg_date as regDate, hit_count as hitCount,
-			"group", step, "order" 
-	FROM Article
-	WHERE board_no = 1
-	ORDER BY article_no desc, reg_date desc
-</select>
-	
-<!-- 게시물 상세 조회  -->	
-<select id="articleDetail" resultType="Article">
-	SELECT 	article_no as articleNo, board_no as boardNo, user_no as userNo, 
-			category_no as categoryNo, title, content, reg_date as regDate, hit_count as hitCount,
-			"group", step, "order" 
-	FROM Article
-	WHERE article_no = #{articleNo}
-</select>
+	<!-- 게시물 전체 목록 불러오기 -->
+	<select id="boardInfoListAll" resultType="Article">
+		SELECT article_no as articleNo, board_no as boardNo, user_no as userNo,
+		category_no as categoryNo, title, content, reg_date as regDate,
+		hit_count as hitCount,
+		"group", step, "order"
+		FROM Article
+		WHERE board_no = 1
+		ORDER BY article_no desc, reg_date desc
+	</select>
 
+	<!-- 게시물 상세 조회 -->
+	<select id="articleDetail" resultType="Article">
+		SELECT article_no as articleNo, board_no as boardNo, user_no as userNo,
+		category_no as categoryNo, title, content, reg_date as regDate,
+		hit_count as hitCount,
+		"group", step, "order"
+		FROM Article
+		WHERE article_no = #{articleNo}
+	</select>
+
+	<!-- 게시글 작성 -->
+	<insert id="articleRegister">
+		INSERT INTO Article(article_no, board_no, user_no, category_no, title,
+		content, reg_date, hit_count, "group", step, "order")
+		VALUES (seq_Article.nextVal, 1, 2, #{categoryNo}, #{title}, #{content},
+		sysdate, 0, 1, 1, 1)
+	</insert>
+
+	<!-- 게시글 삭제 -->
+	<delete id="articleDelete">
+		DELETE FROM Article WHERE article_no = #{articleNo}
+	</delete>
+
+    <!-- 게시글 수정 -->
+    <update id="articleEdit">
+	UPDATE Article SET category_no = #{categoryNo}, title = #{title}, content = #{content}, reg_date = sysdate
+	WHERE article_no = #{articleNo}
+	</update>
 </mapper>

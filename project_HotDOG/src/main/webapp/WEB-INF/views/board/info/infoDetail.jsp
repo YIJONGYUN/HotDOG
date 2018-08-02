@@ -56,9 +56,9 @@
 						<a href="/board/info" class="btn btn-default"> 목록 </a>
 						<div class="bs-docs-example pull-right">
 							<div class="btn-group">
-								<a href="/board/info/edit" class="btn btn-primary">수정</a> <a
-									class="btn btn-theme">삭제 </a> <a href="/board/info/form"
-									class="btn btn-warning">답글</a>
+								<a href="/board/info/viewedit/${article.articleNo}" class="btn btn-primary">수정</a> 
+								<a class="btn btn-theme" href="/board/info/delete/${article.articleNo}">삭제 </a> 
+								<a href="/board/info/form" class="btn btn-warning">답글</a>
 							</div>
 						</div>
 					</div>

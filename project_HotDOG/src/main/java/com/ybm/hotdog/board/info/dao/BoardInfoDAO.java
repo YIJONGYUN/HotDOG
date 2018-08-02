@@ -17,6 +17,12 @@ public interface BoardInfoDAO {
 	
 	/** 게시글 목록 전체 조회 */
 	public List<ArticleDTO> listAll();
-
+	/** 게시글 번호로 검색 */
 	public ArticleDTO getArticle(int articleNo);
+	/** 게시글 등록 */
+	public void articleRegister(ArticleDTO article);
+	/** 게시글 삭제 */
+	public void articleDelete(int articleNo);
+	/** 게시글 수정 */
+	public void articleEdit(ArticleDTO article);
 }

@@ -5,7 +5,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import com.ybm.hotdog.board.domain.ArticleDTO;
@@ -37,10 +36,38 @@ public class BoardInfoDAOImpl implements BoardInfoDAO {
 	/* (non-Javadoc)
 	 * @see com.ybm.hotdog.board.info.dao.BoardInfoDAO#getArticle(int)
 	 */
+	
 	@Override
 	public ArticleDTO getArticle(int articleNo) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace + ".articleDetail", articleNo);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.dao.BoardInfoDAO#articleRegister(com.ybm.hotdog.board.domain.ArticleDTO)
+	 */
+	@Override
+	public void articleRegister(ArticleDTO article) {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace + ".articleRegister",article);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.dao.BoardInfoDAO#articleDelete(int)
+	 */
+	@Override
+	public void articleDelete(int articleNo) {
+		// TODO Auto-generated method stub
+		sqlSession.delete(namespace + ".articleDelete",articleNo); 
+	}
+
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.dao.BoardInfoDAO#articleEdit(com.ybm.hotdog.board.domain.ArticleDTO)
+	 */
+	@Override
+	public void articleEdit(ArticleDTO article) {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace + ".articleEdit",article);
 	}
 
 }

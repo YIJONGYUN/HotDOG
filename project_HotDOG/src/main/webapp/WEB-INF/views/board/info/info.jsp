@@ -91,10 +91,10 @@
 							<div class="input-group">
 								<div class="input-group-btn">
 									<button type="button" class="btn btn-default dropdown-toggle"
-										data-toggle="dropdown">
+										data-toggle="dropdown" id="selectType">
 										검색 <span class="caret"></span>
 									</button>
-									<ul class="dropdown-menu">
+									<ul class="dropdown-menu" id="myType">
 										<li style="text-align: center;">제목</li>
 										<li style="text-align: center;">작성자</li>
 										<li style="text-align: center;">내용</li>
@@ -103,7 +103,7 @@
 
 								<input type="text" class="form-control"> <span
 									class="input-group-btn">
-									<button class="btn btn-default" type="button">Go!</button>
+									<a href="/board/info/search"><button class="btn btn-default" type="button">Go!</button></a>
 								</span>
 							</div>
 						</div>
@@ -114,6 +114,14 @@
 	</div>
 	<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
 
+<script>
+	$(function() {
+		$('#myType li').on('click', function() {
+			//드롭다운 선택항목 넣기
+			$('#selectType').html($(this).text()+'<span class="caret"></span>');
+		})
+	})
+	</script>
 </body>
 
 </html>

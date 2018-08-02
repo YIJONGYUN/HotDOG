@@ -39,4 +39,31 @@ public class BoardInfoServiceImpl implements BoardInfoService {
 		return dao.getArticle(articleNo);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.service.BoardInfoService#articleRegister(com.ybm.hotdog.board.domain.ArticleDTO)
+	 */
+	@Override
+	public void articleRegister(ArticleDTO article) {
+		// TODO Auto-generated method stub
+		dao.articleRegister(article);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.service.BoardInfoService#articleDelete(int)
+	 */
+	@Override
+	public void articleDelete(int articleNo) {
+		// TODO Auto-generated method stub
+		dao.articleDelete(articleNo);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.service.BoardInfoService#articleEdit(com.ybm.hotdog.board.domain.ArticleDTO)
+	 */
+	@Override
+	public void articleEdit(ArticleDTO article) {
+		// TODO Auto-generated method stub
+		dao.articleEdit(article);
+	}
+
 }
