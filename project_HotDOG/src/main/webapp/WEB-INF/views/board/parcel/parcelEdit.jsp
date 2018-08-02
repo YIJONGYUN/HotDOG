@@ -42,10 +42,10 @@
 											<li style="text-align: center;" value="6">[가시개]</li>
 										</ul>
 									</div>
-									<input type="hidden" id="categoryNo" name="categoryNo" value="">
-									<input type="hidden" id="articleNo" name="articleNo"
-										value=${article.articleNo }> <input type="text"
-										name="title" class="form-control" id="name"
+									<input type="hidden" id="categoryNo" name="categoryNo"
+										value=${category.categoryNo }> <input type="hidden"
+										id="articleNo" name="articleNo" value=${article.articleNo }>
+									<input type="text" name="title" class="form-control" id="name"
 										placeholder="제목을 입력해 주세요" data-rule="required"
 										data-msg="제목을 입력해 주세요!" value=${article.title } />
 									<div class="validation"></div>
@@ -55,7 +55,7 @@
 							<div class="form-group">
 								<textarea class="form-control" name="content" rows="5"
 									data-rule="required" data-msg="내용을 입력해 주세요!"
-									placeholder="내용을 입력해 주세요">${article.content}</textarea>
+									placeholder="내용을 입력해 주세요">${article.content }</textarea>
 								<div class="validation"></div>
 							</div>
 
@@ -74,13 +74,14 @@
 	<!-- <script src="/resources/contactform/contactform.js"></script> -->
 
 	<script>
-		$('#mytype li').on('click', function() {
-			// 버튼에 선택된 항목 텍스트 넣기 
-			$('#mystatus').html($(this).text()+ ' <span class="caret"></span>');
-
-			$('#categoryNo').val($(this).attr('value'));
-		});
-
+		$('#mytype li').on(
+				'click',
+				function() {
+					// 버튼에 선택된 항목 텍스트 넣기 
+					$('#mystatus').html(
+							$(this).text() + ' <span class="caret"></span>');
+					$('#categoryNo').val($(this).attr('value'));
+				});
 	</script>
 
 </body>

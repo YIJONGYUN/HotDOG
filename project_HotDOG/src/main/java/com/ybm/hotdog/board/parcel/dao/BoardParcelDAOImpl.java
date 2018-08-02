@@ -1,6 +1,8 @@
 package com.ybm.hotdog.board.parcel.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -45,9 +47,26 @@ public class BoardParcelDAOImpl implements BoardParcelDAO {
 	/** 게시글 수정 */
 	@Override
 	public void articleUpdate(ArticleDTO articleDTO) {
-		System.out.println(articleDTO.getArticleNo());
 		sqlSession.update(namespace + ".articleUpdate", articleDTO);
 
+	}
+
+	/** 게시글 조회수 증가 */
+	@Override
+	public void increaseHitCount(int articleNo) {
+		sqlSession.update(namespace + ".increaseHitCount", articleNo);
+
+	}
+	
+	/** 게시글 조회 */
+	@Override
+	public List<ArticleDTO> listSearch(String searchOption, String keyword) {
+
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+
+		return sqlSession.selectList(namespace + ".listSearch", map);
 	}
 
 }

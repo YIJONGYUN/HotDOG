@@ -19,6 +19,7 @@
 		article_no desc, reg_date desc
 	</select>
 
+	<!-- 게시물 상세보기 -->
 	<select id="articleDetail" resultType="Article">
 		SELECT article_no as
 		articleNo, board_no as boardNo, user_no as userNo,
@@ -31,6 +32,7 @@
 		#{articleNo}
 	</select>
 
+	<!-- 게시글 작성하기 -->
 	<insert id="articleInsert">
 		INSERT INTO Article(article_no, board_no, user_no,
 		category_no, title,
@@ -41,6 +43,7 @@
 		sysdate, 0, 1, 1, 1)
 	</insert>
 
+	<!-- 게시글 수정하기 -->
 	<update id="articleUpdate">
 		UPDATE Article SET category_no = #{categoryNo}, title
 		= #{title},
@@ -48,9 +51,68 @@
 		#{articleNo}
 	</update>
 
+	<!-- 조회수 증가 -->
+	<update id="increaseHitCount">
+		UPDATE Article SET hit_count = hit_count+1 WHERE
+		article_no =
+		#{articleNo}
+	</update>
+
+	<!-- 게시글 삭제하기 -->
 	<delete id="articleDelete">
 		DELETE FROM Article WHERE article_no
 		= #{articleNo}
 	</delete>
+
+	<select id="listSearch" resultType="Article">
+		<include refid="search"></include>
+	</select>
+
+	<sql id="search">
+		<choose>
+			<when test="searchOption=='name'">
+				SELECT article_no as
+				articleNo, board_no as boardNo,
+				Article.user_no as userNo,
+				category_no as
+				categoryNo, title, content, reg_date
+				as regDate,
+				hit_count as hitCount,
+				"group", step, "order"
+				FROM Article,
+				Users
+				WHERE
+				board_no = 2 And
+				Article.user_no = Users.user_no
+				And
+				Users.name LIKE
+				'%'||#{keyword}||'%'
+				ORDER
+				BY
+				article_no desc,
+				reg_date
+				desc
+			</when>
+			<otherwise>
+				SELECT article_no as
+				articleNo, board_no as boardNo,
+				user_no as userNo,
+				category_no as
+				categoryNo, title, content, reg_date
+				as regDate,
+				hit_count as hitCount,
+				"group", step, "order"
+				FROM Article
+				WHERE board_no = 2 And
+				${searchOption} LIKE
+				'%'||#{keyword}||'%'
+				ORDER
+				BY
+				article_no desc,
+				reg_date
+				desc
+			</otherwise>
+		</choose>
+	</sql>
 
 </mapper>

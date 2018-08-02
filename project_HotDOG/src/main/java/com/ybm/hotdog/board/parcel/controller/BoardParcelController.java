@@ -1,6 +1,10 @@
 package com.ybm.hotdog.board.parcel.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ybm.hotdog.board.domain.ArticleDTO;
 import com.ybm.hotdog.board.parcel.service.BoardParcelService;
@@ -56,13 +61,15 @@ public class BoardParcelController {
 		logger.info("이리오시개 글 작성 처리 페이지");
 
 		service.articleInsert(articleDTO);
-		
+
 		return "redirect:/board/parcel";
 	}
 
 	@RequestMapping(value = "/detail/{articleNo}", method = RequestMethod.GET)
 	public String boardDetail(Locale locale, Model model, @PathVariable int articleNo) {
 		logger.info("이리오시개 글 상세 페이지", locale);
+
+		service.increaseHitCount(articleNo);
 
 		ArticleDTO article = service.getArticle(articleNo);
 		UserDTO user = userService.getUser(article.getUserNo());
@@ -106,5 +113,25 @@ public class BoardParcelController {
 		service.articleDelete(articleNo);
 
 		return "redirect:/board/parcel";
+	}
+
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String boardSearchs(Model model, String searchOption, String keyword) {
+		logger.info("이리오시개 글 검색 페이지");
+
+		List<ArticleDTO> list = service.listSearch(searchOption, keyword);
+		List<UserDTO> name = new ArrayList<UserDTO>();
+		List<CategoryDTO> category = new ArrayList<CategoryDTO>();
+
+		for (ArticleDTO articleList : list) {
+			name.add(userService.getUser(articleList.getUserNo()));
+			category.add(categoryService.getCategory(articleList.getCategoryNo()));
+		}
+
+		model.addAttribute("boardParcelList", list);
+		model.addAttribute("name", name);
+		model.addAttribute("category", category);
+
+		return "board/parcel/parcel";
 	}
 }

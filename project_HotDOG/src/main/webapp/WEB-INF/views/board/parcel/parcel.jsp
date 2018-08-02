@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <!-- jstl이란 간단한 프로그램 로직을 구현하기 위해 사용하는 라이브러리이다. -->
 
@@ -57,7 +58,7 @@
 														value="${articleDTO.articleNo}">
 													<!-- 게시글 상세 내용 조회시 articleNo가 필요하기 때문에 숨겨서 보내준다. -->
 													<tr>
-														<td>${status.count}</td>
+														<td>${fn:length(boardParcelList)-((1-1) * 5 + status.index)}</td>
 														<td>${category[status.index].content}</td>
 														<td colspan="4"><a
 															href="/board/parcel/detail/${articleDTO.articleNo}"
@@ -89,32 +90,47 @@
 								</ul>
 							</div>
 						</div>
-						<div class="col-md-4 col-md-offset-4">
-							<div class="input-group">
-								<div class="input-group-btn">
-									<button type="button" class="btn btn-default dropdown-toggle"
-										data-toggle="dropdown">
-										검색 <span class="caret"></span>
-									</button>
-									<ul class="dropdown-menu">
-										<li style="text-align: center;">제목</li>
-										<li style="text-align: center;">작성자</li>
-										<li style="text-align: center;">내용</li>
-									</ul>
-								</div>
+						<form action="/board/parcel/search">
+							<div class="col-md-4 col-md-offset-4">
+								<div class="input-group">
+									<div class="input-group-btn">
+										<button id="mystatus" type="button"
+											class="btn btn-default dropdown-toggle"
+											data-toggle="dropdown">
+											검색 <span class="caret"></span>
+										</button>
+										<input type="hidden" id="searchOption" name="searchOption"
+											value="">
+										<ul id="mytype" class="dropdown-menu">
+											<li style="text-align: center;" value="title">제목</li>
+											<li style="text-align: center;" value="name">작성자</li>
+											<li style="text-align: center;" value="content">내용</li>
+										</ul>
+									</div>
 
-								<input type="text" class="form-control"> <span
-									class="input-group-btn">
-									<button class="btn btn-default" type="button">Go!</button>
-								</span>
+									<input name="keyword" type="text" class="form-control">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="submit">Go!</button>
+									</span>
+								</div>
 							</div>
-						</div>
+						</form>
 					</div>
 				</div>
 			</div>
 		</section>
 	</div>
 	<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
+
+	<script>
+		$('#mytype li').on(
+				'click',
+				function() {
+					$('#mystatus').html(
+							$(this).text() + ' <span class="caret"></span>');
+					$('#searchOption').val($(this).attr('value'));
+				});
+	</script>
 
 </body>
 
