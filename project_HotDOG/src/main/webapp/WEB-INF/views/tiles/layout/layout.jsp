@@ -18,9 +18,6 @@
 	<!-- Theme skin -->
 	<link id="t-colors" href="/resources/skins/default.css" rel="stylesheet" />
 	
-	<!-- boxed bg -->
-	<link id="bodybg" href="/resources/bodybg/bg1.css" rel="stylesheet" type="text/css" />
-    
 	<!-- CSS -->
 	<link href="/resources/plugins/flexslider/flexslider.css" rel="stylesheet" media="screen" />
 	<link href="/resources/css/cubeportfolio.min.css" rel="stylesheet" />

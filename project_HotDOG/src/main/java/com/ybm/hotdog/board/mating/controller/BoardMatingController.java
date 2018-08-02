@@ -1,7 +1,7 @@
 package com.ybm.hotdog.board.mating.controller;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ybm.hotdog.board.domain.ArticleDTO;
 import com.ybm.hotdog.board.mating.service.BoardMatingService;
@@ -123,11 +122,48 @@ public class BoardMatingController {
 		return "redirect:/board/mating";
 	}
 	
+	/**
+	 * 게시글 수정
+	 *
+	 * @Method Name : edit
+	 * @param article
+	 * @return
+	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public String edit(ArticleDTO article) {
 		
 		matingService.edit(article);
 		
 		return "redirect:/board/mating";
+	}
+	
+	/**
+	 * 게시글 검색
+	 *
+	 * @Method Name : search
+	 * @param model
+	 * @param search
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String search(Model model, String searchType, String keyword) throws Exception {
+		
+		List<ArticleDTO> list = matingService.search(searchType, keyword);
+		List<UserDTO> name = new ArrayList<UserDTO>();
+		List<CategoryDTO> category = new ArrayList<CategoryDTO>();
+		int articleNumber = matingService.getSearchNumber(searchType, keyword);
+
+		for (ArticleDTO articleList : list) {
+			name.add(userService.getUser(articleList.getUserNo()));
+			category.add(categoryService.getCategory(articleList.getCategoryNo()));
+		}
+
+		model.addAttribute("boardMatingList", list);
+		model.addAttribute("name", name);
+		model.addAttribute("category", category);
+		model.addAttribute("articleNumber", articleNumber);
+
+		return "board/mating/mating";
 	}
 }

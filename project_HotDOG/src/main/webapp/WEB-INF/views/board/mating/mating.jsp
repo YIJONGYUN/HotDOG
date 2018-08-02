@@ -80,24 +80,24 @@
 							</div>
 						</div>
 						<div class="col-md-4 col-md-offset-4">
-							<form action="" method="get">
+							<form action="/board/mating/search" method="get" id="searchForm">
 								<div class="input-group">
 									<div class="input-group-btn">
 										<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="searchList">
 											검색 <span class="caret"></span>
 										</button>
 										<ul class="dropdown-menu" id="mySearch" role="menu">
-											<li style="text-align: center;" value="title">제목</li>
-											<li style="text-align: center;" value="author">작성자</li>
-											<li style="text-align: center;" value="content">내용</li>
+											<li style="text-align: center;" value="title" id="title">제목</li>
+											<li style="text-align: center;" value="author" id="author">작성자</li>
+											<li style="text-align: center;" value="content" >내용</li>
 										</ul>
 										<input type="hidden" name="searchType" id="searchType">
 									</div>
 	
-									<input type="text" class="form-control" id="keyword"> 
+									<input type="text" class="form-control" id="keyword" name="keyword"> 
 									
 									<span class="input-group-btn">
-										<button class="btn btn-default" type="button" onclick="check()">Go!</button>
+										<button class="btn btn-default" type="submit">Go!</button>
 									</span>
 								</div>
 							</form>
@@ -112,23 +112,41 @@
 	<script>
 		$(function() {
 			$('#mySearch li').on('click', function() {
+				var type = $(this).attr('value');
+				
 			    // 버튼에 선택된 항목 텍스트 넣기 
 			    $('#searchList').html($(this).text()+' <span class="caret"></span>');
-			 	// 카테고리 번호 속성으로 넣기
-			    $('#searchType').val($(this).attr('id'));
+			    // 검색 타입 value 값으로 넣기
+			    $('#searchType').val(type);
 			});
 		})
 		
-		function check() {
-			var keyword = $('#keyword').val();	// 검색할 내용
-			var searchType = $('#mySearch li').attr('value');	// 검색 타입
+		$("#searchForm").submit(function() {
+			var searchType = $('#searchType').val();	// 검색 타입
+			var keyword = $('#keyword').val();			// 검색할 내용
+			
+			/** 검색 유형을 선택하지 않고 버튼 눌렀을 경우 */
+			if (searchType === "") {
+				swal({
+					  type: 'warning',
+					  title: '검색할 유형을 선택하세요!'
+				});
+				return false;
+			}
 			
 			/* 검색어를 입력하지 않고 버튼 눌렀을 경우 */
 			if (keyword.trim().length < 1) {
-				alert("검색어를 입력하세요!");
+				swal({
+					  type: 'warning',
+					  title: '검색어를 입력하세요!'
+				});
 				$('#keyword').focus();
+				return false;
 			}
-		}
+			
+			return true;
+		})
+		
 	</script>
 
 </body>

@@ -35,4 +35,10 @@ public interface BoardMatingService {
 	
 	/** 전체 게시글 수 조회 */
 	public int getArticleNumber();
+	
+	/** 게시글 검색 */
+	public List<ArticleDTO> search(String searchType, String keyword);
+	
+	/** 검색 게시글 수 조회 */
+	public int getSearchNumber(String searchType, String keyword);
 }

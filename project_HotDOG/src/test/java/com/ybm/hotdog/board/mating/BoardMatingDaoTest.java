@@ -103,6 +103,17 @@ public class BoardMatingDaoTest {
 	public void testGetArticlenumber() throws Exception {
 		
 		logger.info(dao.getArticleNumber());
+		logger.info(dao.getSearchNumber("title", "수정"));
+	}
+	
+	/** 게시글 검색 테스트 */
+	@Test
+	public void testSearch() throws Exception {
+		List<ArticleDTO> list = dao.search("title", "수정");
+
+		for (ArticleDTO article : list) {
+			logger.info(article.toString());
+		}
 	}
 
 }
