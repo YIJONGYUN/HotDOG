@@ -45,4 +45,17 @@ public class BoardParcelServiceImpl implements BoardParcelService {
 		dao.articleUpdate(articleDTO);
 	}
 
+	/** 게시글 수정 */
+	@Override
+	public void increaseHitCount(int articleNo) {
+		dao.increaseHitCount(articleNo);
+
+	}
+
+	/** 게시글 검색 */
+	@Override
+	public List<ArticleDTO> listSearch(String searchOption, String keyword) {
+		return dao.listSearch(searchOption, keyword);
+	}
+
 }

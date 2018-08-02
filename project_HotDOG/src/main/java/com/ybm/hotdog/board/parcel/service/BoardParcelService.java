@@ -21,4 +21,10 @@ public interface BoardParcelService {
 	/** 게시글 삭제 */
 	public void articleDelete(int articleNo);
 
+	/** 게시글 조회수 증가 */
+	public void increaseHitCount(int articleNo);
+
+	/** 게시글 검색 */
+	public List<ArticleDTO> listSearch(String searchOption, String keyword);
+
 }
