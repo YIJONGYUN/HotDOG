@@ -55,7 +55,7 @@
 														value="${articleDTO.articleNo}">
 													<!-- 게시글 상세 내용 조회시 articleNo가 필요하기 때문에 숨겨서 보내준다. -->
 													<tr>
-														<td>${status.count}</td>
+														<td>${articleCount-status.index}</td>
 														<td>${category[status.index].content}</td>
 														<td colspan="4"><a
 															href="/board/info/detail/${articleDTO.articleNo}"

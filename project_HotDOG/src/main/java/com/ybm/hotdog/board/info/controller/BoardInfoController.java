@@ -63,7 +63,8 @@ public class BoardInfoController {
 		List<ArticleDTO> list = service.searchArticle(searchOption, keyword);
 		List<UserDTO> name = new ArrayList<UserDTO>();
 		List<CategoryDTO> category = new ArrayList<CategoryDTO>();
-
+		int articleCount = 0;
+		
 		for (ArticleDTO articleList : list) {
 			name.add(userService.getUser(articleList.getUserNo()));
 			category.add(categoryService.getCategory(articleList.getCategoryNo()));
@@ -72,6 +73,7 @@ public class BoardInfoController {
 		model.addAttribute("boardInfoList", list);
 		model.addAttribute("name", name);
 		model.addAttribute("category", category);
+		model.addAttribute("articleCount", articleCount);
 		
 		return "board/info/info";
 	}
