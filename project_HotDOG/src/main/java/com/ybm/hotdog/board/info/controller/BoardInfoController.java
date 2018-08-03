@@ -68,6 +68,7 @@ public class BoardInfoController {
 		for (ArticleDTO articleList : list) {
 			name.add(userService.getUser(articleList.getUserNo()));
 			category.add(categoryService.getCategory(articleList.getCategoryNo()));
+			articleCount++;
 		}
 
 		model.addAttribute("boardInfoList", list);
@@ -85,7 +86,12 @@ public class BoardInfoController {
 		ArticleDTO article = service.getArticle(articleNo);
 		CategoryDTO category = categoryService.getCategory(article.getCategoryNo());
 		UserDTO user = userService.getUser(article.getUserNo());
-
+		/** 조회수 올리기 */
+		int hitCount = article.getHitCount();
+		hitCount++;
+		article.setHitCount(hitCount);
+		service.articleEdit(article);
+		
 		model.addAttribute("article", article);
 		model.addAttribute("category", category);
 		model.addAttribute("user", user);

@@ -49,7 +49,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<textarea class="form-control" name="content" rows="5"
+								<textarea class="form-control form-content" name="content" rows="5"
 									data-rule="required" data-msg="내용을 입력해 주세요!"
 									placeholder="내용을 입력해 주세요"></textarea>
 								<div class="validation"></div>
@@ -78,12 +78,33 @@
 	})
 	
 	$('.contactForm').submit(function() {
+		
 			if ($('#title').val().trim().length < 1) {
-				alert("제목을 입력해 주세요!");
-				$('.validation').html($(this).attr("제목을 입력해 주세요!"));
+				swal({
+					  type: 'error',
+					  title: '제목을 입력하세요!'
+				});
+				return false;
+			}
+			
+			if ($('#categoryNo').val()==="0"){
+				swal({
+					  type: 'error',
+					  title: '말머리를 선택하세요!'
+				});
+				return false;
+			}
+			
+			if ($('.form-content').val().trim().length < 1){
+				swal({
+					  type: 'error',
+					  title: '내용을 입력하세요!'
+				});
 				return false;
 			}
 		})
+	
+		
 	</script>
 
 </body>

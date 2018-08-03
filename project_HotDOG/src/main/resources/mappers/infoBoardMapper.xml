@@ -41,7 +41,7 @@
 
     <!-- 게시글 수정 -->
     <update id="articleEdit">
-	UPDATE Article SET category_no = #{categoryNo}, title = #{title}, content = #{content}, reg_date = sysdate
+	UPDATE Article SET category_no = #{categoryNo}, title = #{title}, content = #{content}, reg_date = sysdate, hit_count = #{hitCount}
 	WHERE article_no = #{articleNo}
 	</update>
 	

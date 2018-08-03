@@ -74,6 +74,7 @@
 						</div>
 						<a href="/board/info/form" class="btn btn-warning pull-right"><i
 							class="fa fa-heart"></i> 글쓰기 </a>
+
 						<div class="col-lg-12">
 							<div class="text-center">
 								<ul class="pagination">
@@ -87,7 +88,7 @@
 								</ul>
 							</div>
 						</div>
-						<form action="/board/info/search" method="post">
+						<form action="/board/info/search" method="post" id="selectForm">
 							<div class="col-md-4 col-md-offset-4">
 								<div class="input-group">
 									<div class="input-group-btn">
@@ -126,6 +127,31 @@
 			//키워드옵션넣기
 			$('#searchOption').val($(this).attr('id'));
 			})
+		})
+		/** 검색 유효성 검사 */
+		$('#selectForm').submit(function() {
+			var searchOption = $('#searchOption').val();
+			var keyword = $('#keyword').val();  
+			
+			/** 검색 조건 없을 때 */
+			if(searchOption==="기본"){
+				swal({
+					  type: 'warning',
+					  title: '검색할 조건을 선택하세요!'
+				});
+				return false;
+			}
+			
+			/** 검색 내용 없을 때 */
+			if(keyword.trim().length<1){
+				swal({
+					  type: 'warning',
+					  title: '검색할 내용을 입력하세요!'
+				});
+				return false;
+			}
+			
+			return true;
 		})
 	</script>
 </body>
