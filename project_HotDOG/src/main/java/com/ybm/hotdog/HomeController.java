@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ybm.hotdog.board.domain.ArticleDTO;
+import com.ybm.hotdog.board.domain.ReplyDTO;
 import com.ybm.hotdog.board.info.service.BoardInfoService;
 import com.ybm.hotdog.board.mating.service.BoardMatingService;
 import com.ybm.hotdog.board.parcel.service.BoardParcelService;
@@ -72,17 +73,20 @@ public class HomeController {
 		List<ArticleDTO> list = matingService.listAll();
 		List<UserDTO> name = new ArrayList<UserDTO>();
 		List<CategoryDTO> category = new ArrayList<CategoryDTO>();
+		List<Integer> replyNumber = new ArrayList<Integer>();
 		int articleNumber = matingService.getArticleNumber();
 
 		for (ArticleDTO articleList : list) {
 			name.add(userService.getUser(articleList.getUserNo()));
 			category.add(categoryService.getCategory(articleList.getCategoryNo()));
+			replyNumber.add(matingService.getReplyNumber(articleList.getArticleNo()));
 		}
 
 		model.addAttribute("boardMatingList", list);
 		model.addAttribute("name", name);
 		model.addAttribute("category", category);
 		model.addAttribute("articleNumber", articleNumber);
+		model.addAttribute("replyNumber", replyNumber);
 
 		return "board/mating/mating";
 	}

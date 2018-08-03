@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ybm.hotdog.board.domain.ArticleDTO;
+import com.ybm.hotdog.board.domain.ReplyDTO;
 import com.ybm.hotdog.board.mating.service.BoardMatingService;
 import com.ybm.hotdog.category.domain.CategoryDTO;
 import com.ybm.hotdog.category.service.CategoryService;
@@ -65,11 +66,21 @@ public class BoardMatingController {
 		ArticleDTO article = matingService.getArticle(articleNo);
 		CategoryDTO category = categoryService.getCategory(article.getCategoryNo());
 		UserDTO user = userService.getUser(article.getUserNo());
+		List<ReplyDTO> replyList = matingService.getReply(articleNo);
+		int replyCount = matingService.getReplyNumber(articleNo);
+		List<UserDTO> name = new ArrayList<UserDTO>();
 		
+		for (ReplyDTO replyDTO : replyList) {
+			name.add(userService.getUser(replyDTO.getUserNo()));
+		}
 		
 		model.addAttribute("article", article);
 		model.addAttribute("category", category);
 		model.addAttribute("user", user);
+		model.addAttribute("replyList", replyList);
+		model.addAttribute("replyCount", replyCount);
+		model.addAttribute("name", name);
+		model.addAttribute("articleNo", articleNo);
 		
 		return "board/mating/matingDetail";
 	}
@@ -165,5 +176,21 @@ public class BoardMatingController {
 		model.addAttribute("articleNumber", articleNumber);
 
 		return "board/mating/mating";
+	}
+	
+	/**
+	 * 댓글 작성
+	 *
+	 * @Method Name : registReply
+	 * @param reply		등록할 댓글 객체
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/registReply", method = RequestMethod.POST)
+	public String registReply(ReplyDTO reply) throws Exception {
+		
+		matingService.registReply(reply);
+		
+		return "redirect:/board/mating/detail/" + reply.getArticleNo();
 	}
 }

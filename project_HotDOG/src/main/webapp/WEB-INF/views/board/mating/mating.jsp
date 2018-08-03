@@ -52,7 +52,7 @@
 													<tr>
 														<td>${articleNumber - status.index}</td>
 														<td>${category[status.index].content}</td>
-														<td colspan="4"><a href="/board/mating/detail/${articleDTO.articleNo}" style="color: black;">${articleDTO.title}</a></td>
+														<td colspan="4"><a href="/board/mating/detail/${articleDTO.articleNo}" style="color: black;">${articleDTO.title}  [${replyNumber[status.index]}]</a></td>
 														<td>${name[status.index].name}</td>
 														<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${articleDTO.regDate}" /></td>
 														<td>${articleDTO.hitCount}</td>

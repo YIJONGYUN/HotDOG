@@ -3,6 +3,7 @@ package com.ybm.hotdog.board.mating.dao;
 import java.util.List;
 
 import com.ybm.hotdog.board.domain.ArticleDTO;
+import com.ybm.hotdog.board.domain.ReplyDTO;
 
 /**
  * 교배게시판 DB에서 데이터를 가져와 모델 생성
@@ -41,4 +42,13 @@ public interface BoardMatingDAO {
 	
 	/** 검색 게시글 수 조회 */
 	public int getSearchNumber(String searchType, String keyword);
+	
+	/** 댓글 작성 */
+	public void registReply (ReplyDTO reply);
+	
+	/** 댓글 조회 */
+	public List<ReplyDTO> getReply (int articleNo);
+	
+	/** 댓글 수 조회 */
+	public int getReplyNumber (int articleNo);
 }

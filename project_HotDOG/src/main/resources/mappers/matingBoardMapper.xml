@@ -5,6 +5,8 @@
 
 <mapper namespace="com.ybm.hotdog.mappers.MatingBoardMapper">
 
+<!-- 게시글 -->
+
 <!-- 게시물 전체 목록 불러오기 -->
 <select id="boardMatingListAll" resultType="Article">
 	SELECT 	article_no as articleNo, board_no as boardNo, user_no as userNo, 
@@ -88,4 +90,27 @@
 	<include refid="search" />
 </select>
 
+
+<!-- 댓글 -->
+
+<!-- 댓글 작성 -->
+<insert id="registReply">
+	INSERT INTO Reply(reply_no, article_no, user_no, content, reg_date) 
+	VALUES (seq_Reply.nextVal, #{articleNo}, 1, #{content}, sysdate)
+</insert>
+
+<!-- 댓글 조회 -->
+<select id="getReply" resultType="Reply">
+	SELECT reply_no as replyNo, article_no as articleNo, user_no as userNo, content, reg_date as regDate 
+	FROM Reply
+	WHERE article_no = #{articleNo}
+	ORDER BY reg_date asc
+</select>
+
+<!-- 댓글 수 조회 -->
+<select id="getReplyNumber" resultType="Integer">
+	SELECT COUNT(reply_no) 
+	FROM Reply
+	WHERE article_no = #{articleNo}
+</select>
 </mapper>

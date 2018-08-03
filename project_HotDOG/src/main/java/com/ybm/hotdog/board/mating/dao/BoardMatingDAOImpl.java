@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.ybm.hotdog.board.domain.ArticleDTO;
+import com.ybm.hotdog.board.domain.ReplyDTO;
 
 import oracle.net.aso.a;
 /**
@@ -91,6 +92,24 @@ public class BoardMatingDAOImpl implements BoardMatingDAO {
 		map.put("keyword", keyword);
 		
 		return sqlSession.selectOne(namespace + ".getSearchNumber", map);
+	}
+
+	/** 댓글 작성 */
+	@Override
+	public void registReply(ReplyDTO reply) {
+		sqlSession.insert(namespace + ".registReply", reply);
+	}
+
+	/** 댓글 조회 */
+	@Override
+	public List<ReplyDTO> getReply(int articleNo) {
+		return sqlSession.selectList(namespace + ".getReply" , articleNo);
+	}
+
+	/** 댓글 수 조회 */
+	@Override
+	public int getReplyNumber(int articleNo) {
+		return sqlSession.selectOne(namespace + ".getReplyNumber", articleNo);
 	}
 
 }

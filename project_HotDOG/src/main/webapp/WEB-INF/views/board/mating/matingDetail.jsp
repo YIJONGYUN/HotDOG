@@ -63,45 +63,34 @@
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2">
 						<div class="comment-area">
-							<h4>댓글 3</h4>
-							<div class="media">
-								<a class="pull-left"><img src="/resources/img/dog2.png"/></a>
-								<div class="media-body">
+							<h4>댓글 ${replyCount}</h4>
+							
+							<c:choose>
+								<c:when test="${empty replyList}">
 									<div class="media-content">
-										<h6><span>2018-07-24</span> 이종윤 </h6>
-										<p>
-											졸귀탱 ㅠㅠ
-										</p>
+										<p align="center"> 댓글이 존재하지 않습니다! </p>
 									</div>
-								</div>
-							</div>
-							<div class="media">
-								<a class="pull-left"><img src="/resources/img/dog2.png"/></a>
-								<div class="media-body">
-									<div class="media-content">
-										<h6><span>2018-07-24</span> 심민정 </h6>
-										<p>
-											저요 저요!
-										</p>
-									</div>
-								</div>
-							</div>
-							<div class="media">
-								<a class="pull-left"><img src="/resources/img/dog2.png"/></a>
-								<div class="media-body">
-									<div class="media-content">
-										<h6><span>2018-07-24</span> 권한별 </h6>
-										<p>
-											이리오시개
-										</p>
-									</div>
-								</div>
-							</div>
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${replyList}" var="reply" varStatus="status">
+										<div class="media">
+											<a class="pull-left"><img src="/resources/img/dog2.png"/></a>
+											<div class="media-body">
+												<div class="media-content">
+													<h6><span><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${reply.regDate}"/></span> ${name[status.index].name} </h6>
+													<p> ${reply.content} </p>
+												</div>
+											</div>
+										</div>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 							<hr class="colorgraph">
-							<form role="form">
+							<form role="form" action="/board/mating/registReply" method="post">
 								<div class="col-md-10">
 									<div class="form-group">
-										<textarea class="form-control" rows="2" placeholder="댓글을 작성해 주세요!" style="resize: none;"></textarea>
+										<textarea class="form-control" rows="2" placeholder="댓글을 작성해 주세요!" style="resize: none;" name="content"></textarea>
+										<input type="hidden" name="articleNo" value="${articleNo}">
 									</div>
 								</div>
 								<div class="col-md-2">

@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ybm.hotdog.board.domain.ArticleDTO;
+import com.ybm.hotdog.board.domain.ReplyDTO;
 import com.ybm.hotdog.board.mating.dao.BoardMatingDAO;
 import com.ybm.hotdog.category.dao.CategoryDAO;
 import com.ybm.hotdog.category.domain.CategoryDTO;
@@ -114,6 +115,19 @@ public class BoardMatingDaoTest {
 		for (ArticleDTO article : list) {
 			logger.info(article.toString());
 		}
+	}
+	
+	/** 댓글 작성 테스트 */
+	@Test
+	public void testRegistReply() throws Exception {
+		
+		ReplyDTO reply = new ReplyDTO();
+		reply.setArticleNo(1);
+		reply.setContent("테스트에서 댓글 작성");
+		
+		dao.registReply(reply);
+
+		logger.info("댓글 작성 완료!");
 	}
 
 }

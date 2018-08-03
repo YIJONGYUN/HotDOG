@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.ybm.hotdog.board.domain.ArticleDTO;
+import com.ybm.hotdog.board.domain.ReplyDTO;
 import com.ybm.hotdog.board.mating.dao.BoardMatingDAO;
 
 /**
@@ -77,6 +78,24 @@ public class BoardMatingServiceImpl implements BoardMatingService {
 	@Override
 	public int getSearchNumber(String searchType, String keyword) {
 		return dao.getSearchNumber(searchType, keyword);
+	}
+
+	/** 댓글 작성 */
+	@Override
+	public void registReply(ReplyDTO reply) {
+		dao.registReply(reply);
+	}
+
+	/** 댓글 조회 */
+	@Override
+	public List<ReplyDTO> getReply(int articleNo) {
+		return dao.getReply(articleNo);
+	}
+
+	/** 댓글 수 조회 */
+	@Override
+	public int getReplyNumber(int articleNo) {
+		return dao.getReplyNumber(articleNo);
 	}
 
 }
