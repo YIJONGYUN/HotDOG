@@ -90,7 +90,7 @@
 								</ul>
 							</div>
 						</div>
-						<form action="/board/parcel/search">
+						<form action="/board/parcel/search" id="searchForm">
 							<div class="col-md-4 col-md-offset-4">
 								<div class="input-group">
 									<div class="input-group-btn">
@@ -108,7 +108,7 @@
 										</ul>
 									</div>
 
-									<input name="keyword" type="text" class="form-control">
+									<input id="keyword" name="keyword" type="text" class="form-control">
 									<span class="input-group-btn">
 										<button class="btn btn-default" type="submit">Go!</button>
 									</span>
@@ -130,6 +130,24 @@
 							$(this).text() + ' <span class="caret"></span>');
 					$('#searchOption').val($(this).attr('value'));
 				});
+
+		$('#searchForm').submit(function() {
+
+			if ($('#searchOption').val() == "") {
+				swal({
+					type : 'error',
+					title : '검색 유형을 선택해 주세요!'
+				});
+				return false;
+			} else if ($('#keyword').val().trim().length < 1) {
+				swal({
+					type : 'error',
+					title : '검색할 내용을 입력해 주세요!'
+				});
+				$('#keyword').focus();
+				return false;
+			}
+		});
 	</script>
 
 </body>

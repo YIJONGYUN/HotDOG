@@ -45,7 +45,7 @@
 									<input type="hidden" id="categoryNo" name="categoryNo"
 										value=${category.categoryNo }> <input type="hidden"
 										id="articleNo" name="articleNo" value=${article.articleNo }>
-									<input type="text" name="title" class="form-control" id="name"
+									<input type="text" name="title" class="form-control" id="title"
 										placeholder="제목을 입력해 주세요" data-rule="required"
 										data-msg="제목을 입력해 주세요!" value=${article.title } />
 									<div class="validation"></div>
@@ -55,7 +55,7 @@
 							<div class="form-group">
 								<textarea class="form-control" name="content" rows="5"
 									data-rule="required" data-msg="내용을 입력해 주세요!"
-									placeholder="내용을 입력해 주세요">${article.content }</textarea>
+									placeholder="내용을 입력해 주세요" id="articleContent">${article.content }</textarea>
 								<div class="validation"></div>
 							</div>
 
@@ -82,6 +82,27 @@
 							$(this).text() + ' <span class="caret"></span>');
 					$('#categoryNo').val($(this).attr('value'));
 				});
+
+		$('.contactForm').submit(function() {
+
+			if ($('#title').val().trim().length < 1) {
+				swal({
+					type : 'error',
+					title : '제목을 입력해 주세요!'
+				});
+				$('#title').focus();
+				return false;
+			}
+
+			else if ($('#articleContent').val().trim().length < 1) {
+				swal({
+					type : 'error',
+					title : '내용을 입력해 주세요!'
+				});
+				$('#articleContent').focus();
+				return false;
+			}
+		})
 	</script>
 
 </body>

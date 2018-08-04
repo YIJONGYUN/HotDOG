@@ -43,7 +43,7 @@
 										</ul>
 									</div>
 									<input type="hidden" id="categoryNo" name="categoryNo" value="">
-									<input type="text" name="title" class="form-control" id="name"
+									<input type="text" name="title" class="form-control" id="title"
 										placeholder="제목을 입력해 주세요" data-rule="required"
 										data-msg="제목을 입력해 주세요!" />
 									<div class="validation"></div>
@@ -53,7 +53,7 @@
 							<div class="form-group">
 								<textarea class="form-control" name="content" rows="5"
 									data-rule="required" data-msg="내용을 입력해 주세요!"
-									placeholder="내용을 입력해 주세요"></textarea>
+									placeholder="내용을 입력해 주세요" id="articleContent"></textarea>
 								<div class="validation"></div>
 							</div>
 
@@ -72,14 +72,45 @@
 	<!--<script src="/resources/contactform/contactform.js"></script>-->
 
 	<script>
-		$('#mytype li').on('click', function() {
-			// 버튼에 선택된 항목 텍스트 넣기 
-			$('#mystatus').html($(this).text()+ ' <span class="caret"></span>');
+		$('#mytype li').on(
+				'click',
+				function() {
+					// 버튼에 선택된 항목 텍스트 넣기 
+					$('#mystatus').html(
+							$(this).text() + ' <span class="caret"></span>');
 
-			// 선택된 항목 값(value) 얻기
-			$('#categoryNo').val($(this).attr('value'));
-		});
+					// 선택된 항목 값(value) 얻기
+					$('#categoryNo').val($(this).attr('value'));
+				});
 
+		$('.contactForm').submit(function() {
+
+			if ($('#categoryNo').val() == "") {
+				swal({
+					type : 'error',
+					title : '말머리를 선택해 주세요!'
+				});
+				return false;
+			}
+
+			else if ($('#title').val().trim().length < 1) {
+				swal({
+					type : 'error',
+					title : '제목을 입력해 주세요!'
+				});
+				$('#title').focus();
+				return false;
+			}
+
+			else if ($('#articleContent').val().trim().length < 1) {
+				swal({
+					type : 'error',
+					title : '내용을 입력해 주세요!'
+				});
+				$('#articleContent').focus();
+				return false;
+			}
+		})
 	</script>
 </body>
 

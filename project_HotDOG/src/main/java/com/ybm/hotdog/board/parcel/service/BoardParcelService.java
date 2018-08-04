@@ -25,6 +25,7 @@ public interface BoardParcelService {
 	public void increaseHitCount(int articleNo);
 
 	/** 게시글 검색 */
+
 	public List<ArticleDTO> listSearch(String searchOption, String keyword);
 
 }
