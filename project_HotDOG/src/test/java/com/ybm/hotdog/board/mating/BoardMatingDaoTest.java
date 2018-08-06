@@ -129,5 +129,19 @@ public class BoardMatingDaoTest {
 
 		logger.info("댓글 작성 완료!");
 	}
+	
+	/** 답글 작성 테스트 */
+	@Test
+	public void testInsertReply() throws Exception {
+		ArticleDTO article = new ArticleDTO();
+		article.setCategoryNo(7);
+		article.setArticleNo(65);
+		article.setTitle("테스트에서 답글 작성");
+		article.setContent("답글 1 내용");
+		
+		dao.registRearticle(article);
+		
+		logger.info("답글 작성 완료!");
+	}
 
 }

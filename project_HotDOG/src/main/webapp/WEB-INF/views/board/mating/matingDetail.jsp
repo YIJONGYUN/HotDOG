@@ -55,7 +55,7 @@
 							<div class="btn-group">
 								<a href="/board/mating/editForm/${article.articleNo}" class="btn btn-primary">수정</a>
 								<a href="/board/mating/delete/${article.articleNo}" class="btn btn-theme">삭제 </a>
-								<a href="/board/mating/form" class="btn btn-warning">답글</a>
+								<a href="/board/mating/rearticleForm/${article.articleNo}" class="btn btn-warning">답글</a>
 							</div>
 						</div>
 					</div>

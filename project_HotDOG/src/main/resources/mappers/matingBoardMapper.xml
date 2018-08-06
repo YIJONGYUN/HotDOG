@@ -14,7 +14,7 @@
 			"group", step, "order" 
 	FROM Article
 	WHERE board_no = 3
-	ORDER BY article_no desc, reg_date desc
+	ORDER BY "group" desc, "order" asc
 </select>
 
 <!-- 게시글 상세 조회 -->
@@ -29,8 +29,23 @@
 <!-- 게시글 작성 -->
 <insert id="registMating">
 	INSERT INTO Article(article_no, board_no, user_no, category_no, title, content, reg_date, hit_count, "group", step, "order") 
-	VALUES (seq_Article.nextVal, 3, 1, #{categoryNo}, #{title}, #{content}, sysdate, 0, 1, 1, 1)
+	VALUES (seq_Article.nextVal, 3, 1, #{categoryNo}, #{title}, #{content}, sysdate, 0, seq_Article.currVal, 0, 0)
 </insert>
+
+<!-- 답글 작성 -->
+<insert id="registMatingRearticle">
+	INSERT INTO Article(article_no, board_no, user_no, category_no, title, content, reg_date, hit_count, "group", step, "order") 
+	VALUES (seq_Article.nextVal, 3, 1, #{categoryNo}, #{title}, #{content}, sysdate, 0, #{articleNo}, #{step} + 1, #{order} + 1)
+</insert>
+
+<!-- 답글 계층 및 순서 수정 -->
+<update id="updateMatingRearticle">
+<![CDATA[
+	UPDATE Article 
+	SET "order" = "order"+1 
+	WHERE "group" = #{group} AND "order" > #{order}
+]]>
+</update>
 
 <!-- 게시글 삭제 -->
 <delete id="deleteMating">

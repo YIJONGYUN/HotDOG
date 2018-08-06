@@ -98,4 +98,16 @@ public class BoardMatingServiceImpl implements BoardMatingService {
 		return dao.getReplyNumber(articleNo);
 	}
 
+	/** 답글 등록 */
+	@Override
+	public void registRearticle(ArticleDTO article) {
+		dao.registRearticle(article);
+	}
+
+	/** 답글 계층 및 순서 수정 */
+	@Override
+	public void updateRearticle(int group, int order) {
+		dao.updateRearticle(group, order);
+	}
+
 }

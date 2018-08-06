@@ -112,4 +112,21 @@ public class BoardMatingDAOImpl implements BoardMatingDAO {
 		return sqlSession.selectOne(namespace + ".getReplyNumber", articleNo);
 	}
 
+	/** 답글 등록 */
+	@Override
+	public void registRearticle(ArticleDTO article) {
+		sqlSession.insert(namespace + ".registMatingRearticle", article);
+	}
+
+	/** 답글 계층 및 순서 수정 */
+	@Override
+	public void updateRearticle(int group, int order) {
+		
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("group", group);
+		map.put("order", order);
+		
+		sqlSession.update(namespace + ".updateMatingRearticle", map);
+	}
+
 }

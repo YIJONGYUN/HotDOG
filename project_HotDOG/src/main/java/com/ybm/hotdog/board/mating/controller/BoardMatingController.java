@@ -193,4 +193,34 @@ public class BoardMatingController {
 		
 		return "redirect:/board/mating/detail/" + reply.getArticleNo();
 	}
+	
+	@RequestMapping(value = "/rearticleForm/{articleNo}", method = RequestMethod.GET)
+	public String boardReplyForm(Model model, @PathVariable int articleNo) {
+		logger.info("도그시그널 답글 작성 페이지");
+		
+		List<CategoryDTO> categoryList = categoryService.getCategoryList(3);
+		
+		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("articleNo", articleNo);
+		
+		return "board/mating/matingRearticleForm";
+	}
+	
+	/**
+	 * 답글 등록
+	 * 
+	 * @Method Name : regist
+	 * @param article	등록할 게시글 객체
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/registRearticle", method = RequestMethod.POST)
+	public String registRearticle(ArticleDTO article) throws Exception {
+		
+		matingService.updateRearticle(article.getGroup(), article.getOrder());
+		matingService.registRearticle(article);
+		
+		return "redirect:/board/mating";
+	}
+	
 }

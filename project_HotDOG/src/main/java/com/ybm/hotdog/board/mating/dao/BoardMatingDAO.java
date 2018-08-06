@@ -51,4 +51,10 @@ public interface BoardMatingDAO {
 	
 	/** 댓글 수 조회 */
 	public int getReplyNumber (int articleNo);
+	
+	/** 답글 등록 */
+	public void registRearticle (ArticleDTO article);
+	
+	/** 답글 계층 및 순서 수정 */
+	public void updateRearticle (int group, int order);
 }
