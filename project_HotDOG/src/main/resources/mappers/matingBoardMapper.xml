@@ -35,7 +35,7 @@
 <!-- 답글 작성 -->
 <insert id="registMatingRearticle">
 	INSERT INTO Article(article_no, board_no, user_no, category_no, title, content, reg_date, hit_count, "group", step, "order") 
-	VALUES (seq_Article.nextVal, 3, 1, #{categoryNo}, #{title}, #{content}, sysdate, 0, #{articleNo}, #{step} + 1, #{order} + 1)
+	VALUES (seq_Article.nextVal, 3, 1, #{categoryNo}, #{title}, #{content}, sysdate, 0, #{group}, #{step} + 1, #{order} + 1)
 </insert>
 
 <!-- 답글 계층 및 순서 수정 -->

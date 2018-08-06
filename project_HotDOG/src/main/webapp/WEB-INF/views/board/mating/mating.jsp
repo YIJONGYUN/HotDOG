@@ -53,13 +53,13 @@
 														<td>${articleNumber - status.index}</td>
 														<td>${category[status.index].content}</td>
 														<td colspan="4"><a href="/board/mating/detail/${articleDTO.articleNo}" style="color: black;">
-															<c:choose>
-																<c:when test="${articleDTO.step gt 0}">
-																<c:forEach begin="1" end="${articleDTO.step}" step="1">
-																	 <img src="/resources/img/reply.png" width="3%" style="margin-bottom: 0px;" /> 
-																</c:forEach>
-																</c:when> 
-															</c:choose>
+														<c:choose>
+															<c:when test="${articleDTO.step > 0}">
+															<c:forEach begin="1" end="${articleDTO.step}" step="1">
+																 <img src="/resources/img/reply.png" width="3%" style="margin-bottom: 0px;" /> 
+															</c:forEach>
+															</c:when> 
+														</c:choose>
 														${articleDTO.title}  [${replyNumber[status.index]}]</a></td>
 														<td>${name[status.index].name}</td>
 														<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${articleDTO.regDate}" /></td>

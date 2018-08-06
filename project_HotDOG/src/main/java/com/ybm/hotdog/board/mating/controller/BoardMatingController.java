@@ -194,13 +194,16 @@ public class BoardMatingController {
 		return "redirect:/board/mating/detail/" + reply.getArticleNo();
 	}
 	
-	@RequestMapping(value = "/rearticleForm/{articleNo}", method = RequestMethod.GET)
-	public String boardReplyForm(Model model, @PathVariable int articleNo) {
+	@RequestMapping(value = "/rearticleForm/{articleNo}/{group}", method = RequestMethod.GET)
+	public String boardReplyForm(Model model, @PathVariable int articleNo, @PathVariable int group) {
 		logger.info("도그시그널 답글 작성 페이지");
 		
+		ArticleDTO article = matingService.getArticle(articleNo);
 		List<CategoryDTO> categoryList = categoryService.getCategoryList(3);
 		
+		model.addAttribute("article", article);
 		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("group", group);
 		model.addAttribute("articleNo", articleNo);
 		
 		return "board/mating/matingRearticleForm";

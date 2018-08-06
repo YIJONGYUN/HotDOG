@@ -38,10 +38,10 @@
 									</div>
 						             
 						            <input type="hidden" id="categoryNo" name="categoryNo" value="0">
-						            <input type="hidden" id="group" name="group" value="${articleNo}">
-						            <input type="hidden" id="step" name="step" value="0">
-						            <input type="hidden" id="order" name="order" value="0">
-						            <input type="hidden" id="articleNo" name="articleNo" value="${articleNo}">
+						            <input type="hidden" id="group" name="group" value="${article.group}">
+						            <input type="hidden" id="step" name="step" value="${article.step}">
+						            <input type="hidden" id="order" name="order" value="${article.order}">
+						            <input type="hidden" id="articleNo" name="articleNo" value="${article.articleNo}">
 						            
 						  			<input type="text" name="title" class="form-control" id="title" placeholder="[답글] 제목을 입력해 주세요"/>
 						             
