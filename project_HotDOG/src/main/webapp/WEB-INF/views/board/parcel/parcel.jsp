@@ -62,7 +62,8 @@
 														<td>${category[status.index].content}</td>
 														<td colspan="4"><a
 															href="/board/parcel/detail/${articleDTO.articleNo}"
-															style="color: black;">${articleDTO.title}</a></td>
+															style="color: black;">${articleDTO.title}</a>  [
+															${replyCount[status.index]} ]</td>
 														<td>${name[status.index].name}</td>
 														<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 																value="${articleDTO.regDate}" /></td>
@@ -108,8 +109,8 @@
 										</ul>
 									</div>
 
-									<input id="keyword" name="keyword" type="text" class="form-control">
-									<span class="input-group-btn">
+									<input id="keyword" name="keyword" type="text"
+										class="form-control"> <span class="input-group-btn">
 										<button class="btn btn-default" type="submit">Go!</button>
 									</span>
 								</div>

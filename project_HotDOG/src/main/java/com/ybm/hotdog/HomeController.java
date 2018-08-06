@@ -42,7 +42,7 @@ public class HomeController {
 
 	@Inject
 	private BoardInfoService InfoService;
-	
+
 	@Inject
 	private BoardParcelService parcelService;
 
@@ -92,14 +92,14 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/board/info", method = RequestMethod.GET)
-	public String boardInfo(Locale locale , Model model) {
+	public String boardInfo(Locale locale, Model model) {
 		logger.info("독스타그램 페이지 들어옴~", locale);
 
 		List<ArticleDTO> list = InfoService.listAll();
 		List<UserDTO> name = new ArrayList<UserDTO>();
 		List<CategoryDTO> category = new ArrayList<CategoryDTO>();
-		int articleCount=0;
-		
+		int articleCount = 0;
+
 		for (ArticleDTO articleList : list) {
 			name.add(userService.getUser(articleList.getUserNo()));
 			category.add(categoryService.getCategory(articleList.getCategoryNo()));
@@ -110,7 +110,7 @@ public class HomeController {
 		model.addAttribute("name", name);
 		model.addAttribute("category", category);
 		model.addAttribute("articleCount", articleCount);
-		
+
 		return "board/info/info";
 	}
 
@@ -121,15 +121,18 @@ public class HomeController {
 		List<ArticleDTO> list = parcelService.listAll();
 		List<UserDTO> name = new ArrayList<UserDTO>();
 		List<CategoryDTO> category = new ArrayList<CategoryDTO>();
+		List<Integer> replyCount = new ArrayList<Integer>();
 
 		for (ArticleDTO articleList : list) {
 			name.add(userService.getUser(articleList.getUserNo()));
 			category.add(categoryService.getCategory(articleList.getCategoryNo()));
+			replyCount.add(parcelService.listReply(articleList.getArticleNo()).size());
 		}
 
 		model.addAttribute("boardParcelList", list);
 		model.addAttribute("name", name);
 		model.addAttribute("category", category);
+		model.addAttribute("replyCount", replyCount);
 
 		return "board/parcel/parcel";
 	}

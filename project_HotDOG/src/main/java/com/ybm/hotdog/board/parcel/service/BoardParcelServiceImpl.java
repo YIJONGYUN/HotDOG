@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.ybm.hotdog.board.domain.ArticleDTO;
+import com.ybm.hotdog.board.domain.ReplyDTO;
 import com.ybm.hotdog.board.parcel.dao.BoardParcelDAO;
 
 @Service
@@ -19,6 +20,12 @@ public class BoardParcelServiceImpl implements BoardParcelService {
 	@Override
 	public List<ArticleDTO> listAll() {
 		return dao.listAll();
+	}
+
+	/** 댓글 전체 조회 */
+	@Override
+	public List<ReplyDTO> listReply(int articleNo) {
+		return dao.listReply(articleNo);
 	}
 
 	/** 게시글 상세 조회 */
@@ -37,6 +44,13 @@ public class BoardParcelServiceImpl implements BoardParcelService {
 	@Override
 	public void articleInsert(ArticleDTO articleDTO) {
 		dao.articleInsert(articleDTO);
+	}
+
+	/** 댓글 작성 */
+	@Override
+	public void replyInsert(ReplyDTO replyDTO) {
+		dao.replyInsert(replyDTO);
+
 	}
 
 	/** 게시글 수정 */

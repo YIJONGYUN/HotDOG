@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ybm.hotdog.board.domain.ArticleDTO;
+import com.ybm.hotdog.board.domain.ReplyDTO;
 import com.ybm.hotdog.board.parcel.service.BoardParcelService;
 import com.ybm.hotdog.category.domain.CategoryDTO;
 import com.ybm.hotdog.category.service.CategoryService;
@@ -61,6 +62,16 @@ public class BoardParcelController {
 		return "redirect:/board/parcel";
 	}
 
+	@RequestMapping(value = "/reply", method = RequestMethod.GET)
+	public String boardReply(Locale locale, Model model, ReplyDTO replyDTO) {
+		logger.info("이리오시개 댓글 페이지", locale);
+
+		service.replyInsert(replyDTO);
+		int articleNo = replyDTO.getArticleNo();
+
+		return "redirect:/board/parcel/detail/" + articleNo;
+	}
+
 	@RequestMapping(value = "/detail/{articleNo}", method = RequestMethod.GET)
 	public String boardDetail(Locale locale, Model model, @PathVariable int articleNo) {
 		logger.info("이리오시개 글 상세 페이지", locale);
@@ -71,9 +82,19 @@ public class BoardParcelController {
 		UserDTO user = userService.getUser(article.getUserNo());
 		CategoryDTO category = categoryService.getCategory(article.getCategoryNo());
 
+		List<ReplyDTO> list = service.listReply(articleNo);
+		List<UserDTO> name = new ArrayList<UserDTO>();
+
+		for (ReplyDTO replyList : list) {
+			name.add(userService.getUser(replyList.getUserNo()));
+		}
+
 		model.addAttribute("article", article);
 		model.addAttribute("category", category);
 		model.addAttribute("user", user);
+		model.addAttribute("replyList", list);
+		model.addAttribute("name", name);
+		model.addAttribute("replyCount", list.size());
 
 		return "board/parcel/parcelDetail";
 	}

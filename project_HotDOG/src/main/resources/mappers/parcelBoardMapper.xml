@@ -19,6 +19,16 @@
 		article_no desc, reg_date desc
 	</select>
 
+	<!-- 댓글 전체 조회하기 -->
+	<select id="listReply" resultType="Reply">
+		SELECT reply_no, article_no,
+		user_no as userNo, content, reg_date as regDate FROM Reply
+		WHERE
+		article_no = #{articleNo}
+		ORDER BY reg_date
+		desc
+	</select>
+
 	<!-- 게시물 상세보기 -->
 	<select id="articleDetail" resultType="Article">
 		SELECT article_no as
@@ -41,6 +51,15 @@
 		VALUES (seq_Article.nextVal, 2, 123, #{categoryNo}, #{title},
 		#{content},
 		sysdate, 0, 1, 1, 1)
+	</insert>
+
+	<!-- 댓글 작성하기 -->
+	<insert id="replyInsert">
+		INSERT INTO Reply(reply_no, article_no, user_no,
+		content, reg_date)
+		VALUES (seq_Article.nextVal, #{articleNo},
+		123,
+		#{content}, sysdate)
 	</insert>
 
 	<!-- 게시글 수정하기 -->
@@ -75,11 +94,13 @@
 				articleNo, board_no as boardNo,
 				Article.user_no as userNo,
 				category_no as
-				categoryNo, title, content, reg_date
+				categoryNo, title, content,
+				reg_date
 				as regDate,
 				hit_count as hitCount,
 				"group", step, "order"
-				FROM Article,
+				FROM
+				Article,
 				Users
 				WHERE
 				board_no = 2 And
