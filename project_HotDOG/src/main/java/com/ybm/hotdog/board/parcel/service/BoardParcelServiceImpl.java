@@ -46,6 +46,19 @@ public class BoardParcelServiceImpl implements BoardParcelService {
 		dao.articleInsert(articleDTO);
 	}
 
+	/** 답글 구조 */
+	@Override
+	public void replyView(int group, int order) {
+		dao.replyView(group, order);
+
+	}
+
+	/** 답글 저장 */
+	@Override
+	public void articleReplyInsert(ArticleDTO articleDTO) {
+		dao.articleReplyInsert(articleDTO);
+	}
+
 	/** 댓글 작성 */
 	@Override
 	public void replyInsert(ReplyDTO replyDTO) {

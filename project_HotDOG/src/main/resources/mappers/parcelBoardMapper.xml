@@ -16,7 +16,8 @@
 		FROM Article
 		WHERE board_no = 2
 		ORDER BY
-		article_no desc, reg_date desc
+		"group"
+		DESC, "order" ASC
 	</select>
 
 	<!-- 댓글 전체 조회하기 -->
@@ -50,7 +51,26 @@
 		"order")
 		VALUES (seq_Article.nextVal, 2, 123, #{categoryNo}, #{title},
 		#{content},
-		sysdate, 0, 1, 1, 1)
+		sysdate, 0, seq_Article.currVal, 0, 0)
+	</insert>
+
+	<!-- 답글 구조 정하기 -->
+	<update id="replyView">
+		UPDATE Article SET "order" = "order"+1
+		WHERE
+		"group" =
+		#{group} AND "order" > #{order}
+	</update>
+
+	<!-- 답글 작성하기 -->
+	<insert id="articleReplyInsert">
+		INSERT INTO Article(article_no, board_no, user_no,
+		category_no, title,
+		content, reg_date, hit_count, "group", step,
+		"order")
+		VALUES (seq_Article.nextVal, 2, 123, #{categoryNo}, #{title},
+		#{content},
+		sysdate, 0, #{group}, #{step}+1, #{order}+1)
 	</insert>
 
 	<!-- 댓글 작성하기 -->

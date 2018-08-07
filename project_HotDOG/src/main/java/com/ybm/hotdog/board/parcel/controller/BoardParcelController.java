@@ -62,6 +62,27 @@ public class BoardParcelController {
 		return "redirect:/board/parcel";
 	}
 
+	@RequestMapping(value = "/replyForm/{articleNo}", method = RequestMethod.GET)
+	public String boardReplyForm(Locale locale, Model model, @PathVariable int articleNo) {
+		logger.info("이리오시개 답글 작성 페이지", locale);
+
+		ArticleDTO article = service.getArticle(articleNo);
+
+		model.addAttribute("article", article);
+
+		return "board/parcel/parcelReplyForm";
+	}
+
+	@RequestMapping(value = "/articleReply", method = RequestMethod.POST)
+	public String boardReplyWrite(ArticleDTO articleDTO) {
+		logger.info("이리오시개  답글 작성 처리 페이지");
+
+		service.replyView(articleDTO.getGroup(), articleDTO.getOrder());
+		service.articleReplyInsert(articleDTO);
+
+		return "redirect:/board/parcel";
+	}
+
 	@RequestMapping(value = "/reply", method = RequestMethod.GET)
 	public String boardReply(Locale locale, Model model, ReplyDTO replyDTO) {
 		logger.info("이리오시개 댓글 페이지", locale);
@@ -151,4 +172,5 @@ public class BoardParcelController {
 
 		return "board/parcel/parcel";
 	}
+
 }

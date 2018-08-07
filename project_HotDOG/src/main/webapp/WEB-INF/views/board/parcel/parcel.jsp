@@ -60,9 +60,10 @@
 													<tr>
 														<td>${fn:length(boardParcelList)-((1-1) * 5 + status.index)}</td>
 														<td>${category[status.index].content}</td>
-														<td colspan="4"><a
+														<td colspan="4"><c:forEach begin="1"
+																end="${articleDTO.step}">[RE] </c:forEach><a
 															href="/board/parcel/detail/${articleDTO.articleNo}"
-															style="color: black;">${articleDTO.title}</a>  [
+															style="color: black;">${articleDTO.title}</a> [
 															${replyCount[status.index]} ]</td>
 														<td>${name[status.index].name}</td>
 														<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"

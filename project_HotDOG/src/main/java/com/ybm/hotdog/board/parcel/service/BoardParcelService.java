@@ -19,6 +19,12 @@ public interface BoardParcelService {
 	/** 게시글 저장 */
 	public void articleInsert(ArticleDTO articleDTO);
 
+	/** 답글 구조 */
+	public void replyView(int group, int order);
+
+	/** 답글 저장 */
+	public void articleReplyInsert(ArticleDTO articleDTO);
+
 	/** 댓글 저장 */
 	public void replyInsert(ReplyDTO replyDTO);
 

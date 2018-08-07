@@ -59,7 +59,8 @@
 								<a href="/board/parcel/edit/${article.articleNo}"
 									class="btn btn-primary">수정</a> <a
 									href="/board/parcel/delete/${article.articleNo}"
-									class="btn btn-theme">삭제 </a> <a href="/board/parcel/form"
+									class="btn btn-theme">삭제 </a> <a
+									href="/board/parcel/replyForm/${article.articleNo}"
 									class="btn btn-warning">답글</a>
 							</div>
 						</div>
@@ -99,11 +100,11 @@
 								</c:otherwise>
 							</c:choose>
 							<hr class="colorgraph">
-							<form role="form" action="/board/parcel/reply">
+							<form role="form" action="/board/parcel/reply" class="replyForm">
 								<div class="col-md-10">
 									<div class="form-group">
 										<textarea class="form-control" rows="2"
-											placeholder="댓글을 작성해 주세요!" name="content"></textarea>
+											placeholder="댓글을 작성해 주세요!" name="content" id="replyContent"></textarea>
 										<input type="hidden" id="articleNo" name="articleNo"
 											value=${article.articleNo }>
 									</div>
@@ -120,7 +121,20 @@
 		</section>
 	</div>
 	<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
-	<script src="/resources/contactform/contactform.js"></script>
+	<!--<script src="/resources/contactform/contactform.js"></script>-->
+
+	<script>
+		$('.replyForm').submit(function() {
+			if ($('#replyContent').val().trim().length < 1) {
+				swal({
+					type : 'error',
+					title : '댓글을 입력해 주세요!'
+				});
+				$('#replyContent').focus();
+				return false;
+			}
+		})
+	</script>
 
 </body>
 

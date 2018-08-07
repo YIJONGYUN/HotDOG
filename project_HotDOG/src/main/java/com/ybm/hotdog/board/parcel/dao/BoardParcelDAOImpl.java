@@ -51,6 +51,22 @@ public class BoardParcelDAOImpl implements BoardParcelDAO {
 
 	}
 
+	/** 답글 구조 */
+	@Override
+	public void replyView(int group, int order) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("group", group);
+		map.put("order", order);
+
+		sqlSession.insert(namespace + ".replyView", map);
+	}
+
+	/** 답글 작성 */
+	@Override
+	public void articleReplyInsert(ArticleDTO articleDTO) {
+		sqlSession.insert(namespace + ".articleReplyInsert", articleDTO);
+	}
+
 	/** 댓글 작성 */
 	@Override
 	public void replyInsert(ReplyDTO replyDTO) {
