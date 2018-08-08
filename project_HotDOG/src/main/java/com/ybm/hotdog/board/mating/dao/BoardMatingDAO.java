@@ -38,7 +38,7 @@ public interface BoardMatingDAO {
 	public int getArticleNumber();
 	
 	/** 게시글 검색 */
-	public List<ArticleDTO> search(String searchType, String keyword);
+	public List<ArticleDTO> search(String searchType, String keyword, int start, int end);
 	
 	/** 검색 게시글 수 조회 */
 	public int getSearchNumber(String searchType, String keyword);

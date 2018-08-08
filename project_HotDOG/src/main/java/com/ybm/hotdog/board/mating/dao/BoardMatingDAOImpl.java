@@ -74,11 +74,17 @@ public class BoardMatingDAOImpl implements BoardMatingDAO {
 
 	/** 게시글 검색 */
 	@Override
-	public List<ArticleDTO> search(String searchType, String keyword) {
+	public List<ArticleDTO> search(String searchType, String keyword, int start, int end) {
 		
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchType", searchType);
 		map.put("keyword", keyword);
+		map.put("start", start);
+		map.put("end", end);
+		
+		System.out.println("=================");
+		System.out.println(map.toString());
+		System.out.println("=================");
 		
 		return sqlSession.selectList(namespace + ".searchMating", map);
 	}

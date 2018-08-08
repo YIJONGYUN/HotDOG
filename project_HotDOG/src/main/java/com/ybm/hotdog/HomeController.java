@@ -70,10 +70,12 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/board/mating", method = RequestMethod.GET)
-	public String boardMating(Model model, Integer curPage) {
+	public String boardMating(Model model, Integer curPage, String searchType, String keyword) {
 		logger.info("도그시그널 페이지 들어옴~ 페이지: " + curPage);
 		
 		if (curPage == null) curPage = 1;
+		if (searchType == null) searchType = "";
+		if (keyword == null) keyword = "";
 		
 		int numPerPage = 10;	// 페이지 당 게시글 수
 		int pagePerBlock = 5;	// 페이지 링크 그룹 (block) 크기
@@ -117,7 +119,9 @@ public class HomeController {
 		model.addAttribute("pages", pages);
 		model.addAttribute("curPage", curPage);
 		model.addAttribute("listNo", listNo);
-
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("keyword", keyword);
+		
 		return "board/mating/mating";
 	}
 

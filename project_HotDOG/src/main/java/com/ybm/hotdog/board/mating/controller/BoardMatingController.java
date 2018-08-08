@@ -161,6 +161,9 @@ public class BoardMatingController {
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String search(Model model, String searchType, String keyword, Integer curPage) throws Exception {
 		
+		logger.info("도그시그널 검색 중! current page : " + curPage);
+		logger.info("searchType : " + searchType + " / keyword : " + keyword);
+		
 		if (curPage == null) curPage = 1;
 		
 		int numPerPage = 10;	// 페이지 당 게시글 수
@@ -173,7 +176,7 @@ public class BoardMatingController {
 		int start = pagingHelper.getStartRecord();
 		int end = pagingHelper.getEndRecord();
 		
-		List<ArticleDTO> list = matingService.search(searchType, keyword);
+		List<ArticleDTO> list = matingService.search(searchType, keyword, start, end);
 		List<UserDTO> name = new ArrayList<UserDTO>();
 		List<CategoryDTO> category = new ArrayList<CategoryDTO>();
 		List<Integer> replyNumber = new ArrayList<Integer>();

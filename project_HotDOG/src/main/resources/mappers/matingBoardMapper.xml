@@ -74,14 +74,47 @@
 
 <!-- 게시글 검색 -->
 <select id="searchMating" resultType="Article">
-	SELECT article_no as articleNo, board_no as boardNo, Article.user_no as userNo, 
-		   category_no as categoryNo, title, content, reg_date as regDate, hit_count as hitCount,
-		   "group", step, "order" 
-	FROM Article, Users
+			SELECT AAA.* 
+			FROM   (SELECT Count(*) OVER() AS TOTAL_COUNT, AA.* 
+			        FROM   (SELECT Row_number() OVER (ORDER BY "group" DESC, step ASC) RNUM, 
+			                       article_no                           AS articleNo, 
+			                       board_no                             AS boardNo, 
+			                       article.user_no                      AS userNo, 
+			                       category_no                          AS categoryNo, 
+			                       title, 
+			                       content, 
+			                       reg_date                             AS regDate, 
+			                       hit_count                            AS hitCount, 
+			                       "group", 
+			                       step, 
+			                       "order" 
+			                FROM   article, 
+			                       users 
+			                WHERE  board_no = 3 
+			                       AND (article.user_no = users.user_no) 
 	<include refid="search"></include>
+			WHERE  AAA.rnum BETWEEN #{start,jdbcType=INTEGER} AND #{end,jdbcType=INTEGER} 
 </select>
 
 <sql id="search">
+	<choose>
+		<when test="searchType=='author'">
+			                       AND users.NAME LIKE '%'||#{keyword,jdbcType=VARCHAR}||'%') AA) AAA 
+		</when>
+		<otherwise>
+			                       AND ${searchType} LIKE '%'||#{keyword,jdbcType=VARCHAR}||'%') AA) AAA 
+		</otherwise>
+	</choose>
+</sql>
+
+<!-- 게시글 검색 글 수 조회 -->
+<select id="getSearchNumber" resultType="Integer">
+	SELECT COUNT(article_no) 
+	FROM Article, Users
+	<include refid="search2" />
+</select>
+
+<sql id="search2">
 	<choose>
 		<when test="searchType=='author'">
 			WHERE board_no = 3 
@@ -97,13 +130,6 @@
 		</otherwise>
 	</choose>
 </sql>
-
-<!-- 게시글 검색 글 수 조회 -->
-<select id="getSearchNumber" resultType="Integer">
-	SELECT COUNT(article_no) 
-	FROM Article, Users
-	<include refid="search" />
-</select>
 
 <!-- 페이징 -->
 <select id="pagination" resultType="Article">

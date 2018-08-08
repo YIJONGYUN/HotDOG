@@ -75,8 +75,8 @@ public class BoardMatingServiceImpl implements BoardMatingService {
 
 	/** 게시글 검색 */
 	@Override
-	public List<ArticleDTO> search(String searchType, String keyword) {
-		return dao.search(searchType, keyword);
+	public List<ArticleDTO> search(String searchType, String keyword, int start, int end) {
+		return dao.search(searchType, keyword, start, end);
 	}
 
 	/** 검색 게시글 수 조회 */

@@ -110,7 +110,7 @@ public class BoardMatingDaoTest {
 	/** 게시글 검색 테스트 */
 	@Test
 	public void testSearch() throws Exception {
-		List<ArticleDTO> list = dao.search("title", "수정");
+		List<ArticleDTO> list = dao.search("title", "답", 0, 10);
 
 		for (ArticleDTO article : list) {
 			logger.info(article.toString());
