@@ -40,4 +40,5 @@ public interface BoardParcelService {
 	/** 게시글 조회수 증가 */
 	public void increaseHitCount(int articleNo);
 
+
 }
