@@ -67,7 +67,7 @@
 
 <!-- 전체 게시글 수 조회 -->
 <select id="getArticleNumber" resultType="Integer">
-	SELECT COUNT(article_no)
+	SELECT COUNT(*)
 	FROM Article
 	WHERE board_no = 3
 </select>
