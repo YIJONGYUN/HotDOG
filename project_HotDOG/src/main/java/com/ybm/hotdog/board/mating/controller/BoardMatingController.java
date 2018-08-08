@@ -20,6 +20,7 @@ import com.ybm.hotdog.category.domain.CategoryDTO;
 import com.ybm.hotdog.category.service.CategoryService;
 import com.ybm.hotdog.user.domain.UserDTO;
 import com.ybm.hotdog.user.service.UserService;
+import com.ybm.hotdog.util.PagingHelper;
 
 /**
  * 교배 게시판 관련 프로젝트 Controller @RequestMapping("/board/mating") URI 매칭
@@ -141,11 +142,11 @@ public class BoardMatingController {
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public String edit(ArticleDTO article, int curPage) {
+	public String edit(ArticleDTO article) {
 		
 		matingService.edit(article);
 		
-		return "redirect:/board/mating?curPage=" + curPage;
+		return "redirect:/board/mating";
 	}
 	
 	/**
@@ -158,22 +159,52 @@ public class BoardMatingController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public String search(Model model, String searchType, String keyword) throws Exception {
+	public String search(Model model, String searchType, String keyword, Integer curPage) throws Exception {
+		
+		if (curPage == null) curPage = 1;
+		
+		int numPerPage = 10;	// 페이지 당 게시글 수
+		int pagePerBlock = 5;	// 페이지 링크 그룹 (block) 크기
+		int totalRecord = matingService.getSearchNumber(searchType, keyword);	// 전체 게시글 수
+		
+		PagingHelper pagingHelper = new PagingHelper(totalRecord, curPage, numPerPage, pagePerBlock);
+		matingService.setPagingHelper(pagingHelper);
+		
+		int start = pagingHelper.getStartRecord();
+		int end = pagingHelper.getEndRecord();
 		
 		List<ArticleDTO> list = matingService.search(searchType, keyword);
 		List<UserDTO> name = new ArrayList<UserDTO>();
 		List<CategoryDTO> category = new ArrayList<CategoryDTO>();
-		int articleNumber = matingService.getSearchNumber(searchType, keyword);
+		List<Integer> replyNumber = new ArrayList<Integer>();
 
 		for (ArticleDTO articleList : list) {
 			name.add(userService.getUser(articleList.getUserNo()));
 			category.add(categoryService.getCategory(articleList.getCategoryNo()));
+			replyNumber.add(matingService.getReplyNumber(articleList.getArticleNo()));
 		}
+		
+		int listNo = matingService.getListNo();
+		int prevLink = matingService.getPrevLink();
+		int nextLink = matingService.getNextLink();
+		int firstPage = matingService.getFirstPage();
+		int lastPage = matingService.getLastPage();
+		int[] pages = matingService.getPages();
+		
+		logger.info(pagingHelper.toString());
 
 		model.addAttribute("boardMatingList", list);
 		model.addAttribute("name", name);
 		model.addAttribute("category", category);
-		model.addAttribute("articleNumber", articleNumber);
+		model.addAttribute("articleNumber", totalRecord);
+		model.addAttribute("replyNumber", replyNumber);
+		model.addAttribute("prevLink", prevLink);
+		model.addAttribute("nextLink", nextLink);
+		model.addAttribute("firstPage", firstPage);
+		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("pages", pages);
+		model.addAttribute("curPage", curPage);
+		model.addAttribute("listNo", listNo);
 
 		return "board/mating/mating";
 	}

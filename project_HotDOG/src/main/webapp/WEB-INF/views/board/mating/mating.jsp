@@ -78,23 +78,29 @@
 							<div class="text-center">
 								<ul class="pagination">
 								<c:if test="${prevLink > 0}">
-									<li><a href="javascript:goList('${prevPage }')">&laquo;</a></li>
+									<li><a href="javascript:goList('${prevLink}')">&laquo;</a></li>
 								</c:if>
 								
-								<c:forEach var="i" items="${pages}">
-									<%-- <li><a href="/board/mating?curPage=${i}">${i}</a></li> --%>
-									<li><a href="javascript:goList('${i }')">${i}</a></li>
+								<c:forEach var="i" items="${pages}" >
+									<c:choose>
+										<c:when test="${curPage == i}">
+											<li><a style="background-color:#fecf71">${i}</a></li>
+										</c:when>
+									<c:otherwise>
+										<li><a href="javascript:goList('${i}')">${i}</a></li>
+									</c:otherwise>
+									</c:choose>
 								</c:forEach>
 								
 								<c:if test="${nextLink > 0}">
-									<li><a href="javascript:goList('${nextPage }')">&raquo;</a></li>
+									<li><a href="javascript:goList('${nextLink}')">&raquo;</a></li>
 								</c:if>
 								</ul>
 							</div>
 						</div>
 						
 						<div id="form-group" style="display: none;">
-							<form id="listForm" action="board/mating/list" method="get">
+							<form id="listForm" action="/board/mating" method="get">
 							 <p>
 							  <input type="hidden" name="curPage" />
 							 </p>

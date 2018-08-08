@@ -32,7 +32,7 @@ public class PagingHelper {
 		int totalBlock = ((totalPage % pagePerBlock) == 0) ? totalPage / pagePerBlock : totalPage / pagePerBlock + 1;
 		
 		/* 현재 블럭 */
-		int block = ((curPage % pagePerBlock) == 0) ? totalPage / pagePerBlock : totalPage / pagePerBlock + 1;
+		int block = ((curPage % pagePerBlock) == 0) ? curPage / pagePerBlock : curPage / pagePerBlock + 1;
 		
 		this.firstPage = (block - 1) * pagePerBlock + 1;
 		this.lastPage = block * pagePerBlock;
@@ -103,5 +103,4 @@ public class PagingHelper {
 				+ ", nextLink=" + nextLink + ", startRecord=" + startRecord + ", endRecord=" + endRecord + ", listNo="
 				+ listNo + ", pages=" + Arrays.toString(pages) + "]";
 	}
-	
 }
