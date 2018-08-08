@@ -43,6 +43,9 @@ public interface BoardMatingDAO {
 	/** 검색 게시글 수 조회 */
 	public int getSearchNumber(String searchType, String keyword);
 	
+	/** 페이징 처리 게시글 목록 전체 조회 */
+	public List<ArticleDTO> getArticleList (int start, int end);
+	
 	/** 댓글 작성 */
 	public void registReply (ReplyDTO reply);
 	

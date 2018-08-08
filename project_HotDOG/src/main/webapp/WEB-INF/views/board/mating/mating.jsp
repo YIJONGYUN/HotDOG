@@ -49,7 +49,7 @@
 												<c:forEach items="${boardMatingList}" var="articleDTO" varStatus="status">
 													<input type="hidden" id="articleNo" value="${articleDTO.articleNo}">
 													<tr>
-														<td class="text-center">${articleNumber - status.index}</td>
+														<td class="text-center">${listNo - status.index}</td>
 														<td class="text-center">${category[status.index].content}</td>
 														<td colspan="4"><a href="/board/mating/detail/${articleDTO.articleNo}" style="color: black;">
 														<c:choose>
@@ -73,19 +73,34 @@
 							</div>
 						</div>
 						<a href="/board/mating/form" class="btn btn-warning pull-right"><i class="fa fa-heart"></i> 글쓰기 </a>
+						
 						<div class="col-lg-12">
 							<div class="text-center">
 								<ul class="pagination">
-									<li><a href="#">&laquo;</a></li>
-									<li><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
-									<li><a href="#">&raquo;</a></li>
+								<c:if test="${prevLink > 0}">
+									<li><a href="javascript:goList('${prevPage }')">&laquo;</a></li>
+								</c:if>
+								
+								<c:forEach var="i" items="${pages}">
+									<%-- <li><a href="/board/mating?curPage=${i}">${i}</a></li> --%>
+									<li><a href="javascript:goList('${i }')">${i}</a></li>
+								</c:forEach>
+								
+								<c:if test="${nextLink > 0}">
+									<li><a href="javascript:goList('${nextPage }')">&raquo;</a></li>
+								</c:if>
 								</ul>
 							</div>
 						</div>
+						
+						<div id="form-group" style="display: none;">
+							<form id="listForm" action="board/mating/list" method="get">
+							 <p>
+							  <input type="hidden" name="curPage" />
+							 </p>
+							</form>
+						</div>
+													
 						<div class="col-md-4 col-md-offset-4">
 							<form action="/board/mating/search" method="get" id="searchForm">
 								<div class="input-group">
@@ -153,6 +168,12 @@
 			
 			return true;
 		})
+		
+		function goList(page) {
+			var form = document.getElementById("listForm");
+			form.curPage.value = page;
+			form.submit();
+		}
 		
 	</script>
 

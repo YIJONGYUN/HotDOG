@@ -1,6 +1,8 @@
 package com.ybm.hotdog.board.mating.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.ybm.hotdog.board.domain.ArticleDTO;
 import com.ybm.hotdog.board.domain.ReplyDTO;
 import com.ybm.hotdog.board.mating.dao.BoardMatingDAO;
+import com.ybm.hotdog.util.PagingHelper;
 
 /**
  * BoardMatingService 인터페이스 구현 클래스
@@ -25,6 +28,8 @@ public class BoardMatingServiceImpl implements BoardMatingService {
 	
 	@Inject
 	private BoardMatingDAO dao;
+	
+	private PagingHelper pagingHelper;
 
 	/** 게시글 목록 전체 조회 */
 	@Override
@@ -110,4 +115,49 @@ public class BoardMatingServiceImpl implements BoardMatingService {
 		dao.updateRearticle(group, order);
 	}
 
+	/** 페이징 처리 게시글 목록 전체 조회 */
+	@Override
+	public List<ArticleDTO> getArticleList(int start, int end) {
+		return dao.getArticleList(start, end);
+	}
+
+	@Override
+	public int getFirstPage() {
+		return pagingHelper.getFirstPage();
+	}
+
+	@Override
+	public int getLastPage() {
+		return pagingHelper.getLastPage();
+	}
+
+	@Override
+	public int getPrevLink() {
+		return pagingHelper.getPrevLink();
+	}
+
+	@Override
+	public int getNextLink() {
+		return pagingHelper.getNextLink();
+	}
+
+	@Override
+	public int getListNo() {
+		return pagingHelper.getListNo();
+	}
+
+	@Override
+	public int[] getPages() {
+		return pagingHelper.getPages();
+	}
+	
+	public PagingHelper getPagingHelper() {
+		return pagingHelper;
+	}
+
+	@Override
+	public void setPagingHelper(PagingHelper pagingHelper) {
+		this.pagingHelper = pagingHelper;
+	}
+	
 }

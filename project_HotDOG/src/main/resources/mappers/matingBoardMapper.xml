@@ -105,6 +105,27 @@
 	<include refid="search" />
 </select>
 
+<!-- 페이징 -->
+<select id="pagination" resultType="Article">
+	SELECT AAA.* 
+	FROM  (SELECT Count(*) over() AS TOTAL_COUNT, AA.* 
+	       FROM  (SELECT Row_number() over (ORDER BY "group" DESC, step ASC) RNUM, 
+	                     article_no     AS articleNo, 
+	                     board_no       AS boardNo, 
+	                     user_no        AS userNo, 
+	                     category_no    AS categoryNo, 
+	                     title, 
+	                     content, 
+	                     reg_date       AS regDate, 
+	                     hit_count      AS hitCount, 
+	                     "group", 
+	                     step, 
+	                     "order" 
+	              FROM   article 
+	              WHERE  board_no = 3) AA) AAA 
+	WHERE  AAA.rnum BETWEEN #{start} AND #{end}
+</select>
+
 
 <!-- 댓글 -->
 

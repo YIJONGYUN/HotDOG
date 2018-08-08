@@ -129,4 +129,15 @@ public class BoardMatingDAOImpl implements BoardMatingDAO {
 		sqlSession.update(namespace + ".updateMatingRearticle", map);
 	}
 
+	/** 페이징 처리 게시글 목록 전체 조회 */
+	@Override
+	public List<ArticleDTO> getArticleList(int start, int end) {
+		
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("start", start);
+		map.put("end", end);
+		
+		return sqlSession.selectList(namespace + ".pagination" , map);
+	}
+
 }

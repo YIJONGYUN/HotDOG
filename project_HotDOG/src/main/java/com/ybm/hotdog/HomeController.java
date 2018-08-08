@@ -24,6 +24,7 @@ import com.ybm.hotdog.category.domain.CategoryDTO;
 import com.ybm.hotdog.category.service.CategoryService;
 import com.ybm.hotdog.user.domain.UserDTO;
 import com.ybm.hotdog.user.service.UserService;
+import com.ybm.hotdog.util.PagingHelper;
 
 /**
  * 메뉴 관련 컨트롤러
@@ -69,26 +70,53 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/board/mating", method = RequestMethod.GET)
-	public String boardMating(Model model) {
-		logger.info("도그시그널 페이지 들어옴~");
-
-		List<ArticleDTO> list = matingService.listAll();
+	public String boardMating(Model model, Integer curPage) {
+		logger.info("도그시그널 페이지 들어옴~ 페이지: " + curPage);
+		
+		if (curPage == null) curPage = 1;
+		
+		int numPerPage = 10;	// 페이지 당 게시글 수
+		int pagePerBlock = 5;	// 페이지 링크 그룹 (block) 크기
+		int totalRecord = matingService.getArticleNumber();	// 전체 게시글 수
+		
+		PagingHelper pagingHelper = new PagingHelper(totalRecord, curPage, numPerPage, pagePerBlock);
+		matingService.setPagingHelper(pagingHelper);
+		
+		int start = pagingHelper.getStartRecord();
+		int end = pagingHelper.getEndRecord();
+		
+		List<ArticleDTO> list = matingService.getArticleList(start, end);
 		List<UserDTO> name = new ArrayList<UserDTO>();
 		List<CategoryDTO> category = new ArrayList<CategoryDTO>();
 		List<Integer> replyNumber = new ArrayList<Integer>();
-		int articleNumber = matingService.getArticleNumber();
 
 		for (ArticleDTO articleList : list) {
 			name.add(userService.getUser(articleList.getUserNo()));
 			category.add(categoryService.getCategory(articleList.getCategoryNo()));
 			replyNumber.add(matingService.getReplyNumber(articleList.getArticleNo()));
 		}
+		
+		int listNo = matingService.getListNo();
+		int prevLink = matingService.getPrevLink();
+		int nextLink = matingService.getNextLink();
+		int firstPage = matingService.getFirstPage();
+		int lastPage = matingService.getLastPage();
+		int[] pages = matingService.getPages();
+		
+		logger.info(pagingHelper.toString());
 
 		model.addAttribute("boardMatingList", list);
 		model.addAttribute("name", name);
 		model.addAttribute("category", category);
-		model.addAttribute("articleNumber", articleNumber);
+		model.addAttribute("articleNumber", totalRecord);
 		model.addAttribute("replyNumber", replyNumber);
+		model.addAttribute("prevLink", prevLink);
+		model.addAttribute("nextLink", nextLink);
+		model.addAttribute("firstPage", firstPage);
+		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("pages", pages);
+		model.addAttribute("curPage", curPage);
+		model.addAttribute("listNo", listNo);
 
 		return "board/mating/mating";
 	}

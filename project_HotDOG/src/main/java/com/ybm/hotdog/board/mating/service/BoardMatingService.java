@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ybm.hotdog.board.domain.ArticleDTO;
 import com.ybm.hotdog.board.domain.ReplyDTO;
+import com.ybm.hotdog.util.PagingHelper;
 
 /**
  * 교배게시판 관련 인터페이스 정의
@@ -43,6 +44,9 @@ public interface BoardMatingService {
 	/** 검색 게시글 수 조회 */
 	public int getSearchNumber(String searchType, String keyword);
 	
+	/** 페이징 처리 게시글 목록 전체 조회 */
+	public List<ArticleDTO> getArticleList (int start, int end);
+	
 	/** 댓글 작성 */
 	public void registReply (ReplyDTO reply);
 	
@@ -57,4 +61,21 @@ public interface BoardMatingService {
 	
 	/** 답글 계층 및 순서 수정 */
 	public void updateRearticle (int group, int order);
+	
+	
+	/* 페이징 */
+	
+	public int getFirstPage();
+
+	public int getLastPage();
+
+	public int getPrevLink();
+
+	public int getNextLink();
+
+	public int getListNo();
+
+	public int[] getPages();
+	
+	public void setPagingHelper (PagingHelper pagingHelper);
 }

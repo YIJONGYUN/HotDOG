@@ -141,11 +141,11 @@ public class BoardMatingController {
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public String edit(ArticleDTO article) {
+	public String edit(ArticleDTO article, int curPage) {
 		
 		matingService.edit(article);
 		
-		return "redirect:/board/mating";
+		return "redirect:/board/mating?curPage=" + curPage;
 	}
 	
 	/**
