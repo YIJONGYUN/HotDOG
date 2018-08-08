@@ -82,17 +82,29 @@
 						<div class="col-lg-12">
 							<div class="text-center">
 								<ul class="pagination">
-									<li><a href="#">&laquo;</a></li>
-									<li><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
-									<li><a href="#">&raquo;</a></li>
+									<c:if test="${boardPager.curBlock > 1}">
+										<li><a href="javascript:list(${boardPager.prevPage})">&laquo;</a>
+										</li>
+									</c:if>
+									<c:forEach begin="${boardPager.blockBegin }"
+										end="${boardPager.blockEnd}" var="index">
+										<c:choose>
+											<c:when test="${index == boardPager.curPage }">
+												<li><span style="color: #f0ad4e">${index }</span></li>
+											</c:when>
+											<c:otherwise>
+												<li><a href="javascript:list(${index})">${index }</a></li>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+									<c:if test="${boardPager.curBlock <= boardPager.totBlock}">
+										<li><a href="javascript:list(${boardPager.nextPage})">&raquo;</a>
+										</li>
+									</c:if>
 								</ul>
 							</div>
 						</div>
-						<form action="/board/parcel/search" id="searchForm">
+						<form action="/board/parcel" id="searchForm">
 							<div class="col-md-4 col-md-offset-4">
 								<div class="input-group">
 									<div class="input-group-btn">
@@ -150,6 +162,11 @@
 				return false;
 			}
 		});
+
+		function list(page) {
+			location.href = "/board/parcel?curPage=" + page
+					+ "&searchOption=${searchOption}&keyword=${keyword}";
+		}
 	</script>
 
 </body>

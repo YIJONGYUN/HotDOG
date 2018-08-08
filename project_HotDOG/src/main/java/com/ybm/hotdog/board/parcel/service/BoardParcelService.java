@@ -8,7 +8,10 @@ import com.ybm.hotdog.board.domain.ReplyDTO;
 public interface BoardParcelService {
 
 	/** 게시글 목록 전체 조회 */
-	public List<ArticleDTO> listAll();
+	public List<ArticleDTO> listAll(String searchOption, String keyword, int start, int end);
+
+	/** 검색 게시글 전체 수 */
+	public int searchCount(String searchOption, String keyword);
 
 	/** 댓글 전체 조회 */
 	public List<ReplyDTO> listReply(int articleNo);
@@ -36,8 +39,5 @@ public interface BoardParcelService {
 
 	/** 게시글 조회수 증가 */
 	public void increaseHitCount(int articleNo);
-
-	/** 게시글 검색 */
-	public List<ArticleDTO> listSearch(String searchOption, String keyword);
 
 }

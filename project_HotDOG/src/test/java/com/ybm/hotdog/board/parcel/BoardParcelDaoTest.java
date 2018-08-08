@@ -28,16 +28,6 @@ public class BoardParcelDaoTest {
 
 	Logger logger = Logger.getLogger(BoardParcelDaoTest.class);
 
-	/** 게시글 목록 전체 조회 테스트 */
-	@Test
-	public void testListAll() throws Exception {
-		List<ArticleDTO> list = dao.listAll();
-
-		for (ArticleDTO article : list) {
-			logger.info(article.toString());
-		}
-	}
-
 	/** 카테고리 조회 테스트 */
 	@Test
 	public void testCategory() throws Exception {
@@ -55,15 +45,14 @@ public class BoardParcelDaoTest {
 
 		logger.info(article.toString());
 	}
-	
-	
+
 	@Test
 	public void testArticleWrite() throws Exception {
 		ArticleDTO article = new ArticleDTO();
 		article.setTitle("테스트에서 작성");
 		article.setContent("테스트에서 작성");
 		article.setCategoryNo(5);
-		
+
 		dao.articleInsert(article);
 
 		logger.info("작성 완료");

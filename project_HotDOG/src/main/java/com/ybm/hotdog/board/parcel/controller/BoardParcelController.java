@@ -13,9 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ybm.hotdog.board.domain.ArticleDTO;
 import com.ybm.hotdog.board.domain.ReplyDTO;
+import com.ybm.hotdog.board.parcel.service.BoardPager;
 import com.ybm.hotdog.board.parcel.service.BoardParcelService;
 import com.ybm.hotdog.category.domain.CategoryDTO;
 import com.ybm.hotdog.category.service.CategoryService;
@@ -152,25 +154,36 @@ public class BoardParcelController {
 
 		return "redirect:/board/parcel";
 	}
-
+    /*
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public String boardSearchs(Model model, String searchOption, String keyword) {
+	public String boardSearchs(Model model, String searchOption, String keyword,
+			@RequestParam(defaultValue = "1") int curPage) {
 		logger.info("이리오시개 글 검색 페이지");
 
-		List<ArticleDTO> list = service.listSearch(searchOption, keyword);
+		int count = service.searchCount(searchOption, keyword);
+		BoardPager boardPager = new BoardPager(count, curPage);
+		int start = boardPager.getPageBegin();
+		int end = boardPager.getPageEnd();
+
+		List<ArticleDTO> list = service.listSearch(searchOption, keyword, start, end);
 		List<UserDTO> name = new ArrayList<UserDTO>();
 		List<CategoryDTO> category = new ArrayList<CategoryDTO>();
+		List<Integer> replyCount = new ArrayList<Integer>();
 
 		for (ArticleDTO articleList : list) {
 			name.add(userService.getUser(articleList.getUserNo()));
 			category.add(categoryService.getCategory(articleList.getCategoryNo()));
+			replyCount.add(service.listReply(articleList.getArticleNo()).size());
 		}
 
 		model.addAttribute("boardParcelList", list);
 		model.addAttribute("name", name);
 		model.addAttribute("category", category);
+		model.addAttribute("replyCount", replyCount);
+		model.addAttribute("boardPager", boardPager);
 
 		return "board/parcel/parcel";
 	}
+	*/
 
 }

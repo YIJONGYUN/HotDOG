@@ -22,8 +22,25 @@ public class BoardParcelDAOImpl implements BoardParcelDAO {
 
 	/** 게시글 목록 전체 조회 */
 	@Override
-	public List<ArticleDTO> listAll() {
-		return sqlSession.selectList(namespace + ".boardParcelListAll"); // selectList : 쿼리 결과를 List<E>로 반환
+	public List<ArticleDTO> listAll(String searchOption, String keyword, int start, int end) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		map.put("start", start);
+		map.put("end", end);
+
+		return sqlSession.selectList(namespace + ".boardParcelListAll", map); // selectList : 쿼리 결과를 List<E>로 반환
+	}
+
+	/** 검색 게시글 전체 수 */
+	@Override
+	public int searchCount(String searchOption, String keyword) {
+
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		return sqlSession.selectOne(namespace + ".searchCount", map);
 	}
 
 	/** 댓글 전체 조회 */
@@ -87,16 +104,4 @@ public class BoardParcelDAOImpl implements BoardParcelDAO {
 		sqlSession.update(namespace + ".increaseHitCount", articleNo);
 
 	}
-
-	/** 게시글 조회 */
-	@Override
-	public List<ArticleDTO> listSearch(String searchOption, String keyword) {
-
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("searchOption", searchOption);
-		map.put("keyword", keyword);
-
-		return sqlSession.selectList(namespace + ".listSearch", map);
-	}
-
 }

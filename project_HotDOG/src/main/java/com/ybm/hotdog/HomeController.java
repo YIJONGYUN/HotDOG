@@ -12,11 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ybm.hotdog.board.domain.ArticleDTO;
 import com.ybm.hotdog.board.domain.ReplyDTO;
 import com.ybm.hotdog.board.info.service.BoardInfoService;
 import com.ybm.hotdog.board.mating.service.BoardMatingService;
+import com.ybm.hotdog.board.parcel.service.BoardPager;
 import com.ybm.hotdog.board.parcel.service.BoardParcelService;
 import com.ybm.hotdog.category.domain.CategoryDTO;
 import com.ybm.hotdog.category.service.CategoryService;
@@ -115,10 +117,16 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/board/parcel", method = RequestMethod.GET)
-	public String boardParcel(Locale locale, Model model) {
+	public String boardParcel(Locale locale, Model model, @RequestParam(defaultValue = "list") String searchOption,
+			@RequestParam(defaultValue = "") String keyword, @RequestParam(defaultValue = "1") int curPage) {
 		logger.info("이리오시개 페이지 들어옴~", locale);
 
-		List<ArticleDTO> list = parcelService.listAll();
+		int count = parcelService.searchCount(searchOption, keyword);
+		BoardPager boardPager = new BoardPager(count, curPage);
+		int start = boardPager.getPageBegin();
+		int end = boardPager.getPageEnd();
+
+		List<ArticleDTO> list = parcelService.listAll(searchOption, keyword, start, end);
 		List<UserDTO> name = new ArrayList<UserDTO>();
 		List<CategoryDTO> category = new ArrayList<CategoryDTO>();
 		List<Integer> replyCount = new ArrayList<Integer>();
@@ -133,6 +141,9 @@ public class HomeController {
 		model.addAttribute("name", name);
 		model.addAttribute("category", category);
 		model.addAttribute("replyCount", replyCount);
+		model.addAttribute("boardPager", boardPager);
+		model.addAttribute("searchOption", searchOption);
+		model.addAttribute("keyword", keyword);
 
 		return "board/parcel/parcel";
 	}

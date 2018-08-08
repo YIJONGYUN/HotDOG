@@ -7,17 +7,52 @@
 
 	<!-- 게시물 목록 전체 조회하기 -->
 	<select id="boardParcelListAll" resultType="Article">
+		<include refid="pagingHeader"></include>
 		SELECT article_no as
-		articleNo, board_no as boardNo, user_no as userNo,
+		articleNo, board_no as boardNo, Article.user_no as
+		userNo,
 		category_no as
 		categoryNo, title, content, reg_date as regDate,
 		hit_count as hitCount,
 		"group", step, "order"
-		FROM Article
-		WHERE board_no = 2
+		<include refid="search"></include>
 		ORDER BY
 		"group"
 		DESC, "order" ASC
+		<include refid="pagingFooter"></include>
+	</select>
+
+	<sql id="pagingHeader">
+		SELECT * FROM(
+		SELECT ROWNUM AS rn, A.*FROM(
+	</sql>
+	<sql id="pagingFooter">
+		)A
+		)WHERE rn BETWEEN #{start} AND #{end}
+	</sql>
+
+	<sql id="search">
+		<choose>
+			<when test="searchOption == 'list'">
+				FROM Article
+				WHERE
+				board_no = 2
+			</when>
+			<otherwise>
+				FROM Article, Users
+				WHERE
+				board_no = 2 And
+				Article.user_no = Users.user_no
+				And
+				${searchOption} LIKE
+				'%'||#{keyword}||'%'
+			</otherwise>
+		</choose>
+	</sql>
+	<!-- 검색된 게시물 수 -->
+	<select id="searchCount" resultType="Integer">
+		SELECT count(article_no)
+		<include refid="search"></include>
 	</select>
 
 	<!-- 댓글 전체 조회하기 -->
@@ -102,58 +137,5 @@
 		DELETE FROM Article WHERE article_no
 		= #{articleNo}
 	</delete>
-
-	<select id="listSearch" resultType="Article">
-		<include refid="search"></include>
-	</select>
-
-	<sql id="search">
-		<choose>
-			<when test="searchOption=='name'">
-				SELECT article_no as
-				articleNo, board_no as boardNo,
-				Article.user_no as userNo,
-				category_no as
-				categoryNo, title, content,
-				reg_date
-				as regDate,
-				hit_count as hitCount,
-				"group", step, "order"
-				FROM
-				Article,
-				Users
-				WHERE
-				board_no = 2 And
-				Article.user_no = Users.user_no
-				And
-				Users.name LIKE
-				'%'||#{keyword}||'%'
-				ORDER
-				BY
-				article_no desc,
-				reg_date
-				desc
-			</when>
-			<otherwise>
-				SELECT article_no as
-				articleNo, board_no as boardNo,
-				user_no as userNo,
-				category_no as
-				categoryNo, title, content, reg_date
-				as regDate,
-				hit_count as hitCount,
-				"group", step, "order"
-				FROM Article
-				WHERE board_no = 2 And
-				${searchOption} LIKE
-				'%'||#{keyword}||'%'
-				ORDER
-				BY
-				article_no desc,
-				reg_date
-				desc
-			</otherwise>
-		</choose>
-	</sql>
 
 </mapper>

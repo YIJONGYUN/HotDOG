@@ -8,7 +8,10 @@ import com.ybm.hotdog.board.domain.ReplyDTO;
 public interface BoardParcelDAO {
 
 	/** 게시글의 목록 조회 */
-	public List<ArticleDTO> listAll();// 모든 게시글을 가져옴으로 반환형이 리스트임을 알 수 있음.
+	public List<ArticleDTO> listAll(String searchOption, String keyword, int start, int end);// 모든 게시글을 가져옴으로 반환형이 리스트임을 알 수 있음.
+
+	/** 검색 게시글 전체 수 */
+	public int searchCount(String searchOption, String keyword);
 
 	/** 댓글 전체 조회 */
 	public List<ReplyDTO> listReply(int articleNo);
@@ -36,8 +39,5 @@ public interface BoardParcelDAO {
 
 	/** 게시글 조회수 증가 */
 	public void increaseHitCount(int articleNo);
-
-	/** 게시글 검색 */
-	public List<ArticleDTO> listSearch(String searchOption, String keyword);
 
 }
