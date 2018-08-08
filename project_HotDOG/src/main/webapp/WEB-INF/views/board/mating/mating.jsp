@@ -29,8 +29,7 @@
 						<hr class="colorgraph">
 						<div class="row">
 							<div class="col-sm-12 col-lg-12">
-								<table class="table table-striped table-hover text-center"
-									data-effect="fade">
+								<table class="table table-striped table-hover" data-effect="fade">
 									<thead>
 										<tr>
 											<th>번호</th>
@@ -44,26 +43,27 @@
 									<tbody>
 										<c:choose>
 											<c:when test="${empty boardMatingList}">
-												<td colspan="9">게시물이 존재하지 않습니다.</td>
+												<td colspan="9" class="text-center">게시물이 존재하지 않습니다.</td>
 											</c:when>
 											<c:otherwise>
 												<c:forEach items="${boardMatingList}" var="articleDTO" varStatus="status">
 													<input type="hidden" id="articleNo" value="${articleDTO.articleNo}">
 													<tr>
-														<td>${articleNumber - status.index}</td>
-														<td>${category[status.index].content}</td>
+														<td class="text-center">${articleNumber - status.index}</td>
+														<td class="text-center">${category[status.index].content}</td>
 														<td colspan="4"><a href="/board/mating/detail/${articleDTO.articleNo}" style="color: black;">
 														<c:choose>
 															<c:when test="${articleDTO.step > 0}">
-															<c:forEach begin="1" end="${articleDTO.step}" step="1">
-																 <img src="/resources/img/reply.png" width="3%" style="margin-bottom: 0px;" /> 
-															</c:forEach>
+																<c:forEach begin="1" end="${articleDTO.step}" step="1">
+																	 　
+																</c:forEach>
+															<img src="/resources/img/reply.png" width="3%" style="margin-bottom: 0px;" />
 															</c:when> 
 														</c:choose>
 														${articleDTO.title}  [${replyNumber[status.index]}]</a></td>
-														<td>${name[status.index].name}</td>
-														<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${articleDTO.regDate}" /></td>
-														<td>${articleDTO.hitCount}</td>
+														<td class="text-center">${name[status.index].name}</td>
+														<td class="text-center"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${articleDTO.regDate}" /></td>
+														<td class="text-center">${articleDTO.hitCount}</td>
 													</tr>
 												</c:forEach>
 											</c:otherwise>
@@ -72,8 +72,7 @@
 								</table>
 							</div>
 						</div>
-						<a href="/board/mating/form" class="btn btn-warning pull-right"><i
-							class="fa fa-heart"></i> 글쓰기 </a>
+						<a href="/board/mating/form" class="btn btn-warning pull-right"><i class="fa fa-heart"></i> 글쓰기 </a>
 						<div class="col-lg-12">
 							<div class="text-center">
 								<ul class="pagination">
