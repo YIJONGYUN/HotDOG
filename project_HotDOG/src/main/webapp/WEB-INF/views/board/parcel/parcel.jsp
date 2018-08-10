@@ -58,13 +58,22 @@
 														value="${articleDTO.articleNo}">
 													<!-- 게시글 상세 내용 조회시 articleNo가 필요하기 때문에 숨겨서 보내준다. -->
 													<tr>
-														<td>${fn:length(boardParcelList)-((1-1) * 5 + status.index)}</td>
+														<td>${(totalCount-status.index)-((boardPager.curPage-1)*10)}</td>
 														<td>${category[status.index].content}</td>
-														<td colspan="4"><c:forEach begin="1"
-																end="${articleDTO.step}">[RE] </c:forEach><a
-															href="/board/parcel/detail/${articleDTO.articleNo}"
-															style="color: black;">${articleDTO.title}</a> [
-															${replyCount[status.index]} ]</td>
+														<td colspan="4" style="text-align: left;"><c:forEach
+																begin="1" end="${articleDTO.step}">
+																<img src="/resources/img/reply.png" width="3%"
+																	style="margin-bottom: 0px;" />
+															</c:forEach> <c:choose>
+																<c:when test="${articleDTO.title == '삭제된 게시물입니다.'}">
+																	<span style="color: gray;">${articleDTO.title}</span>
+																</c:when>
+																<c:otherwise>
+																	<a href="/board/parcel/detail/${articleDTO.articleNo}"
+																		style="color: black;">${articleDTO.title}</a> [
+															${replyCount[status.index]} ]
+															</c:otherwise>
+															</c:choose></td>
 														<td>${name[status.index].name}</td>
 														<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 																value="${articleDTO.regDate}" /></td>

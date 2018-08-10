@@ -16,18 +16,6 @@ public class BoardParcelServiceImpl implements BoardParcelService {
 	@Inject
 	private BoardParcelDAO dao;
 
-	/** 게시글 검색 */
-	@Override
-	public List<ArticleDTO> listAll(String searchOption, String keyword, int start, int end) {
-		return dao.listAll(searchOption, keyword, start, end);
-	}
-
-	/** 검색 게시글 전체 수 */
-	@Override
-	public int searchCount(String searchOption, String keyword) {
-		return dao.searchCount(searchOption, keyword);
-	}
-
 	/** 댓글 전체 조회 */
 	@Override
 	public List<ReplyDTO> listReply(int articleNo) {
@@ -83,6 +71,16 @@ public class BoardParcelServiceImpl implements BoardParcelService {
 	public void increaseHitCount(int articleNo) {
 		dao.increaseHitCount(articleNo);
 
+	}
+
+	@Override
+	public List<ArticleDTO> listAll(String searchOption, String keyword, int start, int end) {
+		return dao.listAll(searchOption, keyword, start, end);
+	}
+
+	@Override
+	public int searchCount(String searchOption, String keyword) {
+		return dao.searchCount(searchOption, keyword);
 	}
 
 }

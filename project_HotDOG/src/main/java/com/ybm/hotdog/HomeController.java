@@ -176,6 +176,7 @@ public class HomeController {
 		model.addAttribute("boardPager", boardPager);
 		model.addAttribute("searchOption", searchOption);
 		model.addAttribute("keyword", keyword);
+		model.addAttribute("totalCount", count);
 
 		return "board/parcel/parcel";
 	}

@@ -58,7 +58,7 @@ public class BoardParcelDAOImpl implements BoardParcelDAO {
 	/** 게시글 삭제 */
 	@Override
 	public void articleDelete(int articleNo) {
-		sqlSession.delete(namespace + ".articleDelete", articleNo);
+		sqlSession.update(namespace + ".articleDelete", articleNo);
 	}
 
 	/** 게시글 작성 */
@@ -75,7 +75,7 @@ public class BoardParcelDAOImpl implements BoardParcelDAO {
 		map.put("group", group);
 		map.put("order", order);
 
-		sqlSession.insert(namespace + ".replyView", map);
+		sqlSession.update(namespace + ".replyView", map);
 	}
 
 	/** 답글 작성 */

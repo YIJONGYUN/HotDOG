@@ -42,7 +42,8 @@
 				FROM Article, Users
 				WHERE
 				board_no = 2 And
-				Article.user_no = Users.user_no
+				Article.user_no =
+				Users.user_no
 				And
 				${searchOption} LIKE
 				'%'||#{keyword}||'%'
@@ -133,9 +134,9 @@
 	</update>
 
 	<!-- 게시글 삭제하기 -->
-	<delete id="articleDelete">
-		DELETE FROM Article WHERE article_no
-		= #{articleNo}
-	</delete>
+	<update id="articleDelete">
+		UPDATE Article SET title = '삭제된 게시물입니다.', content = 'ㅩ'
+		WHERE article_no = #{articleNo}
+	</update>
 
 </mapper>
