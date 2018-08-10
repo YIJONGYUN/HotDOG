@@ -51,16 +51,23 @@
 													<tr>
 														<td class="text-center">${listNo - status.index}</td>
 														<td class="text-center">${category[status.index].content}</td>
-														<td colspan="4"><a href="/board/mating/detail/${articleDTO.articleNo}" style="color: black;">
+														<td colspan="4">
 														<c:choose>
 															<c:when test="${articleDTO.step > 0}">
-																<c:forEach begin="1" end="${articleDTO.step}" step="1">
-																	 　
-																</c:forEach>
+																<c:forEach begin="1" end="${articleDTO.step}" step="1">　</c:forEach>
 															<img src="/resources/img/reply.png" width="3%" style="margin-bottom: 0px;" />
 															</c:when> 
 														</c:choose>
-														${articleDTO.title}  [${replyNumber[status.index]}]</a></td>
+														<c:choose>
+															<c:when test="${articleDTO.title != '삭제된 게시물입니다.'}">
+																<a href="/board/mating/detail/${articleDTO.articleNo}" style="color: black;">
+																${articleDTO.title}  [${replyNumber[status.index]}]</a>
+															</c:when>
+															<c:otherwise>
+																<div class="text-center">${articleDTO.title}</div>
+															</c:otherwise>
+														</c:choose>
+														</td>
 														<td class="text-center">${name[status.index].name}</td>
 														<td class="text-center"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${articleDTO.regDate}" /></td>
 														<td class="text-center">${articleDTO.hitCount}</td>
@@ -176,9 +183,7 @@
 		})
 		
 		function goList(page) {
-			var form = document.getElementById("listForm");
-			form.curPage.value = page;
-			form.submit();
+			location.href = "/board/mating?searchType=${searchType}&keyword=${keyword}&curPage=" + page;
 		}
 		
 	</script>

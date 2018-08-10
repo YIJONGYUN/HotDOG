@@ -48,10 +48,10 @@
 </update>
 
 <!-- 게시글 삭제 -->
-<delete id="deleteMating">
-	DELETE FROM Article 
+<update id="deleteMating">
+	UPDATE Article SET title = '삭제된 게시물입니다.', content = 'ㅩ'
 	WHERE article_no = #{articleNo}
-</delete>
+</update>
 
 <!-- 게시글 수정 -->
 <update id="updateMating">
@@ -98,6 +98,9 @@
 
 <sql id="search">
 	<choose>
+		<when  test="searchType=='list'">
+			) AA) AAA
+		</when>
 		<when test="searchType=='author'">
 			                       AND users.NAME LIKE '%'||#{keyword,jdbcType=VARCHAR}||'%') AA) AAA 
 		</when>
@@ -120,13 +123,11 @@
 			WHERE board_no = 3 
 				  AND (Article.user_no = Users.user_no)
 				  AND Users.name LIKE '%'||#{keyword}||'%'
-			ORDER BY article_no desc, reg_date desc
 		</when>
 		<otherwise>
 			WHERE board_no = 3 
 				  AND (Article.user_no = Users.user_no)
 				  AND ${searchType} LIKE '%'||#{keyword}||'%'
-			ORDER BY article_no desc, reg_date desc
 		</otherwise>
 	</choose>
 </sql>

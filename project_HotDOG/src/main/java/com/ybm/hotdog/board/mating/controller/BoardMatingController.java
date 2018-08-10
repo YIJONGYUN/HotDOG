@@ -165,7 +165,7 @@ public class BoardMatingController {
 		logger.info("searchType : " + searchType + " / keyword : " + keyword);
 		
 		if (curPage == null) curPage = 1;
-		
+			
 		int numPerPage = 10;	// 페이지 당 게시글 수
 		int pagePerBlock = 5;	// 페이지 링크 그룹 (block) 크기
 		int totalRecord = matingService.getSearchNumber(searchType, keyword);	// 전체 게시글 수
@@ -208,6 +208,8 @@ public class BoardMatingController {
 		model.addAttribute("pages", pages);
 		model.addAttribute("curPage", curPage);
 		model.addAttribute("listNo", listNo);
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("keyword", keyword);
 
 		return "board/mating/mating";
 	}

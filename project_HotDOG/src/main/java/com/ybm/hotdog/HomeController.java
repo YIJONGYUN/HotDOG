@@ -74,7 +74,7 @@ public class HomeController {
 		logger.info("도그시그널 페이지 들어옴~ 페이지: " + curPage);
 		
 		if (curPage == null) curPage = 1;
-		if (searchType == null) searchType = "";
+		if (searchType == null) searchType = "list";
 		if (keyword == null) keyword = "";
 		
 		int numPerPage = 10;	// 페이지 당 게시글 수
@@ -87,7 +87,7 @@ public class HomeController {
 		int start = pagingHelper.getStartRecord();
 		int end = pagingHelper.getEndRecord();
 		
-		List<ArticleDTO> list = matingService.getArticleList(start, end);
+		List<ArticleDTO> list = matingService.search(searchType, keyword, start, end);
 		List<UserDTO> name = new ArrayList<UserDTO>();
 		List<CategoryDTO> category = new ArrayList<CategoryDTO>();
 		List<Integer> replyNumber = new ArrayList<Integer>();
