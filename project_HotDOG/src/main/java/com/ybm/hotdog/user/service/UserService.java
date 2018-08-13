@@ -20,4 +20,7 @@ public interface UserService {
 
 	/** 회원 번호로 회원 정보 조회 */
 	public UserDTO getUser (int userNo);
+	
+	/** 회원 가입 */
+	public void register (UserDTO user);
 }

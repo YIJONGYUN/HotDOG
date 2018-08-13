@@ -37,5 +37,17 @@ public class UserDaoTest {
 		}
 		
 	}
+	
+	/** 회원 가입 테스트 */
+	@Test
+	public void TestRegistAll() {
+		
+		UserDTO user = new UserDTO(1, "test", "1111", "이종윤", "01026479515", 1);
+				
+		dao.register(user);
+		
+		logger.info("회원가입 완료");
+		
+	}
 
 }

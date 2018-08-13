@@ -76,7 +76,7 @@
 <select id="searchMating" resultType="Article">
 			SELECT AAA.* 
 			FROM   (SELECT Count(*) OVER() AS TOTAL_COUNT, AA.* 
-			        FROM   (SELECT Row_number() OVER (ORDER BY "group" DESC, step ASC) RNUM, 
+			        FROM   (SELECT Row_number() OVER (ORDER BY "group" DESC, "order" ASC) RNUM, 
 			                       article_no                           AS articleNo, 
 			                       board_no                             AS boardNo, 
 			                       article.user_no                      AS userNo, 
@@ -136,7 +136,7 @@
 <select id="pagination" resultType="Article">
 	SELECT AAA.* 
 	FROM  (SELECT Count(*) over() AS TOTAL_COUNT, AA.* 
-	       FROM  (SELECT Row_number() over (ORDER BY "group" DESC, step ASC) RNUM, 
+	       FROM  (SELECT Row_number() over (ORDER BY "group" DESC, "order" ASC) RNUM, 
 	                     article_no     AS articleNo, 
 	                     board_no       AS boardNo, 
 	                     user_no        AS userNo, 

@@ -27,10 +27,10 @@ public class UserController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-//	@Inject
-//	private UserService service;
+	@Inject
+	private UserService service;
 
-//	UserDTO user;
+	UserDTO user;
 	
 	@RequestMapping(value = "/loginPage", method = RequestMethod.GET)
 	public String loginPage() {
@@ -40,6 +40,23 @@ public class UserController {
 	@RequestMapping(value = "/registerPage", method = RequestMethod.GET)
 	public String registerPage() {
 		return "user/register";
+	}
+	
+	/**
+	 * 회원가입
+	 * 
+	 *
+	 * @Method Name : register
+	 * @param user	등록할 회원 객체
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/regist", method = RequestMethod.POST)
+	public String register(UserDTO user) throws Exception {
+		
+		service.register(user);
+		
+		return "user/login";
 	}
 
 }

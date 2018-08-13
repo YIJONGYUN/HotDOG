@@ -17,5 +17,11 @@
 	FROM Users
 	WHERE user_no=#{userNo}
 </select>
+
+<!-- 회원가입 -->
+<insert id="register">
+	INSERT INTO Users(user_no, ID, password, name, phone, grade) 
+	VALUES (seq_Users.nextVal, #{id}, #{password}, #{name}, #{phone}, 1)
+</insert>
 	
 </mapper>

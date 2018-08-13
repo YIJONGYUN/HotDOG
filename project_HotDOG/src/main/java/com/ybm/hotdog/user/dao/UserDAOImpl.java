@@ -41,4 +41,10 @@ public class UserDAOImpl implements UserDAO {
 		return sqlSession.selectOne(namespace + ".getUser", userNo);
 	}
 
+	/** 회원 가입 */
+	@Override
+	public void register(UserDTO user) {
+		sqlSession.insert(namespace + ".register", user);
+	}
+
 }

@@ -22,13 +22,13 @@
 
 				<div class="row">
 					<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-						<form role="form" class="register-form" action="/user/loginPage">
+						<form role="form" class="register-form" action="/user/regist" method="post">
 							<h2>Sign Up <small>It's free and always will be.</small></h2>
 							<hr class="colorgraph">
 							<div class="row">
 								<div class="col-xs-9 col-sm-9">
 									<div class="form-group">
-										<input type="text" name="u_id" id="u_id" class="form-control input-lg" placeholder="ID" tabindex="1">
+										<input type="text" name="id" id="id" class="form-control input-lg" placeholder="ID" tabindex="1">
 									</div>
 								</div>
 								<div class="col-xs-3 col-sm-3">
@@ -51,10 +51,10 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<input type="text" name="u_name" id="u_name" class="form-control input-lg" placeholder="Name" tabindex="4">
+								<input type="text" name="name" id="name" class="form-control input-lg" placeholder="Name" tabindex="4">
 							</div>
 							<div class="form-group">
-								<input type="text" name="u_pnum" id="u_pnum" class="form-control input-lg" placeholder="Phone Number" tabindex="5">
+								<input type="text" name="phone" id="phone" class="form-control input-lg" placeholder="Phone Number" tabindex="5">
 							</div>
 
 							<hr class="colorgraph">
@@ -72,6 +72,65 @@
 
 	</div>
 	<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
+	
+	<script type="text/javascript">
+		$('.register-form').submit(function() {
+			
+			if ($('#id').val().trim().length < 1) {
+				swal({
+					  type: 'error',
+					  title: 'ID를 입력해 주세요!'
+				});
+				$('#id').focus();
+				return false;
+			}
+			
+			if ($('#password').val().trim().length < 1) {
+				swal({
+					  type: 'error',
+					  title: '비밀번호를 입력해 주세요!'
+				});
+				$('#password').focus();
+				return false;
+			}
+			
+			if ($('#password_confirmation').val().trim().length < 1) {
+				swal({
+					  type: 'error',
+					  title: '비밀번호를 한번 더 입력해 주세요!'
+				});
+				$('#password_confirmation').focus();
+				return false;
+			}
+			
+			if ($('#name').val().trim().length < 1) {
+				swal({
+					  type: 'error',
+					  title: '이름을 입력해 주세요!'
+				});
+				$('#name').focus();
+				return false;
+			}
+			
+			if ($('#phone').val().trim().length < 1) {
+				swal({
+					  type: 'error',
+					  title: '전화번호를 입력해 주세요!'
+				});
+				$('#phone').focus();
+				return false;
+			}
+			
+			if ($('#password').val() != $('#password_confirmation').val()) {
+				swal({
+					  type: 'error',
+					  title: '비밀번호가 일치하지 않습니다.'
+				});
+				$('#password').focus();
+				return false;
+			}
+		});
+	</script>
 
 </body>
 

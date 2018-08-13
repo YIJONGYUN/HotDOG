@@ -18,7 +18,6 @@ import com.ybm.hotdog.user.domain.UserDTO;
  * @date : 2018. 7. 28. 
  *
  */
-
 @Service
 public class UserServiceImpl implements UserService {
 	
@@ -35,6 +34,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDTO getUser(int userNo) {
 		return dao.getUser(userNo);
+	}
+
+	/** 회원 가입 */
+	@Override
+	public void register(UserDTO user) {
+		dao.register(user);
 	}
 
 }
