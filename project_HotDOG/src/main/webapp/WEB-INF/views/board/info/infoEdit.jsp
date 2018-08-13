@@ -41,6 +41,7 @@
 						             
 						             <input type="hidden" id="categoryNo" name="categoryNo" value="${category.categoryNo}">
 						             <input type="hidden" id="articleNo" name="articleNo" value="${article.articleNo}">
+						             <input type="hidden" id="group" name="group" value="${article.group}">
 						             <input type="hidden" id="categoryType" name="categoryType" value="${category.content}">
 						             
 						  			<input type="text" name="title" class="form-control" id="title" data-rule="required" data-msg="제목을 입력해 주세요!" value="${article.title}"/>

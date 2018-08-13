@@ -132,11 +132,13 @@ public class HomeController {
 		List<ArticleDTO> list = InfoService.listAll();
 		List<UserDTO> name = new ArrayList<UserDTO>();
 		List<CategoryDTO> category = new ArrayList<CategoryDTO>();
+		List<Integer> reply = new ArrayList<Integer>();
 		int articleCount = 0;
 
 		for (ArticleDTO articleList : list) {
 			name.add(userService.getUser(articleList.getUserNo()));
 			category.add(categoryService.getCategory(articleList.getCategoryNo()));
+			reply.add(InfoService.countReply(articleList.getArticleNo()));
 			articleCount++;
 		}
 
@@ -144,6 +146,7 @@ public class HomeController {
 		model.addAttribute("name", name);
 		model.addAttribute("category", category);
 		model.addAttribute("articleCount", articleCount);
+		model.addAttribute("reply",reply);
 
 		return "board/info/info";
 	}

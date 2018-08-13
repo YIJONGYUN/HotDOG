@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.ybm.hotdog.board.domain.ArticleDTO;
+import com.ybm.hotdog.board.domain.ReplyDTO;
 import com.ybm.hotdog.board.info.dao.BoardInfoDAO;
 
 /**
@@ -74,6 +75,33 @@ public class BoardInfoServiceImpl implements BoardInfoService {
 	public List<ArticleDTO> searchArticle(String searchOption, String keyword) {
 		// TODO Auto-generated method stub
 		return dao.articleSearch(searchOption, keyword);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.service.BoardInfoService#countReply(int)
+	 */
+	@Override
+	public int countReply(int articleNo) {
+		// TODO Auto-generated method stub
+		return dao.countReply(articleNo);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.service.BoardInfoService#replyRegister(com.ybm.hotdog.board.domain.ReplyDTO)
+	 */
+	@Override
+	public void replyRegister(ReplyDTO reply) {
+		// TODO Auto-generated method stub
+		dao.replyRegister(reply);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.service.BoardInfoService#replyListAll(int)
+	 */
+	@Override
+	public List<ReplyDTO> replyListAll(int articleNo) {
+		// TODO Auto-generated method stub
+		return dao.replyListAll(articleNo);
 	}
 
 }

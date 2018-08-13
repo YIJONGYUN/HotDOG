@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.ybm.hotdog.board.domain.ArticleDTO;
+import com.ybm.hotdog.board.domain.ReplyDTO;
 
 /**
  * BoardInfoDAO 인터페이스를 구현하는 클래스
@@ -85,6 +86,34 @@ public class BoardInfoDAOImpl implements BoardInfoDAO {
 		map.put("keyword", keyword);
 		
 		return sqlSession.selectList(namespace + ".articleSearch",map);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.dao.BoardInfoDAO#countReply(int)
+	 */
+	@Override
+	public int countReply(int articleNo) {
+		// TODO Auto-generated method stub
+		
+		return sqlSession.selectOne(namespace + ".countReply",articleNo);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.dao.BoardInfoDAO#replyRegister(com.ybm.hotdog.board.domain.ReplyDTO)
+	 */
+	@Override
+	public void replyRegister(ReplyDTO reply) {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace + ".replyRegister",reply);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.dao.BoardInfoDAO#replyListAll(int)
+	 */
+	@Override
+	public List<ReplyDTO> replyListAll(int articleNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace + ".replyListAll", articleNo);
 	}
 
 }

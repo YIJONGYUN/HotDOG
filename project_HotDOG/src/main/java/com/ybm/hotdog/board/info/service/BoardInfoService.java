@@ -3,6 +3,7 @@ package com.ybm.hotdog.board.info.service;
 import java.util.List;
 
 import com.ybm.hotdog.board.domain.ArticleDTO;
+import com.ybm.hotdog.board.domain.ReplyDTO;
 
 /**
  * 정보게시판 관련 인터페이스 정의
@@ -27,4 +28,10 @@ public interface BoardInfoService {
 	public void articleEdit(ArticleDTO article);
 	/** 게시글 검색 */
 	public List<ArticleDTO> searchArticle(String searchOption, String keyword);
+	/** 댓글 카운트*/
+	public int countReply(int articleNo);
+	/** 댓글 등록 */
+	public void replyRegister(ReplyDTO reply);
+    /** 댓글 리스트 */
+	public List<ReplyDTO> replyListAll(int articleNo);
 }

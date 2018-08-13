@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ybm.hotdog.board.domain.ArticleDTO;
+import com.ybm.hotdog.board.domain.ReplyDTO;
 import com.ybm.hotdog.board.info.service.BoardInfoService;
 import com.ybm.hotdog.category.domain.CategoryDTO;
 import com.ybm.hotdog.category.service.CategoryService;
@@ -86,15 +87,21 @@ public class BoardInfoController {
 		ArticleDTO article = service.getArticle(articleNo);
 		CategoryDTO category = categoryService.getCategory(article.getCategoryNo());
 		UserDTO user = userService.getUser(article.getUserNo());
+		List<ReplyDTO> reply = service.replyListAll(articleNo);
+		int replyCount = service.countReply(articleNo);
+
 		/** 조회수 올리기 */
 		int hitCount = article.getHitCount();
 		hitCount++;
 		article.setHitCount(hitCount);
 		service.articleEdit(article);
-		
+
 		model.addAttribute("article", article);
 		model.addAttribute("category", category);
 		model.addAttribute("user", user);
+		model.addAttribute("reply", reply);
+		model.addAttribute("replyCount", replyCount);
+
 
 		return "board/info/infoDetail";
 	}
@@ -117,6 +124,18 @@ public class BoardInfoController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String boardRegister(ArticleDTO article) {
 
+		article.setStep(1);
+		article.setOrder(1);
+
+		service.articleRegister(article);
+
+		return "redirect:/board/info";
+	}
+
+	@RequestMapping(value = "/rearticleRegister", method = RequestMethod.POST)
+	public String rearticleRegister(ArticleDTO article) {
+
+		article.setCategoryNo(1);
 		service.articleRegister(article);
 
 		return "redirect:/board/info";
@@ -133,9 +152,67 @@ public class BoardInfoController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public String boardEdit(ArticleDTO article) throws Exception{
 
-		CategoryDTO category = categoryService.getCategory(article.getCategoryNo()); 
 		service.articleEdit(article);
 
 		return "redirect:/board/info";
 	}
+	
+	@RequestMapping(value = "/reply/{articleNo}", method = RequestMethod.POST)
+	public String addReply(@RequestParam("replyContent") String replyContent, @PathVariable int articleNo, Model model)
+			throws Exception {
+		logger.info(" 댓글 다는중 ");
+		ReplyDTO reply = new ReplyDTO();
+		reply.setArticleNo(articleNo);
+		reply.setContent(replyContent);
+		reply.setUserNo(2);
+
+		service.replyRegister(reply);
+
+		ArticleDTO article = service.getArticle(articleNo);
+		CategoryDTO category = categoryService.getCategory(article.getCategoryNo());
+		UserDTO user = userService.getUser(article.getUserNo());
+		List<ReplyDTO> reply1 = service.replyListAll(articleNo);
+		List<UserDTO> userName = new ArrayList<UserDTO>();
+		int replyCount = service.countReply(articleNo);
+
+		for (ReplyDTO replyList : reply1) {
+			userName.add(userService.getUser(replyList.getUserNo()));
+		}
+
+		model.addAttribute("article", article);
+		model.addAttribute("category", category);
+		model.addAttribute("user", user);
+		model.addAttribute("reply", reply1);
+		model.addAttribute("replyCount", replyCount);
+		model.addAttribute("userName", userName);
+		model.addAttribute("articleNo", articleNo);
+
+		return "board/info/infoDetail";
+	}
+
+	@RequestMapping(value = "/rearticleForm/{articleNo}", method = RequestMethod.GET)
+	public String rearticle(@PathVariable int articleNo, Model model) throws Exception {
+
+		ArticleDTO articleDTO = service.getArticle(articleNo);
+		
+		if (articleDTO.getGroup() == 1) {
+			articleDTO.setGroup(articleDTO.getArticleNo());
+			service.articleEdit(articleDTO);
+			articleDTO.setOrder(articleDTO.getOrder() + 1);
+			articleDTO.setStep(articleDTO.getStep() + 1);
+			articleDTO.setGroup(articleDTO.getArticleNo());
+		} else {
+			articleDTO.setOrder(articleDTO.getOrder() + 1);
+			articleDTO.setStep(articleDTO.getStep() + 1);
+			articleDTO.setGroup(articleDTO.getGroup());
+		}
+
+		model.addAttribute("articleDTO", articleDTO);
+
+		return "board/info/rearticleForm";
+
+	}
+
 }
+
+

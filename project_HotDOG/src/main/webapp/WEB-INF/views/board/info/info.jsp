@@ -59,7 +59,7 @@
 														<td>${category[status.index].content}</td>
 														<td colspan="4"><a
 															href="/board/info/detail/${articleDTO.articleNo}"
-															style="color: black;">${articleDTO.title}</a></td>
+															style="color: black;">${articleDTO.title}[${reply[status.index]}]</a></td>
 														<td>${name[status.index].name}</td>
 														<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 																value="${articleDTO.regDate}" /></td>

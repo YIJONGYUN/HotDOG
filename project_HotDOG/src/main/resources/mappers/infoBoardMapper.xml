@@ -4,34 +4,38 @@
 <!-- 게시판 네임스페이스(사용영역) 설정 -->
 
 <mapper namespace="com.ybm.hotdog.mappers.InfoBoardMapper">
-
 	<!-- 게시물 전체 목록 불러오기 -->
-	<select id="boardInfoListAll" resultType="Article">
-		SELECT article_no as articleNo, board_no as boardNo, user_no as userNo,
-		category_no as categoryNo, title, content, reg_date as regDate,
-		hit_count as hitCount,
-		"group", step, "order"
-		FROM Article
-		WHERE board_no = 1
-		ORDER BY article_no desc, reg_date desc
+	<select resultType="Article" id="boardInfoListAll">
+		SELECT article_no as articleNo,
+		board_no as boardNo, user_no as userNo,
+		category_no as categoryNo,
+		title, content, reg_date as regDate,
+		hit_count as hitCount, "group",
+		step, "order" FROM Article WHERE
+		board_no = 1 ORDER BY article_no
+		desc, reg_date desc
 	</select>
 
 	<!-- 게시물 상세 조회 -->
-	<select id="articleDetail" resultType="Article">
-		SELECT article_no as articleNo, board_no as boardNo, user_no as userNo,
-		category_no as categoryNo, title, content, reg_date as regDate,
-		hit_count as hitCount,
-		"group", step, "order"
-		FROM Article
-		WHERE article_no = #{articleNo}
+	<select resultType="Article" id="articleDetail">
+		SELECT article_no as articleNo,
+		board_no as boardNo, user_no as userNo,
+		category_no as categoryNo,
+		title, content, reg_date as regDate,
+		hit_count as hitCount, "group",
+		step, "order" FROM Article WHERE
+		article_no = #{articleNo}
 	</select>
 
 	<!-- 게시글 작성 -->
 	<insert id="articleRegister">
-		INSERT INTO Article(article_no, board_no, user_no, category_no, title,
-		content, reg_date, hit_count, "group", step, "order")
-		VALUES (seq_Article.nextVal, 1, 2, #{categoryNo}, #{title}, #{content},
-		sysdate, 0, 1, 1, 1)
+		INSERT INTO Article(article_no, board_no, user_no,
+		category_no, title,
+		content, reg_date, hit_count, "group", step,
+		"order") VALUES
+		(seq_Article.nextVal, 1, 2, #{categoryNo}, #{title},
+		#{content},
+		sysdate, 0,seq_Article.nextVal, #{step}, #{order})
 	</insert>
 
 	<!-- 게시글 삭제 -->
@@ -39,33 +43,66 @@
 		DELETE FROM Article WHERE article_no = #{articleNo}
 	</delete>
 
-    <!-- 게시글 수정 -->
-    <update id="articleEdit">
-	UPDATE Article SET category_no = #{categoryNo}, title = #{title}, content = #{content}, reg_date = sysdate, hit_count = #{hitCount}
-	WHERE article_no = #{articleNo}
+	<!-- 게시글 수정 -->
+	<update id="articleEdit">
+		UPDATE Article SET category_no = #{categoryNo},
+		title = #{title}, content =
+		#{content}, reg_date = sysdate, hit_count
+		= #{hitCount}, "group" = #{group} WHERE
+		article_no = #{articleNo}
 	</update>
-	
+
 	<!-- 키워드로 게시글 조회 -->
-	<select id="articleSearch" resultType="Article">
-		SELECT  article.article_no as articleNo,  article.board_no as boardNo,  article.user_no as userNo,
-		 article.category_no as categoryNo, title, content,  article.reg_date as regDate,
-		hit_count as hitCount,
-		"group", step, "order", Users.name
-		FROM  article inner join Users on article.user_no = Users.user_no
-		<include refid="search"></include>
+	<select resultType="Article" id="articleSearch">
+		SELECT article.article_no as articleNo, article.board_no as boardNo,
+		article.user_no as userNo, article.category_no as categoryNo, title,
+		content, article.reg_date as regDate, hit_count as hitCount, "group",
+		step, "order", Users.name FROM article inner join Users on
+		article.user_no = Users.user_no
+		<include refid="search" />
 	</select>
-	
+
 	<sql id="search">
-	<choose>
-	<when test="searchOption == '제목'">
-	where title like '%'||#{keyword}||'%' and article.board_no = 1
-	</when>
-	<when test="searchOption == '작성자'">
-	where name like '%'||#{keyword}||'%' and article.board_no = 1
-	</when>
-	<when test="searchOption == '내용'">
-	where content like '%'||#{keyword}||'%' and article.board_no = 1
-	</when>
-	</choose>
+		<choose>
+			<when test="searchOption == '제목'">
+				where title like '%'||#{keyword}||'%' and
+				article.board_no = 1
+			</when>
+
+			<when test="searchOption == '작성자'">
+				where name like '%'||#{keyword}||'%' and
+				article.board_no = 1
+			</when>
+
+			<when test="searchOption == '내용'">
+				where content like '%'||#{keyword}||'%' and
+				article.board_no = 1
+			</when>
+
+		</choose>
 	</sql>
+	<!--댓글 갯수 구하기 -->
+	<select resultType="int" id="countReply">
+		SELECT count(reply_no) FROM Reply
+		WHERE article_no = #{articleNo}
+	</select>
+
+	<!--댓글 쓰기 -->
+	<insert id="replyRegister">
+		INSERT INTO Reply(reply_no, article_no, user_no,
+		content, reg_date) VALUES
+		(seq_Reply.nextval, #{articleNo},
+		#{userNo}, #{content}, sysdate)
+	</insert>
+
+	<!--댓글 리스트 -->
+
+
+	<select resultType="Reply" id="replyListAll">
+		SELECT reply_no as replyNo,
+		article_no as articleNo, user_no as userNo,
+		content, reg_date as
+		regDate FROM Reply WHERE article_no = #{articleNo}
+	</select>
+
 </mapper>

@@ -56,9 +56,10 @@
 						<a href="/board/info" class="btn btn-default"> 목록 </a>
 						<div class="bs-docs-example pull-right">
 							<div class="btn-group">
-								<a href="/board/info/viewedit/${article.articleNo}" class="btn btn-primary">수정</a> 
-								<a class="btn btn-theme" href="/board/info/delete/${article.articleNo}">삭제 </a> 
-								<a href="/board/info/form" class="btn btn-warning">답글</a>
+								<a href="/board/info/viewedit/${article.articleNo}"
+									class="btn btn-primary">수정</a> <a class="btn btn-theme"
+									href="/board/info/delete/${article.articleNo}">삭제 </a> <a
+									href="/board/info/rearticleForm/${article.articleNo}" class="btn btn-warning">답글</a>
 							</div>
 						</div>
 					</div>
@@ -66,46 +67,43 @@
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2">
 						<div class="comment-area">
-							<h4>댓글 3</h4>
-							<div class="media">
-								<a class="pull-left"><img src="/resources/img/dog2.png" /></a>
-								<div class="media-body">
-									<div class="media-content">
-										<h6>
-											<span>2018-07-24</span> 이종윤
-										</h6>
-										<p>졸귀탱 ㅠㅠ</p>
+							<h4>댓글 ${replyCount}</h4>
+							<c:choose>
+								<c:when test="${empty reply}">
+									<div class="media">
+									<center>
+												<h6>댓글이 존재하지 않습니다.</h6>
+												</center>
 									</div>
-								</div>
-							</div>
-							<div class="media">
-								<a class="pull-left"><img src="/resources/img/dog2.png" /></a>
-								<div class="media-body">
-									<div class="media-content">
-										<h6>
-											<span>2018-07-24</span> 심민정
-										</h6>
-										<p>저요 저요!</p>
-									</div>
-								</div>
-							</div>
-							<div class="media">
-								<a class="pull-left"><img src="/resources/img/dog2.png" /></a>
-								<div class="media-body">
-									<div class="media-content">
-										<h6>
-											<span>2018-07-24</span> 권한별
-										</h6>
-										<p>이리오시개</p>
-									</div>
-								</div>
-							</div>
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${reply}" var="replyDTO" varStatus="status">
+										<div class="media">
+											<a class="pull-left"><img src="/resources/img/dog2.png" /></a>
+											<div class="media-body">
+												<div class="media-content">
+													<h6>
+														<span><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+																value="${replyDTO.regDate}" /></span>
+														${userName[status.index].name} </h6>
+													<p>${replyDTO.content}</p>
+													<input type="hidden" id="replyNo"
+														value="${replyDTO.replyNo}">
+												</div>
+											</div>
+										</div>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 							<hr class="colorgraph">
-							<form role="form">
+							<form action="/board/info/reply/${article.articleNo}"
+								method="POST">
+								<input type="hidden" id="articleNo" value="${article.articleNo}">
 								<div class="col-md-10">
 									<div class="form-group">
 										<textarea class="form-control" rows="2"
-											placeholder="댓글을 작성해 주세요!"></textarea>
+											placeholder="댓글을 작성해 주세요!" id="replyContent"
+											name="replyContent"></textarea>
 									</div>
 								</div>
 								<div class="col-md-2">
