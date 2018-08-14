@@ -77,13 +77,19 @@ public class BoardInfoDAOImpl implements BoardInfoDAO {
 	 */
 	/** 키워드로 게시글 검색 */
 	@Override
-	public List<ArticleDTO> articleSearch(String searchOption, String keyword) {
+	public List<ArticleDTO> articleSearch(String searchOption, String keyword, int start, int end) {
 		// TODO Auto-generated method stub
-		Map<String, String> map = new HashMap<String,String>();
+		Map<String, Object> map = new HashMap<String,Object>();
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
+		map.put("start", start);
+		map.put("end", end);
 		
-		return sqlSession.selectList(namespace + ".articleSearch",map);
+		System.out.println("=================");
+		System.out.println(map.toString());
+		System.out.println("=================");
+		
+		return sqlSession.selectList(namespace + ".pageSearch",map);
 	}
 
 	/* (non-Javadoc)
@@ -151,6 +157,47 @@ public class BoardInfoDAOImpl implements BoardInfoDAO {
 	public int countPerReArticle(int articleNo) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace + ".countPerReArticle",articleNo);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.dao.BoardInfoDAO#countArticle()
+	 */
+	@Override
+	public int countArticle() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace + ".countArticle");
+	}
+
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.dao.BoardInfoDAO#articleSearchNum(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public int articleSearchNum(String searchOption, String keyword) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		
+		System.out.println("=================");
+		System.out.println(map.toString());
+		System.out.println("=================");
+		
+		return sqlSession.selectOne(namespace + ".articleSearchNum",map);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.dao.BoardInfoDAO#getPagingArticleList(int, int)
+	 */
+	/** 페이징 처리 게시글 목록 전체 조회 */
+	@Override
+	public List<ArticleDTO> getPagingArticleList(int start, int end) {
+		// TODO Auto-generated method stub
+		
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("start", start);
+		map.put("end", end);
+		
+		return sqlSession.selectList(namespace + ".pagination");
 	}
 
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ybm.hotdog.board.domain.ArticleDTO;
 import com.ybm.hotdog.board.domain.ReplyDTO;
 import com.ybm.hotdog.board.info.dao.BoardInfoDAO;
+import com.ybm.hotdog.util.PagingHelper;
 
 /**
  * BoardInfoService 인터페이스 구현 클래스
@@ -25,6 +26,8 @@ public class BoardInfoServiceImpl implements BoardInfoService {
 	@Inject
 	private BoardInfoDAO dao;
 
+	private PagingHelper pagingHelper;
+	
 	/** 게시글 목록 전체 조회 */
 	@Override
 	public List<ArticleDTO> listAll() {
@@ -72,9 +75,9 @@ public class BoardInfoServiceImpl implements BoardInfoService {
 	 */
 	/** 키워드로 게시글 검색 */
 	@Override
-	public List<ArticleDTO> searchArticle(String searchOption, String keyword) {
+	public List<ArticleDTO> searchArticle(String searchOption, String keyword, int start, int end) {
 		// TODO Auto-generated method stub
-		return dao.articleSearch(searchOption, keyword);
+		return dao.articleSearch(searchOption, keyword, start, end);
 	}
 
 	/* (non-Javadoc)
@@ -142,4 +145,71 @@ public class BoardInfoServiceImpl implements BoardInfoService {
 		return dao.countPerReArticle(articleNo);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.service.BoardInfoService#countArticle()
+	 */
+	/** 게시판글 갯수 */
+	@Override
+	public int countArticle() {
+		// TODO Auto-generated method stub
+		return dao.countArticle();
+	}
+
+	@Override
+	public int getFirstPage() {
+		return pagingHelper.getFirstPage();
+	}
+
+	@Override
+	public int getLastPage() {
+		return pagingHelper.getLastPage();
+	}
+
+	@Override
+	public int getPrevLink() {
+		return pagingHelper.getPrevLink();
+	}
+
+	@Override
+	public int getNextLink() {
+		return pagingHelper.getNextLink();
+	}
+
+	@Override
+	public int getListNo() {
+		return pagingHelper.getListNo();
+	}
+
+	@Override
+	public int[] getPages() {
+		return pagingHelper.getPages();
+	}
+	
+	public PagingHelper getPagingHelper() {
+		return pagingHelper;
+	}
+
+	@Override
+	public void setPagingHelper(PagingHelper pagingHelper) {
+		this.pagingHelper = pagingHelper;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.service.BoardInfoService#articleSearchNum(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public int articleSearchNum(String searchOption, String keyword) {
+		// TODO Auto-generated method stub
+		return dao.articleSearchNum(searchOption, keyword);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.service.BoardInfoService#getPagingArticleList(int, int)
+	 */
+	/** 페이징 처리 게시글 목록 전체 조회 */
+	@Override
+	public List<ArticleDTO> getPagingArticleList(int start, int end) {
+		// TODO Auto-generated method stub
+		return dao.getPagingArticleList(start, end);
+	}
 }

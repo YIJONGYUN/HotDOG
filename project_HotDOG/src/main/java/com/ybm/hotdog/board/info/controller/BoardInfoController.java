@@ -22,6 +22,7 @@ import com.ybm.hotdog.category.domain.CategoryDTO;
 import com.ybm.hotdog.category.service.CategoryService;
 import com.ybm.hotdog.user.domain.UserDTO;
 import com.ybm.hotdog.user.service.UserService;
+import com.ybm.hotdog.util.PagingHelper;
 
 /**
  * 정보 게시판 관련 프로젝트 Controller @RequestMapping("/board/info") URI 매칭
@@ -58,24 +59,54 @@ public class BoardInfoController {
 	}
 	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
-	public String boardFormSearch(@RequestParam("searchOption") String searchOption,@RequestParam("keyword") String keyword, Model model) {
-		logger.info("독스타그램 게시글 검색");
+	public String boardFormSearch(Integer curPage, String searchOption, String keyword, Model model) {
+		logger.info("독스타그램 게시글 검색"+ curPage);
+		logger.info("searchOption : " + searchOption + " / keyword : " + keyword);
 		
-		List<ArticleDTO> list = service.searchArticle(searchOption, keyword);
+		if (curPage == null) curPage = 1;
+		
+		int numPerPage = 10;	// 페이지 당 게시글수
+		int pagePerBlock = 5;	// 페이지 링크 그룹 (block) 크기
+		int totalRecord = service.articleSearchNum(searchOption, keyword);	// 전체 게시글 수
+		
+		PagingHelper pagingHelper = new PagingHelper(totalRecord, curPage, numPerPage, pagePerBlock);
+		service.setPagingHelper(pagingHelper);
+		
+		int start = pagingHelper.getStartRecord();
+		int end = pagingHelper.getEndRecord();
+		
+		List<ArticleDTO> list = service.searchArticle(searchOption, keyword,start,end);
 		List<UserDTO> name = new ArrayList<UserDTO>();
 		List<CategoryDTO> category = new ArrayList<CategoryDTO>();
-		int articleCount = 0;
+		List<Integer> reply = new ArrayList<Integer>();
 		
 		for (ArticleDTO articleList : list) {
 			name.add(userService.getUser(articleList.getUserNo()));
 			category.add(categoryService.getCategory(articleList.getCategoryNo()));
-			articleCount++;
+			reply.add(service.countReply(articleList.getArticleNo()));
 		}
+		
+		int listNo = service.getListNo();
+		int prevLink = service.getPrevLink();
+		int nextLink = service.getNextLink();
+		int firstPage = service.getFirstPage();
+		int lastPage = service.getLastPage();
+		int[] pages = service.getPages();
 
 		model.addAttribute("boardInfoList", list);
 		model.addAttribute("name", name);
 		model.addAttribute("category", category);
-		model.addAttribute("articleCount", articleCount);
+		model.addAttribute("totalRecord", totalRecord);
+		model.addAttribute("reply", reply);
+		model.addAttribute("prevLink", prevLink);
+		model.addAttribute("nextLink", nextLink);
+		model.addAttribute("firstPage", firstPage);
+		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("pages", pages);
+		model.addAttribute("curPage", curPage);
+		model.addAttribute("listNo", listNo);
+		model.addAttribute("searchOption", searchOption);
+		model.addAttribute("keyword", keyword);
 		
 		return "board/info/info";
 	}

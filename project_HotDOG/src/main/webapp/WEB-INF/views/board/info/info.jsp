@@ -55,7 +55,7 @@
 														value="${articleDTO.articleNo}">
 													<!-- 게시글 상세 내용 조회시 articleNo가 필요하기 때문에 숨겨서 보내준다. -->
 													<tr>
-														<td>${articleCount-status.index}</td>
+														<td>${listNo-status.index}</td>
 														<c:choose>
 														<c:when test="${articleDTO.step > 0}">
 															<td></td>
@@ -103,16 +103,36 @@
 						<div class="col-lg-12">
 							<div class="text-center">
 								<ul class="pagination">
-									<li><a href="#">&laquo;</a></li>
-									<li><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
-									<li><a href="#">&raquo;</a></li>
+									<c:if test="${prevLink > 0}">
+									<li><a href="javascript:goList('${prevLink}')">&laquo;</a></li>
+								</c:if>
+								
+								<c:forEach var="i" items="${pages}" >
+									<c:choose>
+										<c:when test="${curPage == i}">
+											<li><a style="background-color:#fecf71">${i}</a></li>
+										</c:when>
+									<c:otherwise>
+										<li><a href="javascript:goList('${i}')">${i}</a></li>
+									</c:otherwise>
+									</c:choose>
+								</c:forEach>
+								
+								<c:if test="${nextLink > 0}">
+									<li><a href="javascript:goList('${nextLink}')">&raquo;</a></li>
+								</c:if>
 								</ul>
 							</div>
 						</div>
+						
+						<div id="form-group" style="display: none;">
+							<form id="listForm" action="/board/info" method="get">
+							 <p>
+							  <input type="hidden" name="curPage" />
+							 </p>
+							</form>
+						</div>
+						
 						<form action="/board/info/search" method="post" id="selectForm">
 							<div class="col-md-4 col-md-offset-4">
 								<div class="input-group">
@@ -178,6 +198,10 @@
 			
 			return true;
 		})
+		
+		function goList(page) {
+				location.href = "/board/info?searchOption=${searchOption}&keyword=${keyword}&curPage=" + page;
+			}
 	</script>
 </body>
 

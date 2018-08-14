@@ -129,29 +129,60 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/board/info", method = RequestMethod.GET)
-	public String boardInfo(Locale locale, Model model) {
-		logger.info("독스타그램 페이지 들어옴~", locale);
+	public String boardInfo(Locale locale, Model model, Integer curPage, String searchOption, String keyword) {
+		logger.info("독스타그램 페이지 들어옴~"+ curPage, locale);
 
-		List<ArticleDTO> list = InfoService.listAll();
+		
+		if (curPage == null) curPage = 1;
+		if (searchOption == null) searchOption = "list";
+		if (keyword == null) keyword = "";
+		
+		int numPerPage = 10;	// 페이지 당 게시글 수
+		int pagePerBlock = 5;	// 페이지 링크 그룹 (block) 크기
+		int totalRecord = InfoService.countArticle();	// 전체 게시글 수
+		
+		PagingHelper pagingHelper = new PagingHelper(totalRecord, curPage, numPerPage, pagePerBlock);
+		InfoService.setPagingHelper(pagingHelper);
+		
+		int start = pagingHelper.getStartRecord();
+		int end = pagingHelper.getEndRecord();
+		
+		List<ArticleDTO> list = InfoService.searchArticle(searchOption, keyword, start, end);
 		List<UserDTO> name = new ArrayList<UserDTO>();
 		List<CategoryDTO> category = new ArrayList<CategoryDTO>();
 		List<Integer> reply = new ArrayList<Integer>();
-		int reArticleNum = InfoService.countReArticle();
-		int articleCount = 0;
+		//int reArticleNum = InfoService.countReArticle();
 
 		for (ArticleDTO articleList : list) {
 			name.add(userService.getUser(articleList.getUserNo()));
 			category.add(categoryService.getCategory(articleList.getCategoryNo()));
 			reply.add(InfoService.countReply(articleList.getArticleNo()));
-			articleCount++;
 		}
-
+		
+		int listNo = InfoService.getListNo();
+		int prevLink = InfoService.getPrevLink();
+		int nextLink = InfoService.getNextLink();
+		int firstPage = InfoService.getFirstPage();
+		int lastPage = InfoService.getLastPage();
+		int[] pages = InfoService.getPages();
+		
+		logger.info(pagingHelper.toString());
+		logger.info(list.toString());
+		
 		model.addAttribute("boardInfoList", list);
 		model.addAttribute("name", name);
 		model.addAttribute("category", category);
-		model.addAttribute("articleCount", articleCount);
 		model.addAttribute("reply",reply);
-		model.addAttribute("reArticleNum",reArticleNum);
+		model.addAttribute("totalRecord", totalRecord);
+		model.addAttribute("prevLink", prevLink);
+		model.addAttribute("nextLink", nextLink);
+		model.addAttribute("firstPage", firstPage);
+		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("pages", pages);
+		model.addAttribute("curPage", curPage);
+		model.addAttribute("listNo", listNo);
+		model.addAttribute("searchOption", searchOption);
+		model.addAttribute("keyword", keyword);
 
 		return "board/info/info";
 	}

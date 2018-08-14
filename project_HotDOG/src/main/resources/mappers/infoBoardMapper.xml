@@ -76,7 +76,8 @@
 
 	<!-- 게시글 삭제 -->
 	<update id="articleDelete">
-		UPDATE Article SET title ='삭제된 게시물입니다.' WHERE article_no = #{articleNo}
+		UPDATE Article SET title ='삭제된 게시물입니다.' WHERE
+		article_no = #{articleNo}
 	</update>
 
 	<!-- 게시글 수정 -->
@@ -84,26 +85,46 @@
 		UPDATE Article SET category_no = #{categoryNo},
 		title
 		= #{title}, content =
-		#{content}, reg_date = sysdate, hit_count
-		=
-		#{hitCount}, "group" = #{group} WHERE
+		#{content}, hit_count=
+		#{hitCount}, "group" =
+		#{group} WHERE
 		article_no = #{articleNo}
 	</update>
 
-	<!-- 키워드로 게시글 조회 페이징-->
-	<select resultType="Article" id="pageSearch">
-	SELECT rownum as rnum, A.article_no as articleNo, A.board_no as boardNo
-	, A.user_no as userNo , A.category_no as categoryNo , A.title
-	, A.step , A.order , A.regDate , A.hitCount , A.group
-	from(
-	article.article_no as articleNo, article.board_no as boardNo,
-	article.user_no as userNo, article.category_no as categoryNo, title,
-	content, article.reg_date as regDate, hit_count as hitCount, "group",
-	step, "order" ORDER BY "group" desc, "order" asc) A
-	where rownum between #{start} and #{end}
-		
+	<!--게시글 갯수 구하기 -->
+	<select resultType="int" id="countArticle">
+		SELECT count(article_no) FROM
+		article
+		WHERE board_no = 1
 	</select>
-	
+
+	<!-- 키워드로 게시글 조회 페이징 -->
+	<select resultType="Article" id="pageSearch">
+		SELECT AAA.*
+		FROM (SELECT Count(*) OVER() AS TOTAL_COUNT, AA.*
+		FROM
+		(SELECT Row_number() OVER (ORDER BY "group" DESC, "order" ASC) RNUM,
+		article_no AS articleNo,
+		board_no AS boardNo,
+		article.user_no AS userNo,
+		category_no AS categoryNo,
+		title,
+		content,
+		reg_date AS regDate,
+		hit_count
+		AS hitCount,
+		"group",
+		step,
+		"order"
+		FROM article,
+		users
+		WHERE board_no = 1
+		AND (article.user_no = users.user_no)
+		<include refid="search"></include>
+		WHERE AAA.rnum BETWEEN #{start,jdbcType=INTEGER} AND
+		#{end,jdbcType=INTEGER}
+	</select>
+
 	<!-- 키워드로 게시글 조회 -->
 	<select resultType="Article" id="articleSearch">
 		SELECT article.article_no as articleNo, article.board_no as boardNo,
@@ -111,30 +132,47 @@
 		content, article.reg_date as regDate, hit_count as hitCount, "group",
 		step, "order", Users.name FROM article inner join Users on
 		article.user_no = Users.user_no
-		<include refid="search" />
+		<include refid="searchArticle" />
+	</select>
+	
+	<!-- 키워드로 게시글 갯수 -->
+	<select resultType="int" id="articleSearchNum">
+		SELECT count(article_no)
+		FROM article, Users
+		<include refid="searchArticle" />
 	</select>
 
-	<sql id="search">
+	<sql id="searchArticle">
 		<choose>
 			<when test="searchOption == '제목'">
-				where title like '%'||#{keyword}||'%' and
-				article.board_no = 1
-				ORDER BY "group" desc,
-				"order" asc
+				where board_no = 1 And article.user_no = Users.user_no and title like '%'||#{keyword}||'%'
 			</when>
 
 			<when test="searchOption == '작성자'">
-				where name like '%'||#{keyword}||'%' and
-				article.board_no = 1
-				ORDER BY "group" desc,
-				"order" asc
+				where board_no = 1 And article.user_no = Users.user_no and name like '%'||#{keyword}||'%'
 			</when>
 
 			<when test="searchOption == '내용'">
-				where content like '%'||#{keyword}||'%' and
-				article.board_no = 1
-				ORDER BY "group" desc,
-				"order" asc
+				where board_no = 1 And article.user_no = Users.user_no and content like '%'||#{keyword}||'%'
+			</when>
+		</choose>
+	</sql>
+	
+	<sql id="search">
+		<choose>
+			<when test="searchOption == 'list'">
+				) AA) AAA
+			</when>
+			<when test="searchOption == '제목'">
+				and title like '%'||#{keyword}||'%' ) AA) AAA
+			</when>
+
+			<when test="searchOption == '작성자'">
+				and name like '%'||#{keyword}||'%') AA) AAA
+			</when>
+
+			<when test="searchOption == '내용'">
+				and content like '%'||#{keyword}||'%') AA) AAA
 			</when>
 
 		</choose>

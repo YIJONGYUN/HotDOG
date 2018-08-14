@@ -27,7 +27,7 @@ public interface BoardInfoDAO {
 	/** 게시글 수정 */
 	public void articleEdit(ArticleDTO article);
 	/** 게시글 검색 */
-	public List<ArticleDTO> articleSearch(String searchOption, String keyword);
+	public List<ArticleDTO> articleSearch(String searchOption, String keyword, int start, int end);
 	/** 댓글 카운트 */
 	public int countReply(int articleNo);
 	/** 댓글등록  */
@@ -42,5 +42,11 @@ public interface BoardInfoDAO {
 	public int countReArticle();
 	/** 게시판별 답글갯수 */
 	public int countPerReArticle(int articleNo);
-
+	/** 게시판글 갯수 */
+	public int countArticle();
+	/** 검색 게시판글 갯수 */
+	public int articleSearchNum(String searchOption, String keyword);
+	/** 페이징 처리 게시글 목록 전체 조회 */
+	public List<ArticleDTO> getPagingArticleList (int start, int end);
+	
 }
