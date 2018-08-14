@@ -124,8 +124,8 @@ public class BoardInfoController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String boardRegister(ArticleDTO article) {
 
-		article.setStep(1);
-		article.setOrder(1);
+		article.setStep(0);
+		article.setOrder(0);
 
 		service.articleRegister(article);
 
@@ -135,8 +135,9 @@ public class BoardInfoController {
 	@RequestMapping(value = "/rearticleRegister", method = RequestMethod.POST)
 	public String rearticleRegister(ArticleDTO article) {
 
+		service.reOrder(article);
 		article.setCategoryNo(1);
-		service.articleRegister(article);
+		service.reArticleRegister(article);
 
 		return "redirect:/board/info";
 	}
@@ -195,17 +196,9 @@ public class BoardInfoController {
 
 		ArticleDTO articleDTO = service.getArticle(articleNo);
 		
-		if (articleDTO.getGroup() == 1) {
-			articleDTO.setGroup(articleDTO.getArticleNo());
-			service.articleEdit(articleDTO);
-			articleDTO.setOrder(articleDTO.getOrder() + 1);
-			articleDTO.setStep(articleDTO.getStep() + 1);
-			articleDTO.setGroup(articleDTO.getArticleNo());
-		} else {
 			articleDTO.setOrder(articleDTO.getOrder() + 1);
 			articleDTO.setStep(articleDTO.getStep() + 1);
 			articleDTO.setGroup(articleDTO.getGroup());
-		}
 
 		model.addAttribute("articleDTO", articleDTO);
 

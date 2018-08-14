@@ -56,10 +56,35 @@
 													<!-- 게시글 상세 내용 조회시 articleNo가 필요하기 때문에 숨겨서 보내준다. -->
 													<tr>
 														<td>${articleCount-status.index}</td>
-														<td>${category[status.index].content}</td>
-														<td colspan="4"><a
-															href="/board/info/detail/${articleDTO.articleNo}"
-															style="color: black;">${articleDTO.title}[${reply[status.index]}]</a></td>
+														<c:choose>
+														<c:when test="${articleDTO.step > 0}">
+															<td></td>
+														</c:when>
+														<c:otherwise>
+															<td>${category[status.index].content}</td>
+														</c:otherwise>
+														</c:choose>
+														<td colspan="4" align=left>
+														<c:choose>
+														<c:when test="${articleDTO.title == '삭제된 게시물입니다.'}">
+														<c:choose>
+															<c:when test="${articleDTO.step > 0}">
+																<c:forEach begin="1" end="${articleDTO.step}" step="1">　</c:forEach>
+															<img src="/resources/img/reply.png" width="3%" style="margin-bottom: 0px;" />
+															</c:when> 
+														</c:choose>${articleDTO.title}[${reply[status.index]}]
+														</c:when>
+														<c:otherwise>
+														<a href="/board/info/detail/${articleDTO.articleNo}"
+															style="color: black;"><c:choose>
+															<c:when test="${articleDTO.step > 0}">
+																<c:forEach begin="1" end="${articleDTO.step}" step="1">　</c:forEach>
+															<img src="/resources/img/reply.png" width="3%" style="margin-bottom: 0px;" />
+															</c:when> 
+														</c:choose>${articleDTO.title}[${reply[status.index]}]</a>
+														</c:otherwise>
+														</c:choose>
+														</td>
 														<td>${name[status.index].name}</td>
 														<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 																value="${articleDTO.regDate}" /></td>

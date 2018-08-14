@@ -10,10 +10,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.google.common.util.concurrent.Service;
 import com.ybm.hotdog.board.domain.ArticleDTO;
 import com.ybm.hotdog.board.domain.ReplyDTO;
 import com.ybm.hotdog.board.info.service.BoardInfoService;
@@ -25,6 +27,7 @@ import com.ybm.hotdog.category.service.CategoryService;
 import com.ybm.hotdog.user.domain.UserDTO;
 import com.ybm.hotdog.user.service.UserService;
 import com.ybm.hotdog.util.PagingHelper;
+import com.ybm.hotdog.util.infoPaging;
 
 /**
  * 메뉴 관련 컨트롤러
@@ -133,6 +136,7 @@ public class HomeController {
 		List<UserDTO> name = new ArrayList<UserDTO>();
 		List<CategoryDTO> category = new ArrayList<CategoryDTO>();
 		List<Integer> reply = new ArrayList<Integer>();
+		int reArticleNum = InfoService.countReArticle();
 		int articleCount = 0;
 
 		for (ArticleDTO articleList : list) {
@@ -147,6 +151,7 @@ public class HomeController {
 		model.addAttribute("category", category);
 		model.addAttribute("articleCount", articleCount);
 		model.addAttribute("reply",reply);
+		model.addAttribute("reArticleNum",reArticleNum);
 
 		return "board/info/info";
 	}

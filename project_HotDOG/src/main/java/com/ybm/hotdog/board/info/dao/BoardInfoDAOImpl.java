@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
-
-import org.apache.commons.collections.map.HashedMap;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -62,7 +60,7 @@ public class BoardInfoDAOImpl implements BoardInfoDAO {
 	@Override
 	public void articleDelete(int articleNo) {
 		// TODO Auto-generated method stub
-		sqlSession.delete(namespace + ".articleDelete",articleNo); 
+		sqlSession.update(namespace + ".articleDelete",articleNo); 
 	}
 
 	/* (non-Javadoc)
@@ -114,6 +112,45 @@ public class BoardInfoDAOImpl implements BoardInfoDAO {
 	public List<ReplyDTO> replyListAll(int articleNo) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace + ".replyListAll", articleNo);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.dao.BoardInfoDAO#reArticleRegister(com.ybm.hotdog.board.domain.ArticleDTO)
+	 */
+	@Override
+	public void reArticleRegister(ArticleDTO article) {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace + ".reArticleRegister",article);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.dao.BoardInfoDAO#reOrder(com.ybm.hotdog.board.domain.ArticleDTO)
+	 */
+	/** order 재정렬 */
+	@Override
+	public void reOrder(ArticleDTO article) {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace + ".reOrder", article);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.dao.BoardInfoDAO#countReArticle()
+	 */
+	/** 답글갯수 */
+	@Override
+	public int countReArticle() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace + ".countReArticle");
+	}
+
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.dao.BoardInfoDAO#countPerReArticle(int)
+	 */
+	/** 게시판별 답글갯수 */
+	@Override
+	public int countPerReArticle(int articleNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace + ".countPerReArticle",articleNo);
 	}
 
 }

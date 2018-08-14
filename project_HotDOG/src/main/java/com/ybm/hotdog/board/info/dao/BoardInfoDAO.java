@@ -34,5 +34,13 @@ public interface BoardInfoDAO {
 	public void replyRegister(ReplyDTO reply);
 	/** 댓글 리스트 */
 	public List<ReplyDTO> replyListAll(int articleNo);
+	/** 답글 등록 */
+	public void reArticleRegister(ArticleDTO article);
+	/** order 재정렬 */
+	public void reOrder(ArticleDTO article);
+	/** 답글갯수 */
+	public int countReArticle();
+	/** 게시판별 답글갯수 */
+	public int countPerReArticle(int articleNo);
 
 }

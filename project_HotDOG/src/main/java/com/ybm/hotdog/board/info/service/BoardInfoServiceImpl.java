@@ -104,4 +104,42 @@ public class BoardInfoServiceImpl implements BoardInfoService {
 		return dao.replyListAll(articleNo);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.service.BoardInfoService#reArticleRegister(com.ybm.hotdog.board.domain.ArticleDTO)
+	 */
+	@Override
+	public void reArticleRegister(ArticleDTO article) {
+		// TODO Auto-generated method stub
+		dao.reArticleRegister(article);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.service.BoardInfoService#reOrder(com.ybm.hotdog.board.domain.ArticleDTO)
+	 */
+	@Override
+	public void reOrder(ArticleDTO article) {
+		// TODO Auto-generated method stub
+		dao.reOrder(article);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.service.BoardInfoService#countReArticle()
+	 */
+	/** 답글갯수 */
+	@Override
+	public int countReArticle() {
+		// TODO Auto-generated method stub
+		return dao.countReArticle();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.ybm.hotdog.board.info.service.BoardInfoService#countPerReArticle(int)
+	 */
+	/** 게시판별 답글갯수 */
+	@Override
+	public int countPerReArticle(int articleNo) {
+		// TODO Auto-generated method stub
+		return dao.countPerReArticle(articleNo);
+	}
+
 }

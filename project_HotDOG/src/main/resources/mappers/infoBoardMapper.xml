@@ -12,8 +12,8 @@
 		title, content, reg_date as regDate,
 		hit_count as hitCount, "group",
 		step, "order" FROM Article WHERE
-		board_no = 1 ORDER BY article_no
-		desc, reg_date desc
+		board_no = 1 ORDER BY "group" desc,
+		"order" asc
 	</select>
 
 	<!-- 게시물 상세 조회 -->
@@ -38,20 +38,72 @@
 		sysdate, 0,seq_Article.nextVal, #{step}, #{order})
 	</insert>
 
+	<!-- 답글 작성 -->
+	<insert id="reArticleRegister">
+		INSERT INTO Article(article_no, board_no, user_no,
+		category_no, title,
+		content, reg_date, hit_count, "group", step,
+		"order") VALUES
+		(seq_Article.nextVal, 1, 2, #{categoryNo}, #{title},
+		#{content},
+		sysdate, 0,#{group}, #{step}, #{order})
+	</insert>
+
+	<!-- 답글 카운트 -->
+	<select resultType="int" id="countReArticle">
+		SELECT count(step)
+		FROM Article
+		WHERE
+		board_no=1 and step > 0
+	</select>
+
+	<!-- 게시판별 답글 카운트 -->
+	<select resultType="int" id="countPerReArticle">
+		SELECT count(step)
+		FROM Article
+		WHERE
+		article_no = #{article_no} and step > 0
+	</select>
+
+	<!-- order 증가 -->
+	<update id="reOrder">
+		update Article
+		set "order" = "order" + 1
+		where "group"
+		= #{group} and
+		"order" >= #{order}
+	</update>
+
 	<!-- 게시글 삭제 -->
-	<delete id="articleDelete">
-		DELETE FROM Article WHERE article_no = #{articleNo}
-	</delete>
+	<update id="articleDelete">
+		UPDATE Article SET title ='삭제된 게시물입니다.' WHERE article_no = #{articleNo}
+	</update>
 
 	<!-- 게시글 수정 -->
 	<update id="articleEdit">
 		UPDATE Article SET category_no = #{categoryNo},
-		title = #{title}, content =
+		title
+		= #{title}, content =
 		#{content}, reg_date = sysdate, hit_count
-		= #{hitCount}, "group" = #{group} WHERE
+		=
+		#{hitCount}, "group" = #{group} WHERE
 		article_no = #{articleNo}
 	</update>
 
+	<!-- 키워드로 게시글 조회 페이징-->
+	<select resultType="Article" id="pageSearch">
+	SELECT rownum as rnum, A.article_no as articleNo, A.board_no as boardNo
+	, A.user_no as userNo , A.category_no as categoryNo , A.title
+	, A.step , A.order , A.regDate , A.hitCount , A.group
+	from(
+	article.article_no as articleNo, article.board_no as boardNo,
+	article.user_no as userNo, article.category_no as categoryNo, title,
+	content, article.reg_date as regDate, hit_count as hitCount, "group",
+	step, "order" ORDER BY "group" desc, "order" asc) A
+	where rownum between #{start} and #{end}
+		
+	</select>
+	
 	<!-- 키워드로 게시글 조회 -->
 	<select resultType="Article" id="articleSearch">
 		SELECT article.article_no as articleNo, article.board_no as boardNo,
@@ -67,16 +119,22 @@
 			<when test="searchOption == '제목'">
 				where title like '%'||#{keyword}||'%' and
 				article.board_no = 1
+				ORDER BY "group" desc,
+				"order" asc
 			</when>
 
 			<when test="searchOption == '작성자'">
 				where name like '%'||#{keyword}||'%' and
 				article.board_no = 1
+				ORDER BY "group" desc,
+				"order" asc
 			</when>
 
 			<when test="searchOption == '내용'">
 				where content like '%'||#{keyword}||'%' and
 				article.board_no = 1
+				ORDER BY "group" desc,
+				"order" asc
 			</when>
 
 		</choose>
@@ -92,7 +150,8 @@
 		INSERT INTO Reply(reply_no, article_no, user_no,
 		content, reg_date) VALUES
 		(seq_Reply.nextval, #{articleNo},
-		#{userNo}, #{content}, sysdate)
+		#{userNo},
+		#{content}, sysdate)
 	</insert>
 
 	<!--댓글 리스트 -->
