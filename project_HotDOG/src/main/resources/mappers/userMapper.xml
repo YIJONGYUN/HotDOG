@@ -23,5 +23,12 @@
 	INSERT INTO Users(user_no, ID, password, name, phone, grade) 
 	VALUES (seq_Users.nextVal, #{id}, #{password}, #{name}, #{phone}, 1)
 </insert>
+
+<!-- 로그인 -->
+<select id="login" resultType="User">
+	SELECT user_no as userNo, ID, password, name, phone, grade 
+	FROM Users
+	WHERE id=#{id} and password=#{password}
+</select>
 	
 </mapper>
