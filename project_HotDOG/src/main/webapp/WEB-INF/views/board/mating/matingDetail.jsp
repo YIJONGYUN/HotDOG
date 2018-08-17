@@ -87,15 +87,27 @@
 							</c:choose>
 							<hr class="colorgraph">
 							<form role="form" action="/board/mating/registReply" method="post">
-								<div class="col-md-10">
-									<div class="form-group">
-										<textarea class="form-control" rows="2" placeholder="댓글을 작성해 주세요!" style="resize: none;" name="content"></textarea>
-										<input type="hidden" name="articleNo" value="${articleNo}">
-									</div>
-								</div>
-								<div class="col-md-2">
-									<button type="submit" class="btn btn-lg btn-theme" style="margin-left: 20%">등록</button>
-								</div>
+									<c:choose>
+										<c:when test="${login.id eq null}">
+											<div class="col-md-12">
+												<div class="form-group">
+													<textarea class="form-control" rows="2" placeholder="로그인 후 이용해 주세요." style="resize: none;" name="content" readonly="readonly"></textarea>
+												</div>
+											</div>
+										</c:when>
+										<c:otherwise>
+											<div class="col-md-10">
+												<div class="form-group">
+													<textarea class="form-control" rows="2" placeholder="댓글을 작성해 주세요!" style="resize: none;" name="content"></textarea>
+													<input type="hidden" name="articleNo" value="${articleNo}">
+													<input type="hidden" id="userNo" name="userNo" value="${login.userNo}">
+												</div>
+											</div>
+											<div class="col-md-2">
+												<button type="submit" class="btn btn-lg btn-theme" style="margin-left: 20%">등록</button>
+											</div>
+										</c:otherwise>
+									</c:choose>
 							</form>
 						</div>
 					</div>

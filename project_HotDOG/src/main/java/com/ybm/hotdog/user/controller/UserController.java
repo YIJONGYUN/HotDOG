@@ -1,10 +1,12 @@
 package com.ybm.hotdog.user.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -34,6 +36,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/loginPage", method = RequestMethod.GET)
 	public String loginPage() {
+		logger.info("로그인 페이지");
 		return "user/login";
 	}
 	
@@ -44,7 +47,6 @@ public class UserController {
 	
 	/**
 	 * 회원가입
-	 * 
 	 *
 	 * @Method Name : register
 	 * @param user	등록할 회원 객체
@@ -57,6 +59,26 @@ public class UserController {
 		service.register(user);
 		
 		return "user/login";
+	}
+	
+	/**
+	 * 로그인
+	 * 
+	 * @Method Name : login
+	 * @param user
+	 * @param session
+	 * @param model
+	 */
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public void login (UserDTO user, HttpSession session, Model model) throws Exception {
+		
+		UserDTO loginCheck = service.login(user);
+		
+		if(loginCheck == null) {
+			return;
+		}
+		
+		model.addAttribute("user", loginCheck);
 	}
 
 }

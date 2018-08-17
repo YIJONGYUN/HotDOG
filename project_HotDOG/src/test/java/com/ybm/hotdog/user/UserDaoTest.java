@@ -49,5 +49,16 @@ public class UserDaoTest {
 		logger.info("회원가입 완료");
 		
 	}
-
+	
+	/** 로그인 테스트 */
+	@Test
+	public void TestLogin() {
+		
+		UserDTO user = new UserDTO(1, "jong", "1234", "이종윤", "01026479515", 1);
+				
+		UserDTO userDTO = dao.login(user);
+		
+		logger.info(userDTO.toString());
+		
+	}
 }

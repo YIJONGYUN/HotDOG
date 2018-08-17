@@ -42,6 +42,7 @@
 						            <input type="hidden" id="step" name="step" value="${article.step}">
 						            <input type="hidden" id="order" name="order" value="${article.order}">
 						            <input type="hidden" id="articleNo" name="articleNo" value="${article.articleNo}">
+						            <input type="hidden" id="userNo" name="userNo" value="${login.userNo}">
 						            
 						  			<input type="text" name="title" class="form-control" id="title" placeholder="[답글] 제목을 입력해 주세요"/>
 						             

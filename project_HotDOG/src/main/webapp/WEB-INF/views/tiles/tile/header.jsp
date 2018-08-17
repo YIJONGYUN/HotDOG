@@ -16,7 +16,14 @@
 				<li><a href="/board/info">독스타그램</a></li>
 				<li><a href="/board/parcel">이리오시개</a></li>
 				<li><a href="/board/mating">도그시그널</a></li>
-				<li><a href="/user/loginPage">로그인</a></li>
+				<c:choose>
+					<c:when test="${login.id eq null}">
+						<li><a href="/user/loginPage">로그인</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="#">${login.name} 님</a></li>
+					</c:otherwise>
+				</c:choose>
 			</ul>
 		</div>
 	</div>

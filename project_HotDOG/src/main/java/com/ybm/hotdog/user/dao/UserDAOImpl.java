@@ -47,4 +47,10 @@ public class UserDAOImpl implements UserDAO {
 		sqlSession.insert(namespace + ".register", user);
 	}
 
+	/** 로그인 */
+	@Override
+	public UserDTO login(UserDTO user) {
+		return sqlSession.selectOne(namespace + ".login", user);
+	}
+
 }

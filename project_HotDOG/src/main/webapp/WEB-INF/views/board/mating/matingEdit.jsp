@@ -41,6 +41,7 @@
 									<input type="hidden" id="articleNo" name="articleNo" value="${article.articleNo}">
 									<input type="hidden" id="articleContent" name="articleContent" value="${category.content}">
 									<input type="hidden" id="categoryNo" name="categoryNo" value="${category.categoryNo}">
+									<input type="hidden" id="userNo" name="userNo" value="${login.userNo}">
 						             
 						  			<input type="text" name="title" class="form-control" id="title" value="${article.title}" placeholder="제목을 입력해 주세요" />
 						             

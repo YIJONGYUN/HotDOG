@@ -20,7 +20,7 @@
 
 				<div class="row">
 					<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-						<form action="/" method="get" role="form" class="register-form">
+						<form action="/user/login" method="post" role="form" class="register-form">
 							<h2>Sign in <small>manage your account</small></h2>
 							<hr class="colorgraph">
 
@@ -28,7 +28,7 @@
 								<input type="text" name="id" id="id" class="form-control input-lg" placeholder="ID" tabindex="4" data-rule="required" data-msg="ID를 입력해 주세요!" />
 							</div>
 							<div class="form-group">
-								<input type="password" class="form-control input-lg" id="password" placeholder="Password" data-rule="required" data-msg="비밀번호를 입력해 주세요!" />
+								<input type="password" class="form-control input-lg" id="password" name="password" placeholder="Password" data-rule="required" data-msg="비밀번호를 입력해 주세요!" />
 							</div>
 
 							<hr class="colorgraph">

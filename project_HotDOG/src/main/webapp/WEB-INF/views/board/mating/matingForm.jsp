@@ -38,6 +38,7 @@
 									</div>
 						             
 						            <input type="hidden" id="categoryNo" name="categoryNo" value="0">
+						            <input type="hidden" id="userNo" name="userNo" value="${login.userNo}">
 						            
 						  			<input type="text" name="title" class="form-control" id="title" placeholder="제목을 입력해 주세요"/>
 						             
