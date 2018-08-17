@@ -21,7 +21,7 @@
 						<li><a href="/user/loginPage">로그인</a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="#">${login.name} 님</a></li>
+						<li><a href="/user/logout">${login.name} 님</a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>

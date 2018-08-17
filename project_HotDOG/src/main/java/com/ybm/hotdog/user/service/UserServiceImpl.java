@@ -42,4 +42,10 @@ public class UserServiceImpl implements UserService {
 		dao.register(user);
 	}
 
+	/** 로그인 */
+	@Override
+	public UserDTO login(UserDTO user) {
+		return dao.login(user);
+	}
+
 }

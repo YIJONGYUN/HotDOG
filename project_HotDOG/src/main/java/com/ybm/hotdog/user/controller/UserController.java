@@ -1,6 +1,8 @@
 package com.ybm.hotdog.user.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ybm.hotdog.user.domain.UserDTO;
 import com.ybm.hotdog.user.service.UserService;
+
+import oracle.net.aso.o;
 
 /**
  * 회원 관련 프로젝트 Controller @RequestMapping("/user") URI 매칭
@@ -79,6 +83,31 @@ public class UserController {
 		}
 		
 		model.addAttribute("user", loginCheck);
+	}
+	
+	/**
+	 * 로그아웃
+	 *
+	 * @Method Name : logout
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout (HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+		
+		Object obj = session.getAttribute("login");
+		
+		if (obj != null) {
+			UserDTO user = (UserDTO) obj;
+			
+			session.removeAttribute("login");
+			session.invalidate();
+		}
+		
+		return "user/logout";
 	}
 
 }
