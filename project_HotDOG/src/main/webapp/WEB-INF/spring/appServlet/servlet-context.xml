@@ -23,6 +23,22 @@
 		<beans:property name="contentType" value="text/html; charset=UTF-8" />
 	</beans:bean>
 	
+	<!-- 로그인을 위한 인터셉터 설정 -->
+	<beans:bean id="authInterceptor" class="com.ybm.hotdog.interceptor.AuthInterceptor"></beans:bean>
+	<beans:bean id="loginInterceptor" class="com.ybm.hotdog.interceptor.LoginInterceptor"></beans:bean>
+	<interceptors>
+		<interceptor>
+			<mapping path="/user/login"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/board/info/form"/>
+			<mapping path="/board/parcel/form"/>
+			<mapping path="/board/mating/form"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
 	
     <!-- tiles -->
     
